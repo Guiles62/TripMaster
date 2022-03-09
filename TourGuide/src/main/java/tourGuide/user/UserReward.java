@@ -3,6 +3,7 @@ package tourGuide.user;
 import gpsUtil.location.Attraction;
 import gpsUtil.location.VisitedLocation;
 
+// a mettre dans RewardsCentral.model ?
 public class UserReward {
 
 	public final VisitedLocation visitedLocation;

@@ -24,13 +24,16 @@ public class TourGuideController {
     public String index() {
         return "Greetings from TourGuide!";
     }
-    
+
+    // a mettre dans GpsUtilController
     @RequestMapping("/getLocation") 
     public String getLocation(@RequestParam String userName) {
     	VisitedLocation visitedLocation = tourGuideService.getUserLocation(getUser(userName));
 		return JsonStream.serialize(visitedLocation.location);
     }
-    
+
+
+    // a mettre dans GpsUtilController
     //  TODO: Change this method to no longer return a List of Attractions.
  	//  Instead: Get the closest five tourist attractions to the user - no matter how far away they are.
  	//  Return a new JSON object that contains:
@@ -45,12 +48,14 @@ public class TourGuideController {
     	VisitedLocation visitedLocation = tourGuideService.getUserLocation(getUser(userName));
     	return JsonStream.serialize(tourGuideService.getNearByAttractions(visitedLocation));
     }
-    
+
+    // a mettre dans RewardsCentralController
     @RequestMapping("/getRewards") 
     public String getRewards(@RequestParam String userName) {
     	return JsonStream.serialize(tourGuideService.getUserRewards(getUser(userName)));
     }
-    
+
+    // a mettre GpsUtilController
     @RequestMapping("/getAllCurrentLocations")
     public String getAllCurrentLocations() {
     	// TODO: Get a list of every user's most recent location as JSON
@@ -65,7 +70,8 @@ public class TourGuideController {
     	
     	return JsonStream.serialize("");
     }
-    
+
+    // a mettre dans TripPricerController
     @RequestMapping("/getTripDeals")
     public String getTripDeals(@RequestParam String userName) {
     	List<Provider> providers = tourGuideService.getTripDeals(getUser(userName));
