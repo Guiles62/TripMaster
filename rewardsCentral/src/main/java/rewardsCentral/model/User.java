@@ -1,9 +1,8 @@
 package rewardsCentral.model;
 
 
-import java.util.ArrayList;
+
 import java.util.Date;
-import java.util.List;
 import java.util.UUID;
 
 public class User {
@@ -13,7 +12,6 @@ public class User {
     private String phoneNumber;
     private String emailAddress;
     private Date latestLocationTimestamp;
-    private List<UserReward> userRewards = new ArrayList<>();
 
     public User(UUID userId, String userName, String phoneNumber, String emailAddress) {
         this.userId = userId;
@@ -53,14 +51,5 @@ public class User {
     public Date getLatestLocationTimestamp() {
         return latestLocationTimestamp;
     }
-
-    public void addUserReward(UserReward userReward) {
-        if(userRewards.stream().filter(r -> !r.attraction.attractionName.equals(userReward.attraction)).count() == 0) {
-            userRewards.add(userReward);
-        }
-    }
-
-
-
 
 }

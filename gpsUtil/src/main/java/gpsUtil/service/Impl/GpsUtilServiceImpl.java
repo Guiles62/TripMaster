@@ -19,13 +19,13 @@ public class GpsUtilServiceImpl implements GpsUtilService {
     private int proximityBuffer = defaultProximityBuffer;
     private int attractionProximityRange = 200;
     private final GpsUtil gpsUtil;
-    private final UserReward userReward;
+    private final User user;
+    List<User> userList = new ArrayList<>();
 
-    public GpsUtilServiceImpl(GpsUtil gpsUtil, UserReward userReward) {
+    public GpsUtilServiceImpl(GpsUtil gpsUtil, User user) {
         this.gpsUtil = gpsUtil;
-        this.userReward = userReward;
+        this.user = user;
     }
-
 
     public void setProximityBuffer(int proximityBuffer) {
         this.proximityBuffer = proximityBuffer;

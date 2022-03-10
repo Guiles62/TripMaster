@@ -2,10 +2,11 @@ package gpsUtil.controller;
 
 import com.jsoniter.output.JsonStream;
 import gpsUtil.location.VisitedLocation;
+import gpsUtil.model.User;
 import gpsUtil.service.GpsUtilService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import gpsUtil.model.User;
+
 
 public class GpsUtilController {
 
@@ -16,8 +17,8 @@ public class GpsUtilController {
     }
 
     @RequestMapping("/getLocation")
-    public String getLocation(@RequestParam String userName) {
-        VisitedLocation visitedLocation = gpsUtilService.getUserLocation(getUser(userName));
+    public String getLocation(@RequestParam String userName, User user) {
+        VisitedLocation visitedLocation = gpsUtilService.getUserLocation(user.getUserName(userName)); // où aller chercher les infos du user ??
         return JsonStream.serialize(visitedLocation.location);
     }
 
@@ -42,7 +43,6 @@ public class GpsUtilController {
         return JsonStream.serialize("");
     }
 
-    private User getUser(String userName) {
-        return gpsUtilService.getUser(userName);
-    }
+
+
 }
