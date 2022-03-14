@@ -2,14 +2,15 @@ package tourGuide;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jsoniter.output.JsonStream;
 
-import gpsUtil.location.VisitedLocation;
+
+import tourGuide.proxy.GpsUtilProxy;
 import tourGuide.service.TourGuideService;
 import tourGuide.user.User;
 import tripPricer.Provider;
@@ -17,19 +18,25 @@ import tripPricer.Provider;
 @RestController
 public class TourGuideController {
 
-	@Autowired
 	TourGuideService tourGuideService;
-	
+
+    GpsUtilProxy gpsUtilProxy;
+
+    public TourGuideController(TourGuideService tourGuideService, GpsUtilProxy gpsUtilProxy) {
+        this.tourGuideService = tourGuideService;
+        this.gpsUtilProxy = gpsUtilProxy;
+    }
+
     @RequestMapping("/")
     public String index() {
         return "Greetings from TourGuide!";
     }
 
-    // a mettre dans GpsUtilController
-    @RequestMapping("/getLocation") 
-    public String getLocation(@RequestParam String userName) {
-    	VisitedLocation visitedLocation = tourGuideService.getUserLocation(getUser(userName));
-		return JsonStream.serialize(visitedLocation.location);
+    @RequestMapping("/getLocation")
+    public String getLocation(@RequestParam String userName, User user) {
+        user = tourGuideService.getUser(userName);
+    	String visitedLocation = gpsUtilProxy.getLocation(user);
+		return JsonStream.serialize(visitedLocation);
     }
 
 
@@ -44,9 +51,10 @@ public class TourGuideController {
         // The reward points for visiting each Attraction.
         //    Note: Attraction reward points can be gathered from RewardsCentral
     @RequestMapping("/getNearbyAttractions") 
-    public String getNearbyAttractions(@RequestParam String userName) {
-    	VisitedLocation visitedLocation = tourGuideService.getUserLocation(getUser(userName));
-    	return JsonStream.serialize(tourGuideService.getNearByAttractions(visitedLocation));
+    public String getNearbyAttractions(@RequestParam String userName, User user) {
+        user = tourGuideService.getUser(userName);
+    	String nearAttractions = gpsUtilProxy.getNearbyAttractions(user);
+    	return JsonStream.serialize(nearAttractions);
     }
 
     // a mettre dans RewardsCentralController

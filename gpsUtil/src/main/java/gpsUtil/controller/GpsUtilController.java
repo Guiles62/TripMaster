@@ -6,8 +6,9 @@ import gpsUtil.model.User;
 import gpsUtil.service.GpsUtilService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-
+@RestController
 public class GpsUtilController {
 
     GpsUtilService gpsUtilService;
@@ -17,14 +18,14 @@ public class GpsUtilController {
     }
 
     @RequestMapping("/getLocation")
-    public String getLocation(@RequestParam String userName, User user) {
-        VisitedLocation visitedLocation = gpsUtilService.getUserLocation(user.getUserName(userName)); // où aller chercher les infos du user ??
+    public String getLocation(User user) { // pas besoin du @RequestParam String userName ici mais plus dans le proxy de TourGuide??
+        VisitedLocation visitedLocation = gpsUtilService.getUserLocation(user);
         return JsonStream.serialize(visitedLocation.location);
     }
 
     @RequestMapping("/getNearbyAttractions")
-    public String getNearbyAttractions(@RequestParam String userName) {
-        VisitedLocation visitedLocation = gpsUtilService.getUserLocation(getUser(userName));
+    public String getNearbyAttractions(User user) {
+        VisitedLocation visitedLocation = gpsUtilService.getUserLocation(user);
         return JsonStream.serialize(gpsUtilService.getNearByAttractions(visitedLocation));
     }
 

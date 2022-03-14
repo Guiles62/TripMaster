@@ -61,7 +61,7 @@ public class TourGuideService {
 			user.getLastVisitedLocation() :
 			trackUserLocation(user);
 		return visitedLocation;
-	} */
+	}*/
 	
 	public User getUser(String userName) {
 		return internalUserMap.get(userName);

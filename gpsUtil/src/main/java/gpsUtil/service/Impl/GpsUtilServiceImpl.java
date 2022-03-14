@@ -5,12 +5,13 @@ import gpsUtil.location.Attraction;
 import gpsUtil.location.Location;
 import gpsUtil.location.VisitedLocation;
 import gpsUtil.model.User;
-import gpsUtil.model.UserReward;
 import gpsUtil.service.GpsUtilService;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class GpsUtilServiceImpl implements GpsUtilService {
 
     private static final double STATUTE_MILES_PER_NAUTICAL_MILE = 1.15077945;
