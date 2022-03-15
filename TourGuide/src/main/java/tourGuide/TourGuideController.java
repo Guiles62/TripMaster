@@ -1,8 +1,11 @@
 package tourGuide;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
+import gpsUtil.location.Attraction;
+import gpsUtil.location.VisitedLocation;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,7 +38,7 @@ public class TourGuideController {
     @RequestMapping("/getLocation")
     public String getLocation(@RequestParam String userName, User user) {
         user = tourGuideService.getUser(userName);
-    	String visitedLocation = gpsUtilProxy.getLocation(user);
+    	VisitedLocation visitedLocation = gpsUtilProxy.getLocation(user);
 		return JsonStream.serialize(visitedLocation);
     }
 
@@ -53,7 +56,7 @@ public class TourGuideController {
     @RequestMapping("/getNearbyAttractions") 
     public String getNearbyAttractions(@RequestParam String userName, User user) {
         user = tourGuideService.getUser(userName);
-    	String nearAttractions = gpsUtilProxy.getNearbyAttractions(user);
+    	List<Attraction> nearAttractions = gpsUtilProxy.getNearbyAttractions(user);
     	return JsonStream.serialize(nearAttractions);
     }
 
@@ -75,8 +78,12 @@ public class TourGuideController {
     	//        "019b04a9-067a-4c76-8817-ee75088c3822": {"longitude":-48.188821,"latitude":74.84371} 
     	//        ...
     	//     }
-    	
-    	return JsonStream.serialize("");
+        List<VisitedLocation> usersCurrentVisitedLocationList = new ArrayList<>();
+        List<User> userList = tourGuideService.getAllUsers();
+        for(User user : userList){
+            usersCurrentVisitedLocationList.add(gpsUtilProxy.getCurrentLocation(user));
+        }
+    	return JsonStream.serialize(usersCurrentVisitedLocationList);
     }
 
     // a mettre dans TripPricerController

@@ -16,6 +16,7 @@ public interface GpsUtilService {
     VisitedLocation getUserLocation(User user);
     VisitedLocation trackUserLocation(User user);
     List<Attraction> getNearByAttractions(VisitedLocation visitedLocation);
+    List<Attraction> getAllAttractions();
 
 
 
