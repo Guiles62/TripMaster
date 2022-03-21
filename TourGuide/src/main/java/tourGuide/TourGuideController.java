@@ -46,7 +46,7 @@ public class TourGuideController {
     @RequestMapping("/getLocation")
     public String getLocation(@RequestParam String userName, User user) {
         user = tourGuideService.getUser(userName);
-    	VisitedLocation visitedLocation = gpsUtilProxy.getLocation(user);
+    	VisitedLocation visitedLocation = tourGuideService.getLocation(user);
 		return JsonStream.serialize(visitedLocation);
     }
 
@@ -64,19 +64,15 @@ public class TourGuideController {
     @RequestMapping("/getNearbyAttractions") 
     public String getNearbyAttractions(@RequestParam String userName, User user) {
         user = tourGuideService.getUser(userName);
-    	List<Attraction> nearAttractions = gpsUtilProxy.getNearbyAttractions(user);
-        List<Attraction> nearFiveAttractions = new ArrayList<>();
-        for (int i = 0; i <=4 ; i++) {
-                nearFiveAttractions.add(nearAttractions.get(i));
-        }
-    	return JsonStream.serialize(nearFiveAttractions);
+    	List<Attraction> nearAttractions = tourGuideService.getNearbyAttractions(user);
+    	return JsonStream.serialize(nearAttractions);
     }
 
     // a mettre dans RewardsCentralController
     @RequestMapping("/getRewards") 
     public String getRewards(@RequestParam String userName, User user) {
         user = tourGuideService.getUser(userName);
-        List<UserReward> getUserRewardsList = rewardsCentralProxy.getRewards(user);
+        List<UserReward> getUserRewardsList = tourGuideService.getRewards(user);
     	return JsonStream.serialize(getUserRewardsList);
     }
 
@@ -92,35 +88,17 @@ public class TourGuideController {
     	//        "019b04a9-067a-4c76-8817-ee75088c3822": {"longitude":-48.188821,"latitude":74.84371} 
     	//        ...
     	//     }
-        List<VisitedLocation> usersCurrentVisitedLocationList = new ArrayList<>();
-        List<User> userList = tourGuideService.getAllUsers();
-        for(User user : userList){
-            usersCurrentVisitedLocationList.add(gpsUtilProxy.getCurrentLocation(user));
-        }
+        List<VisitedLocation>usersCurrentVisitedLocationList = tourGuideService.getAllCurrentLocations();
     	return JsonStream.serialize(usersCurrentVisitedLocationList);
     }
 
     // a mettre dans TripPricerController
     @RequestMapping("/getTripDeals")
-    public String getTripDeals(@RequestParam String userName, User user, List<Provider> getUserPrice, Attraction attraction) {
+    public String getTripDeals(@RequestParam String userName, User user) {
         user = tourGuideService.getUser(userName);
-        String apiKey = tourGuideService.getApiKey();
-        List<UserReward> userRewardList = rewardsCentralProxy.getRewards(user);
-        int rewardsPoints = rewardsCentralProxy.getUserRewardsPointsSum(user, userRewardList);
-        int getAttractionRewardPoints = rewardsCentralProxy.getAttractionRewardPoints(user.getUserId(), attraction.attractionId);
-        getUserPrice = tripPricerProxy.getPrice(user, apiKey, getAttractionRewardPoints);
-    	List<Provider> providers = tripPricerProxy.getTripDeals(user, apiKey, rewardsPoints);
+    	List<Provider> providers = tourGuideService.getTripDeals(user);
     	return JsonStream.serialize(providers);
     }
 
-    @RequestMapping(value = "/getPrice")
-    public String calculateRewards (@RequestParam String username, User user, List<Attraction> attractionList, List<Attraction> nearAttractions) {
-        user = tourGuideService.getUser(username);
-        List<UserReward> getUserRewards = rewardsCentralProxy.getRewards(user);
-        nearAttractions = gpsUtilProxy.getNearAttractions(user);
-        attractionList = gpsUtilProxy.getAllAttractions();
-        tourGuideService.calculateRewards(user, attractionList, nearAttractions);
-        return JsonStream.serialize(getUserRewards);
-    }
 
 }

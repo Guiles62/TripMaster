@@ -2,12 +2,7 @@ package tourGuide.service;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -20,6 +15,9 @@ import gpsUtil.GpsUtil;
 import gpsUtil.location.Location;
 import gpsUtil.location.VisitedLocation;
 import tourGuide.helper.InternalTestHelper;
+import tourGuide.proxy.GpsUtilProxy;
+import tourGuide.proxy.RewardsCentralProxy;
+import tourGuide.proxy.TripPricerProxy;
 import tourGuide.tracker.Tracker;
 import tourGuide.user.User;
 import tourGuide.user.UserReward;
@@ -31,6 +29,10 @@ public class TourGuideService {
 	private Logger logger = LoggerFactory.getLogger(TourGuideService.class);
 	public final Tracker tracker;
 	boolean testMode = true;
+
+	GpsUtilProxy gpsUtilProxy;
+	TripPricerProxy tripPricerProxy;
+	RewardsCentralProxy rewardsCentralProxy;
 	
 	public TourGuideService() {
 
@@ -45,6 +47,40 @@ public class TourGuideService {
 		addShutDownHook();
 	}
 
+	public VisitedLocation getLocation (User user) {
+		VisitedLocation visitedLocation = gpsUtilProxy.getLocation(user);
+		return visitedLocation;
+	}
+
+	public List<Attraction> getNearbyAttractions (User user) {
+		List<Attraction> nearAttractions = gpsUtilProxy.getNearbyAttractions(user);
+		List<Attraction> nearFiveAttractions = new ArrayList<>();
+		for (int i = 0; i <=4 ; i++) {
+			nearFiveAttractions.add(nearAttractions.get(i));
+		}
+		return nearFiveAttractions;
+	}
+
+	public List<UserReward> getRewards (User user) {
+		List<UserReward> getUserRewardsList = rewardsCentralProxy.getRewards(user);
+		return getUserRewardsList;
+	}
+
+	public List<VisitedLocation>getAllCurrentLocations() {
+		List<VisitedLocation> usersCurrentVisitedLocationList = new ArrayList<>();
+		List<User> userList = getAllUsers();
+		for(User user : userList){
+			usersCurrentVisitedLocationList.add(gpsUtilProxy.getCurrentLocation(user));
+		}
+		return usersCurrentVisitedLocationList;
+	}
+
+	public List<Provider> getTripDeals(User user) {
+		List<UserReward> userRewardList = rewardsCentralProxy.getRewards(user);
+		int rewardsPoints = rewardsCentralProxy.getUserRewardsPointsSum(user, userRewardList);
+		List<Provider> getPrice = tripPricerProxy.getPrice(user, tripPricerApiKey, rewardsPoints);
+		return getPrice;
+	}
 
 	/* a mettre dans RewardsCentralService ou à laisser ici ??
 	public List<UserReward> getUserRewards(User user) {
@@ -106,25 +142,26 @@ public class TourGuideService {
 		return nearbyAttractions;
 	} */
 
-	public void calculateRewards(User user, List<Attraction> attractionList, List<Attraction> nearAttractions) {
+	public void calculateRewards(User user) {
 		List<VisitedLocation> userLocations = user.getVisitedLocations();
-
+		List<Attraction> attractions = gpsUtilProxy.getAllAttractions();
+		List<Attraction> getNearAttractions = gpsUtilProxy.getNearAttractions(user);
 		for(VisitedLocation visitedLocation : userLocations) {
-			for(Attraction attraction : attractionList) {
+			for(Attraction attraction : attractions) {
 				if(user.getUserRewards().stream().filter(r -> r.attraction.attractionName.equals(attraction.attractionName)).count() == 0) {
-					if(nearAttractions.size() > 0) {
-						user.addUserReward(new UserReward(visitedLocation, attraction, getRewardPoints(attraction, user)));
+					if(getNearAttractions.size() > 0) {
+						user.addUserReward(new UserReward(visitedLocation, attraction, rewardsCentralProxy.getAttractionRewardPoints(attraction.attractionId, user.getUserId())));
 					}
 				}
 			}
 		}
 	}
 
-	public int getRewardPoints(Attraction attraction, User user) {
+	/*public int getRewardPoints(Attraction attraction, User user) {
 		gpsUtilServiceImpl.trackUserLocation(user);
 		calculateRewards(user);
 		return rewardsCentral.getAttractionRewardPoints(attraction.attractionId, user.getUserId());
-	}
+	}*/
 	
 	private void addShutDownHook() {
 		Runtime.getRuntime().addShutdownHook(new Thread() { 
