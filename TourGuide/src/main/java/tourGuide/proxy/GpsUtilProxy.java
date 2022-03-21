@@ -4,6 +4,7 @@ import gpsUtil.location.Attraction;
 import gpsUtil.location.VisitedLocation;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import tourGuide.user.User;
 
 import java.util.List;
@@ -11,16 +12,19 @@ import java.util.List;
 @FeignClient( name = "gpsUtil", url = "localhost:8081")
 public interface GpsUtilProxy {
 
-    @GetMapping(value = "/getLocation")
+    @RequestMapping(value = "/getLocation")
     VisitedLocation getLocation(User user);
 
-    @GetMapping(value = "/getNearbyAttractions")
+    @RequestMapping(value = "/getNearbyAttractions")
     List<Attraction> getNearbyAttractions(User user);
 
-    @GetMapping(value = "/getCurrentLocation")
+    @RequestMapping(value = "/getCurrentLocation")
     VisitedLocation getCurrentLocation(User user);
 
     @GetMapping(value = "/getAllAttractions")
     List<Attraction> getAllAttractions();
+
+    @RequestMapping("/getNearAttractions")
+    List<Attraction> getNearAttractions(User user);
 
 }

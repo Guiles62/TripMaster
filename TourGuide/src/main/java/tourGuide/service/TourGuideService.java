@@ -2,7 +2,6 @@ package tourGuide.service;
 
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -12,6 +11,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import gpsUtil.location.Attraction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -29,15 +29,11 @@ import tripPricer.TripPricer;
 @Service
 public class TourGuideService {
 	private Logger logger = LoggerFactory.getLogger(TourGuideService.class);
-	private final GpsUtil gpsUtil;
-	private final RewardsService rewardsService;
-	private final TripPricer tripPricer = new TripPricer();
 	public final Tracker tracker;
 	boolean testMode = true;
 	
-	public TourGuideService(GpsUtil gpsUtil, RewardsService rewardsService) {
-		this.gpsUtil = gpsUtil;
-		this.rewardsService = rewardsService;
+	public TourGuideService() {
+
 		
 		if(testMode) {
 			logger.info("TestMode enabled");
@@ -50,10 +46,10 @@ public class TourGuideService {
 	}
 
 
-	// a mettre dans RewardsCentralService ou à laisser ici ??
+	/* a mettre dans RewardsCentralService ou à laisser ici ??
 	public List<UserReward> getUserRewards(User user) {
 		return user.getUserRewards();
-	}
+	}*/
 
 	/* a mettre dans GpsUtilService
 	public VisitedLocation getUserLocation(User user) {
@@ -77,14 +73,18 @@ public class TourGuideService {
 		}
 	}
 
-	// a mettre dans TripPricerService ?? car tripPricerApiKey
-	public List<Provider> getTripDeals(User user) {
-		int cumulatativeRewardPoints = user.getUserRewards().stream().mapToInt(i -> i.getRewardPoints()).sum();
+	public String getApiKey() {
+		return tripPricerApiKey;
+	}
+
+	/* a mettre dans TripPricerService ?? car tripPricerApiKey
+	public List<Provider> getTripDeals(String userName, User user, String apiKey, int rewardsPoints) {
+		rewardsPoints = user.getUserRewards().stream().mapToInt(i -> i.getRewardPoints()).sum();
 		List<Provider> providers = tripPricer.getPrice(tripPricerApiKey, user.getUserId(), user.getUserPreferences().getNumberOfAdults(), 
-				user.getUserPreferences().getNumberOfChildren(), user.getUserPreferences().getTripDuration(), cumulatativeRewardPoints);
+				user.getUserPreferences().getNumberOfChildren(), user.getUserPreferences().getTripDuration(), rewardsPoints);
 		user.setTripDeals(providers);
 		return providers;
-	}
+	}*/
 
 	/* a mettre dans GpsUtilService
 	public VisitedLocation trackUserLocation(User user) {
@@ -105,6 +105,26 @@ public class TourGuideService {
 		
 		return nearbyAttractions;
 	} */
+
+	public void calculateRewards(User user, List<Attraction> attractionList, List<Attraction> nearAttractions) {
+		List<VisitedLocation> userLocations = user.getVisitedLocations();
+
+		for(VisitedLocation visitedLocation : userLocations) {
+			for(Attraction attraction : attractionList) {
+				if(user.getUserRewards().stream().filter(r -> r.attraction.attractionName.equals(attraction.attractionName)).count() == 0) {
+					if(nearAttractions.size() > 0) {
+						user.addUserReward(new UserReward(visitedLocation, attraction, getRewardPoints(attraction, user)));
+					}
+				}
+			}
+		}
+	}
+
+	public int getRewardPoints(Attraction attraction, User user) {
+		gpsUtilServiceImpl.trackUserLocation(user);
+		calculateRewards(user);
+		return rewardsCentral.getAttractionRewardPoints(attraction.attractionId, user.getUserId());
+	}
 	
 	private void addShutDownHook() {
 		Runtime.getRuntime().addShutdownHook(new Thread() { 
@@ -119,7 +139,7 @@ public class TourGuideService {
 	 * Methods Below: For Internal Testing
 	 * 
 	 **********************************************************************************/
-	private static final String tripPricerApiKey = "test-server-api-key";
+	private final String tripPricerApiKey = "test-server-api-key";
 	// Database connection will be used for external users, but for testing purposes internal users are provided and stored in memory
 	private final Map<String, User> internalUserMap = new HashMap<>();
 	private void initializeInternalUsers() {

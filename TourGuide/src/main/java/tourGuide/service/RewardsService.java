@@ -37,7 +37,7 @@ public class RewardsService {
 		proximityBuffer = defaultProximityBuffer;
 	} */
 
-	// Aller rechercher nearAttraction dans GpsUtil
+	/* Aller rechercher nearAttraction dans GpsUtil
 	public void calculateRewards(User user) {
 		List<VisitedLocation> userLocations = user.getVisitedLocations();
 		List<Attraction> attractions = gpsUtil.getAttractions();
@@ -51,7 +51,7 @@ public class RewardsService {
 				}
 			}
 		}
-	}
+	}*/
 
 	/* GpsUtilService
 	public boolean isWithinAttractionProximity(Attraction attraction, Location location) {
@@ -63,12 +63,12 @@ public class RewardsService {
 		return getDistance(attraction, visitedLocation.location) > proximityBuffer ? false : true;
 	} */
 
-	// Aller rechercher attractionId dans GpsUtil et rewardCentral pour getAttractionRewardPoint
+	/* Aller rechercher attractionId dans GpsUtil et rewardCentral pour getAttractionRewardPoint
 	private int getRewardPoints(Attraction attraction, User user) {
 		// gpsUtilServiceImpl.trackUserLocation(user)
 		// calculateRewards(user)
 		return rewardsCentral.getAttractionRewardPoints(attraction.attractionId, user.getUserId());
-	}
+	}*/
 
 	/* GpsUtilService
 	public double getDistance(Location loc1, Location loc2) {

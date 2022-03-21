@@ -10,13 +10,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 @RestController
 public class GpsUtilController {
 
-    GpsUtilService gpsUtilService;
+    private GpsUtilService gpsUtilService;
+
+    public GpsUtilController() {
+    }
 
     public GpsUtilController(GpsUtilService gpsUtilService) {
         this.gpsUtilService = gpsUtilService;
@@ -32,6 +35,11 @@ public class GpsUtilController {
     public String getNearbyAttractions(@RequestBody User user) {
         VisitedLocation visitedLocation = gpsUtilService.getUserLocation(user);
         return JsonStream.serialize(gpsUtilService.getNearByAttractions(visitedLocation));
+    }
+    @RequestMapping("/getNearAttractions")
+    public String getNearAttractions(@RequestBody User user) {
+        VisitedLocation visitedLocation = gpsUtilService.getUserLocation(user);
+        return JsonStream.serialize(gpsUtilService.getNearAttractions(visitedLocation));
     }
 
     @RequestMapping("/getCurrentLocation")

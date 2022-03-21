@@ -15,7 +15,6 @@ public class User {
     private String emailAddress;
     private Date latestLocationTimestamp;
     private List<Provider> tripDeals = new ArrayList<>();
-    private List<UserReward> userRewards = new ArrayList<>();
     private UserPreferences userPreferences = new UserPreferences();
     public User(UUID userId, String userName, String phoneNumber, String emailAddress) {
         this.userId = userId;
@@ -64,13 +63,11 @@ public class User {
         return tripDeals;
     }
 
-    public List<UserReward> getUserRewards() {
-        return userRewards;
+    public UserPreferences getUserPreferences() {
+        return userPreferences;
     }
 
-    public void addUserReward(UserReward userReward) {
-        if(userRewards.stream().filter(r -> !r.attraction.attractionName.equals(userReward.attraction)).count() == 0) {
-            userRewards.add(userReward);
-        }
+    public void setUserPreferences(UserPreferences userPreferences) {
+        this.userPreferences = userPreferences;
     }
 }

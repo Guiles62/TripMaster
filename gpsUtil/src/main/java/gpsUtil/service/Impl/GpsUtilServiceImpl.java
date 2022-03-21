@@ -77,8 +77,18 @@ public class GpsUtilServiceImpl implements GpsUtilService {
     public VisitedLocation trackUserLocation(User user) {
         VisitedLocation visitedLocation = gpsUtil.getUserLocation(user.getUserId());
         user.addToVisitedLocations(visitedLocation);
-        // calculateRewards(user);
         return visitedLocation;
+    }
+
+    @Override
+    public List<Attraction> getNearAttractions(VisitedLocation visitedLocation) {
+        List<Attraction> nearAttraction = new ArrayList<>();
+        for(Attraction attraction : gpsUtil.getAttractions()) {
+            if(nearAttraction(visitedLocation, attraction)) {
+                nearAttraction.add(attraction);
+            }
+        }
+        return nearAttraction;
     }
 
     @Override
