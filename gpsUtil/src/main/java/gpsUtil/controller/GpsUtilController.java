@@ -2,6 +2,7 @@ package gpsUtil.controller;
 
 import com.jsoniter.output.JsonStream;
 import gpsUtil.location.Attraction;
+import gpsUtil.location.Location;
 import gpsUtil.location.VisitedLocation;
 import gpsUtil.model.User;
 import gpsUtil.service.GpsUtilService;
@@ -36,10 +37,16 @@ public class GpsUtilController {
         VisitedLocation visitedLocation = gpsUtilService.getUserLocation(user);
         return JsonStream.serialize(gpsUtilService.getNearByAttractions(visitedLocation));
     }
-    @RequestMapping("/getNearAttractions")
-    public String getNearAttractions(@RequestBody User user) {
-        VisitedLocation visitedLocation = gpsUtilService.getUserLocation(user);
-        return JsonStream.serialize(gpsUtilService.getNearAttractions(visitedLocation));
+    @RequestMapping("/nearAttractions")
+    public String getNearAttraction(@RequestBody VisitedLocation visitedLocation, @RequestBody Attraction attraction) {
+        Boolean nearAttraction = gpsUtilService.nearAttraction(visitedLocation, attraction);
+        return JsonStream.serialize(nearAttraction);
+    }
+
+    @RequestMapping("/isWithinAttractionProximity")
+    public String isWithinAttractionProximity(@RequestBody Attraction attraction, Location location) {
+        Boolean withinAttractionProximity = gpsUtilService.isWithinAttractionProximity(attraction,location);
+        return JsonStream.serialize(withinAttractionProximity);
     }
 
     @RequestMapping("/getCurrentLocation")
@@ -52,6 +59,12 @@ public class GpsUtilController {
     public String getAllAttractions(){
         List<Attraction>getAttractionsList = gpsUtilService.getAllAttractions();
         return JsonStream.serialize(getAttractionsList);
+    }
+
+    @GetMapping(value = "/trackUserLocation")
+    public String trackUserLocation(User user) {
+        VisitedLocation visitedLocation = gpsUtilService.trackUserLocation(user);
+        return JsonStream.serialize(visitedLocation);
     }
 
 

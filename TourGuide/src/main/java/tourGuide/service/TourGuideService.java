@@ -11,7 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import gpsUtil.GpsUtil;
+
 import gpsUtil.location.Location;
 import gpsUtil.location.VisitedLocation;
 import tourGuide.helper.InternalTestHelper;
@@ -22,12 +22,12 @@ import tourGuide.tracker.Tracker;
 import tourGuide.user.User;
 import tourGuide.user.UserReward;
 import tripPricer.Provider;
-import tripPricer.TripPricer;
+
 
 @Service
 public class TourGuideService {
 	private Logger logger = LoggerFactory.getLogger(TourGuideService.class);
-	public final Tracker tracker;
+	public Tracker tracker;
 	boolean testMode = true;
 
 	GpsUtilProxy gpsUtilProxy;
@@ -45,6 +45,12 @@ public class TourGuideService {
 		}
 		tracker = new Tracker(this);
 		addShutDownHook();
+	}
+
+	public TourGuideService(GpsUtilProxy gpsUtilProxy, TripPricerProxy tripPricerProxy, RewardsCentralProxy rewardsCentralProxy) {
+		this.gpsUtilProxy = gpsUtilProxy;
+		this.tripPricerProxy = tripPricerProxy;
+		this.rewardsCentralProxy = rewardsCentralProxy;
 	}
 
 	public VisitedLocation getLocation (User user) {
@@ -80,6 +86,16 @@ public class TourGuideService {
 		int rewardsPoints = rewardsCentralProxy.getUserRewardsPointsSum(user, userRewardList);
 		List<Provider> getPrice = tripPricerProxy.getPrice(user, tripPricerApiKey, rewardsPoints);
 		return getPrice;
+	}
+
+	public VisitedLocation trackUserLocation(User user) {
+		VisitedLocation userLocation = gpsUtilProxy.trackUserLocation(user);
+		return userLocation;
+	}
+
+	public List<Attraction> getAttractions() {
+		List<Attraction> attractionList = gpsUtilProxy.getAllAttractions();
+		return attractionList;
 	}
 
 	/* a mettre dans RewardsCentralService ou à laisser ici ??
@@ -145,24 +161,30 @@ public class TourGuideService {
 	public void calculateRewards(User user) {
 		List<VisitedLocation> userLocations = user.getVisitedLocations();
 		List<Attraction> attractions = gpsUtilProxy.getAllAttractions();
-		List<Attraction> getNearAttractions = gpsUtilProxy.getNearAttractions(user);
 		for(VisitedLocation visitedLocation : userLocations) {
 			for(Attraction attraction : attractions) {
 				if(user.getUserRewards().stream().filter(r -> r.attraction.attractionName.equals(attraction.attractionName)).count() == 0) {
-					if(getNearAttractions.size() > 0) {
-						user.addUserReward(new UserReward(visitedLocation, attraction, rewardsCentralProxy.getAttractionRewardPoints(attraction.attractionId, user.getUserId())));
+					if(nearAttraction(visitedLocation, attraction)) {
+						user.addUserReward(new UserReward(visitedLocation, attraction, getRewardPoints(attraction,user)));
 					}
 				}
 			}
 		}
 	}
 
-	/*public int getRewardPoints(Attraction attraction, User user) {
-		gpsUtilServiceImpl.trackUserLocation(user);
-		calculateRewards(user);
-		return rewardsCentral.getAttractionRewardPoints(attraction.attractionId, user.getUserId());
-	}*/
-	
+	public Boolean nearAttraction (VisitedLocation visitedLocation, Attraction attraction) {
+		return gpsUtilProxy.nearAttraction(visitedLocation,attraction);
+	}
+
+	public int getRewardPoints(Attraction attraction, User user) {
+		gpsUtilProxy.trackUserLocation(user);
+		return rewardsCentralProxy.getAttractionRewardPoints(attraction.attractionId, user.getUserId());
+	}
+
+	public Boolean isWithinAttractionProximity(Attraction attraction, Location location) {
+		return gpsUtilProxy.isWithinAttractionProximity(attraction,location);
+	}
+
 	private void addShutDownHook() {
 		Runtime.getRuntime().addShutdownHook(new Thread() { 
 		      public void run() {

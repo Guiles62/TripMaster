@@ -81,17 +81,6 @@ public class GpsUtilServiceImpl implements GpsUtilService {
     }
 
     @Override
-    public List<Attraction> getNearAttractions(VisitedLocation visitedLocation) {
-        List<Attraction> nearAttraction = new ArrayList<>();
-        for(Attraction attraction : gpsUtil.getAttractions()) {
-            if(nearAttraction(visitedLocation, attraction)) {
-                nearAttraction.add(attraction);
-            }
-        }
-        return nearAttraction;
-    }
-
-    @Override
     public List<Attraction> getNearByAttractions(VisitedLocation visitedLocation) {
         List<Attraction> nearbyAttractions = new ArrayList<>();
         for(Attraction attraction : gpsUtil.getAttractions()) {

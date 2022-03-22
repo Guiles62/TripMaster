@@ -15,11 +15,6 @@ public interface GpsUtilService {
     double getDistance(Location loc1, Location loc2);
     VisitedLocation getUserLocation(User user);
     VisitedLocation trackUserLocation(User user);
-    List<Attraction> getNearAttractions(VisitedLocation visitedLocation);
     List<Attraction> getNearByAttractions(VisitedLocation visitedLocation);
     List<Attraction> getAllAttractions();
-
-
-
-
 }

@@ -1,6 +1,7 @@
 package tourGuide.proxy;
 
 import gpsUtil.location.Attraction;
+import gpsUtil.location.Location;
 import gpsUtil.location.VisitedLocation;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,4 +28,12 @@ public interface GpsUtilProxy {
     @RequestMapping("/getNearAttractions")
     List<Attraction> getNearAttractions(User user);
 
+    @RequestMapping("/trackUserLocation")
+    VisitedLocation trackUserLocation (User user);
+
+    @RequestMapping("/nearAttraction")
+    Boolean nearAttraction (VisitedLocation visitedLocation, Attraction attraction);
+
+    @RequestMapping("/isWithinAttractionProximity")
+    Boolean isWithinAttractionProximity (Attraction attraction, Location location);
 }

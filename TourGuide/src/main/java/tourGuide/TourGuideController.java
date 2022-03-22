@@ -27,15 +27,8 @@ public class TourGuideController {
 
 	TourGuideService tourGuideService;
 
-    GpsUtilProxy gpsUtilProxy;
-    TripPricerProxy tripPricerProxy;
-    RewardsCentralProxy rewardsCentralProxy;
-
-    public TourGuideController(TourGuideService tourGuideService, GpsUtilProxy gpsUtilProxy, TripPricerProxy tripPricerProxy, RewardsCentralProxy rewardsCentralProxy) {
+    public TourGuideController(TourGuideService tourGuideService) {
         this.tourGuideService = tourGuideService;
-        this.gpsUtilProxy = gpsUtilProxy;
-        this.tripPricerProxy = tripPricerProxy;
-        this.rewardsCentralProxy = rewardsCentralProxy;
     }
 
     @RequestMapping("/")
