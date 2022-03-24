@@ -1,12 +1,12 @@
 package tourGuide;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 
 import gpsUtil.location.Attraction;
 import gpsUtil.location.VisitedLocation;
-import org.springframework.web.bind.annotation.PostMapping;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,9 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.jsoniter.output.JsonStream;
 
 
-import tourGuide.proxy.GpsUtilProxy;
-import tourGuide.proxy.RewardsCentralProxy;
-import tourGuide.proxy.TripPricerProxy;
+
 import tourGuide.service.TourGuideService;
 import tourGuide.user.User;
 import tourGuide.user.UserReward;
