@@ -13,7 +13,7 @@ import tourGuide.user.UserReward;
 
 
 // trier entre RewardCentralService et GpsUtilService
-@Service
+//@Service
 public class RewardsService {
     private static final double STATUTE_MILES_PER_NAUTICAL_MILE = 1.15077945;
 

@@ -5,6 +5,7 @@
     <file type="web" url="file://$PROJECT_DIR$/gpsUtil" />
     <file type="web" url="file://$PROJECT_DIR$/rewardsCentral" />
     <file type="web" url="file://$PROJECT_DIR$/TourGuide" />
+    <file type="web" url="file://$PROJECT_DIR$/tourGuide1" />
     <file type="web" url="file://$PROJECT_DIR$/tripPricer" />
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_17" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
