@@ -62,7 +62,7 @@ public class GpsUtilController {
     }
 
     @GetMapping(value = "/trackUserLocation")
-    public String trackUserLocation(User user) {
+    public String trackUserLocation(@RequestBody User user) {
         VisitedLocation visitedLocation = gpsUtilService.trackUserLocation(user);
         return JsonStream.serialize(visitedLocation);
     }

@@ -16,11 +16,11 @@ import java.util.UUID;
 public interface RewardsCentralProxy {
 
     @RequestMapping(value = "/getRewards")
-    List<UserReward> getRewards(User user);
+    List<UserReward> getRewards(@RequestBody User user);
 
     @RequestMapping(value = "/getUserRewardsPointsSum")
-    int getUserRewardsPointsSum(User user, List<UserReward> userRewardList);
+    int getUserRewardsPointsSum(@RequestBody User user,@RequestParam List<UserReward> userRewardList);
 
     @RequestMapping("/getAttractionRewardPoints")
-    int getAttractionRewardPoints(UUID userId,UUID attractionId);
+    int getAttractionRewardPoints(@RequestParam UUID userId,@RequestParam UUID attractionId);
 }

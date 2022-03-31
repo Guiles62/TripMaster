@@ -32,7 +32,9 @@ targetCompatibility = 1.8
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
-    implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-openfeign', version: '2.1.2.RELEASE'
+    // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-openfeign
+    implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-openfeign', version: '2.1.5.RELEASE'
+
 
     implementation group: 'io.springfox', name: 'springfox-swagger2', version: '2.7.0'
     implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.7.0'

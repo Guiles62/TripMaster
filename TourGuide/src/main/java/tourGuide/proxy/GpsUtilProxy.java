@@ -5,7 +5,9 @@ import gpsUtil.location.Location;
 import gpsUtil.location.VisitedLocation;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import tourGuide.user.User;
 
 import java.util.List;
@@ -14,26 +16,26 @@ import java.util.List;
 public interface GpsUtilProxy {
 
     @RequestMapping(value = "/getLocation")
-    VisitedLocation getLocation(User user);
+    VisitedLocation getLocation(@RequestBody User user);
 
     @RequestMapping(value = "/getNearbyAttractions")
-    List<Attraction> getNearbyAttractions(User user);
+    List<Attraction> getNearbyAttractions(@RequestBody User user);
 
     @RequestMapping(value = "/getCurrentLocation")
-    VisitedLocation getCurrentLocation(User user);
+    VisitedLocation getCurrentLocation(@RequestBody User user);
 
     @GetMapping(value = "/getAllAttractions")
     List<Attraction> getAllAttractions();
 
     @RequestMapping("/getNearAttractions")
-    List<Attraction> getNearAttractions(User user);
+    List<Attraction> getNearAttractions(@RequestBody User user);
 
     @RequestMapping("/trackUserLocation")
-    VisitedLocation trackUserLocation (User user);
+    VisitedLocation trackUserLocation (@RequestBody User user);
 
     @RequestMapping("/nearAttraction")
-    Boolean nearAttraction (VisitedLocation visitedLocation, Attraction attraction);
+    Boolean nearAttraction (@RequestParam VisitedLocation visitedLocation, @RequestParam Attraction attraction);
 
     @RequestMapping("/isWithinAttractionProximity")
-    Boolean isWithinAttractionProximity (Attraction attraction, Location location);
+    Boolean isWithinAttractionProximity (@RequestParam Attraction attraction, Location location);
 }
