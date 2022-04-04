@@ -14,10 +14,8 @@ import java.util.UUID;
 @RestController
 public class RewardsCentralController {
 
-    RewardsCentralService rewardsCentralService;
+    private RewardsCentralService rewardsCentralService;
 
-    public RewardsCentralController() {
-    }
 
     public RewardsCentralController(RewardsCentralService rewardsCentralService) {
         this.rewardsCentralService = rewardsCentralService;

@@ -16,11 +16,13 @@ public class User {
     private Date latestLocationTimestamp;
     private List<VisitedLocation> visitedLocations = new ArrayList<>();
 
-    public User(UUID userId, String userName, String phoneNumber, String emailAddress) {
+    public User(UUID userId, String userName, String phoneNumber, String emailAddress, Date latestLocationTimestamp, List<VisitedLocation> visitedLocations) {
         this.userId = userId;
         this.userName = userName;
         this.phoneNumber = phoneNumber;
         this.emailAddress = emailAddress;
+        this.latestLocationTimestamp = latestLocationTimestamp;
+        this.visitedLocations = visitedLocations;
     }
 
     public UUID getUserId() {
@@ -71,4 +73,4 @@ public class User {
         visitedLocations.add(visitedLocation);
     }
 
-}
+    }

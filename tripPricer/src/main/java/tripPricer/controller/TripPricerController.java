@@ -11,10 +11,8 @@ import java.util.List;
 @RestController
 public class TripPricerController {
 
-    TripPricerService tripPricerService;
+    private TripPricerService tripPricerService;
 
-    public TripPricerController() {
-    }
 
     public TripPricerController(TripPricerService tripPricerService) {
         this.tripPricerService = tripPricerService;

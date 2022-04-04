@@ -70,4 +70,17 @@ public class User {
     public void setUserPreferences(UserPreferences userPreferences) {
         this.userPreferences = userPreferences;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", userName='" + userName + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", emailAddress='" + emailAddress + '\'' +
+                ", latestLocationTimestamp=" + latestLocationTimestamp +
+                ", tripDeals=" + tripDeals +
+                ", userPreferences=" + userPreferences +
+                '}';
+    }
 }

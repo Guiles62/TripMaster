@@ -12,20 +12,19 @@ import java.util.UUID;
 @Service
 public class RewardsCentralServiceImpl implements RewardsCentralService {
 
-    RewardCentral rewardCentral;
+
+    RewardCentral rewardCentral = new RewardCentral();
 
     public RewardsCentralServiceImpl() {
     }
 
-    public RewardsCentralServiceImpl(RewardCentral rewardCentral) {
-        this.rewardCentral = rewardCentral;
-    }
 
     @Override
     public List<UserReward> getUserRewards(User user) {
         return user.getUserRewards();
     }
 
+    @Override
     public int getAttractionRewardPoints(UUID userId,UUID attractionId) {
         return rewardCentral.getAttractionRewardPoints(userId, attractionId);
     }

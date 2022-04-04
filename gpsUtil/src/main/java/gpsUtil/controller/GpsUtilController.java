@@ -19,17 +19,15 @@ public class GpsUtilController {
 
     private GpsUtilService gpsUtilService;
 
-    public GpsUtilController() {
-    }
 
     public GpsUtilController(GpsUtilService gpsUtilService) {
         this.gpsUtilService = gpsUtilService;
     }
 
     @RequestMapping("/getLocation")
-    public String getLocation(@RequestBody User user) {
+    public Location getLocation(@RequestBody User user) {
         VisitedLocation visitedLocation = gpsUtilService.getUserLocation(user);
-        return JsonStream.serialize(visitedLocation.location);
+        return visitedLocation.location;
     }
 
     @RequestMapping("/getNearbyAttractions")

@@ -11,14 +11,11 @@ import java.util.List;
 @Service
 public class TripPricerServiceImpl implements TripPricerService {
 
-    private TripPricer tripPricer;
+    private TripPricer tripPricer = new TripPricer();
 
     public TripPricerServiceImpl() {
     }
 
-    public TripPricerServiceImpl(TripPricer tripPricer) {
-        this.tripPricer = tripPricer;
-    }
 
     @Override
     public List<Provider> getTripDeals(User user, String apiKey, int rewardsPoints) {

@@ -7,6 +7,7 @@ import java.util.List;
 import gpsUtil.location.Attraction;
 import gpsUtil.location.VisitedLocation;
 
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -81,10 +82,16 @@ public class TourGuideController {
     }
 
     @RequestMapping("/getTripDeals")
-    public String getTripDeals(@RequestParam String userName, User user) {
-        user = tourGuideService.getUser(userName);
+    public String getTripDeals(@RequestParam String userName) {
+        User user = tourGuideService.getUser(userName);
     	List<Provider> providers = tourGuideService.getTripDeals(user);
     	return JsonStream.serialize(providers);
+    }
+
+    @GetMapping("/getUser")
+    public User getUser(@RequestParam String userName) {
+        User user = tourGuideService.getUser(userName);
+        return user;
     }
 
 

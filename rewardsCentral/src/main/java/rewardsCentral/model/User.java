@@ -60,4 +60,15 @@ public class User {
         return userRewards;
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", userName='" + userName + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", emailAddress='" + emailAddress + '\'' +
+                ", latestLocationTimestamp=" + latestLocationTimestamp +
+                ", userRewards=" + userRewards +
+                '}';
+    }
 }
