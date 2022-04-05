@@ -19,14 +19,14 @@ public class TripPricerController {
     }
 
     @RequestMapping("/getTripDeals")
-    public String getTripDeals(@RequestBody User user, @RequestParam String apiKey, @RequestParam int rewardsPoints) {
+    public List<Provider> getTripDeals(@RequestBody User user, @RequestParam String apiKey, @RequestParam int rewardsPoints) {
         List<Provider> providers = tripPricerService.getTripDeals(user, apiKey, rewardsPoints);
-        return JsonStream.serialize(providers);
+        return providers;
     }
     @GetMapping(value = "/getPrice")
-    public String getPrice(@RequestBody User user, @RequestParam String url, @RequestParam int rewardsPoints) {
+    public List<Provider> getPrice(@RequestBody User user, @RequestParam String url, @RequestParam int rewardsPoints) {
         List<Provider> providers = tripPricerService.getPrice(user, url, rewardsPoints);
-        return JsonStream.serialize(providers);
+        return providers;
     }
 
 }

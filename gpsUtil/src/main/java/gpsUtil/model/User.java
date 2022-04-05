@@ -1,5 +1,7 @@
 package gpsUtil.model;
 
+
+
 import gpsUtil.location.VisitedLocation;
 
 import java.util.ArrayList;
@@ -9,21 +11,21 @@ import java.util.UUID;
 
 public class User {
 
-    private final UUID userId;
-    private final String userName;
+    private UUID userId;
+    private String userName;
     private String phoneNumber;
     private String emailAddress;
     private Date latestLocationTimestamp;
     private List<VisitedLocation> visitedLocations = new ArrayList<>();
 
-    public User(UUID userId, String userName, String phoneNumber, String emailAddress, Date latestLocationTimestamp, List<VisitedLocation> visitedLocations) {
+
+    public User(UUID userId, String userName, String phoneNumber, String emailAddress) {
         this.userId = userId;
         this.userName = userName;
         this.phoneNumber = phoneNumber;
         this.emailAddress = emailAddress;
-        this.latestLocationTimestamp = latestLocationTimestamp;
-        this.visitedLocations = visitedLocations;
     }
+
 
     public UUID getUserId() {
         return userId;

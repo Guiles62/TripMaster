@@ -22,18 +22,18 @@ public class RewardsCentralController {
     }
 
     @RequestMapping("/getRewards")
-    public String getRewardsPoint(@RequestBody User user ) {
-        return JsonStream.serialize(rewardsCentralService.getUserRewards(user));
+    public List<UserReward> getRewardsPoint(@RequestBody User user) {
+        return rewardsCentralService.getUserRewards(user);
     }
 
     @RequestMapping("/getUserRewardsPointsSum")
-    public String getRewardsPointSum(@RequestBody User user, List<UserReward> userRewardList) {
-        return JsonStream.serialize(rewardsCentralService.getRewardsPointsSum(user, userRewardList));
+    public int getRewardsPointSum(@RequestBody User user, List<UserReward> userRewardList) {
+        return rewardsCentralService.getRewardsPointsSum(user, userRewardList);
     }
 
     @RequestMapping("/getAttractionRewardPoints")
-    public String getAttractionRewardPoints(@RequestBody User user, UUID attractionId) {
-        return JsonStream.serialize(rewardsCentralService.getAttractionRewardPoints(user.getUserId(), attractionId));
+    public int getAttractionRewardPoints(@RequestBody User user, UUID attractionId) {
+        return rewardsCentralService.getAttractionRewardPoints(user.getUserId(), attractionId);
     }
 
 
