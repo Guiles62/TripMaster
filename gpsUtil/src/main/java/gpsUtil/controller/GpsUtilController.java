@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 public class GpsUtilController {
@@ -20,16 +21,21 @@ public class GpsUtilController {
         this.gpsUtilService = gpsUtilService;
     }
 
-    @RequestMapping("/getLocation")
-    public Location getLocation(@RequestParam String userName) {
-        User user = gpsUtilService.getUser(userName);
-        VisitedLocation visitedLocation = gpsUtilService.getUserLocation(user);
+    @GetMapping("/getLocation")
+    public Location getLocation(@RequestParam UUID userId) {
+        VisitedLocation visitedLocation = gpsUtilService.getUserLocation(userId);
         return visitedLocation.location;
     }
 
+    @PostMapping("/setUser")
+    public User setUserLocation(@RequestParam UUID userId) {
+        User user = gpsUtilService.getUser(userId);
+        return user;
+    }
+
     @RequestMapping("/getNearbyAttractions")
-    public List<Attraction> getNearbyAttractions(@RequestParam String userName) {
-        User user = gpsUtilService.getUser(userName);
+    public List<Attraction> getNearbyAttractions(@RequestParam UUID userId) {
+        User user = gpsUtilService.getUser(userId);
         return gpsUtilService.getNearByAttractions(user);
     }
     @RequestMapping("/nearAttractions")
@@ -45,8 +51,8 @@ public class GpsUtilController {
     }
 
     @RequestMapping("/getCurrentLocation")
-    public VisitedLocation getCurrentLocation(@RequestParam String userName) {
-        User user = gpsUtilService.getUser(userName);
+    public VisitedLocation getCurrentLocation(@RequestParam UUID userId) {
+        User user = gpsUtilService.getUser(userId);
         VisitedLocation visitedLocation = user.getLastVisitedLocation();
         return visitedLocation;
     }
@@ -58,8 +64,8 @@ public class GpsUtilController {
     }
 
     @GetMapping(value = "/trackUserLocation")
-    public VisitedLocation trackUserLocation(@RequestParam String userName) {
-        User user = gpsUtilService.getUser(userName);
+    public VisitedLocation trackUserLocation(@RequestParam UUID userId) {
+        User user = gpsUtilService.getUser(userId);
         VisitedLocation visitedLocation = gpsUtilService.trackUserLocation(user);
         return visitedLocation;
     }

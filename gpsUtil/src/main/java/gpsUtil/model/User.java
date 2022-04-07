@@ -19,13 +19,13 @@ public class User {
     private List<VisitedLocation> visitedLocations = new ArrayList<>();
 
 
-    public User(UUID userId, String userName, String phoneNumber, String emailAddress) {
+    public User(UUID userId) {
         this.userId = userId;
-        this.userName = userName;
-        this.phoneNumber = phoneNumber;
-        this.emailAddress = emailAddress;
     }
 
+    public void setUserId(UUID userId) {
+        this.userId = userId;
+    }
 
     public UUID getUserId() {
         return userId;

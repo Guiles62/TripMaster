@@ -11,11 +11,11 @@ import java.util.UUID;
 
 public interface GpsUtilService {
 
-    User getUser(String userName);
+    User getUser(UUID userId);
     boolean isWithinAttractionProximity(Attraction attraction, Location location);
     boolean nearAttraction(VisitedLocation visitedLocation, Attraction attraction);
     double getDistance(Location loc1, Location loc2);
-    VisitedLocation getUserLocation(User user);
+    VisitedLocation getUserLocation(UUID userId);
     VisitedLocation trackUserLocation(User user);
     List<Attraction> getNearByAttractions(User user);
     List<Attraction> getAllAttractions();
