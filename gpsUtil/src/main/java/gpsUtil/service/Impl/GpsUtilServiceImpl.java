@@ -4,6 +4,7 @@ import gpsUtil.GpsUtil;
 import gpsUtil.location.Attraction;
 import gpsUtil.location.Location;
 import gpsUtil.location.VisitedLocation;
+import gpsUtil.model.NearAttractions;
 import gpsUtil.model.User;
 import gpsUtil.service.GpsUtilService;
 import org.springframework.stereotype.Service;
@@ -85,11 +86,21 @@ public class GpsUtilServiceImpl implements GpsUtilService {
         UUID userId = user.getUserId();
         VisitedLocation visitedLocation = getUserLocation(userId);
         List<Attraction> nearbyAttractions = new ArrayList<>();
+        List<NearAttractions> nearAttractionsList = new ArrayList<>();
         Location location = visitedLocation.location;
         for (Attraction attraction : gpsUtil.getAttractions()) {
-            if (isWithinAttractionProximity(attraction,location) == false) {
-                nearbyAttractions.add(attraction);
+            Double distance = getDistance(attraction, location);
+            nearAttractionsList.add(new NearAttractions(attraction, distance));
+        }
+        Collections.sort(nearAttractionsList, new Comparator<NearAttractions>() {
+            @Override
+            public int compare(NearAttractions attraction1, NearAttractions attraction2) {
+                return attraction1.getDistanceInMilesBetweenUserAndAttraction().compareTo(attraction2.getDistanceInMilesBetweenUserAndAttraction());
             }
+        });
+        for (int i=0; i<5 ; i++) {
+            Attraction attractionsList = nearAttractionsList.get(i).getAttraction();
+            nearbyAttractions.add(attractionsList);
         }
         return nearbyAttractions;
     }
