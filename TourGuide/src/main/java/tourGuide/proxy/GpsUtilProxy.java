@@ -8,31 +8,30 @@ import org.springframework.web.bind.annotation.*;
 import tourGuide.user.User;
 
 import java.util.List;
+import java.util.UUID;
 
 @FeignClient( name = "gpsUtil", url = "localhost:8081")
 public interface GpsUtilProxy {
 
     @RequestMapping(value = "/getLocation")
-    VisitedLocation getLocation(@RequestBody User user);
+    Location getLocation(@RequestParam UUID userId);
+
+    @RequestMapping("/getUserVisitedLocation")
+    List<VisitedLocation> getUserVisitedLocation(@RequestParam UUID userId);
 
     @RequestMapping(value = "/getNearbyAttractions")
-    List<Attraction> getNearbyAttractions(@RequestBody User user);
+    List<Attraction> getNearbyAttractions(@RequestParam UUID userId);
 
     @RequestMapping(value = "/getCurrentLocation")
-    VisitedLocation getCurrentLocation(@RequestBody User user);
+    VisitedLocation getCurrentLocation(@RequestParam UUID userId);
 
     @GetMapping(value = "/getAllAttractions")
     List<Attraction> getAllAttractions();
 
-    @RequestMapping("/getNearAttractions")
-    List<Attraction> getNearAttractions(@RequestBody User user);
-
-    @RequestMapping("/trackUserLocation")
-    VisitedLocation trackUserLocation (@RequestBody User user);
+    @GetMapping(value = "/trackUserLocation")
+    VisitedLocation trackUserLocation(@RequestParam UUID userId);
 
     @RequestMapping("/nearAttraction")
     Boolean nearAttraction (@RequestParam VisitedLocation visitedLocation, @RequestParam Attraction attraction);
 
-    @RequestMapping("/isWithinAttractionProximity")
-    Boolean isWithinAttractionProximity (@RequestParam Attraction attraction, Location location);
 }

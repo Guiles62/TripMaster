@@ -54,23 +54,23 @@ public class TourGuideService {
 
 	}
 
-	public VisitedLocation getLocation (User user) {
-		VisitedLocation visitedLocation = gpsUtilProxy.getLocation(user);
-		return visitedLocation;
+	public Location getLocation (User user) {
+		Location location = gpsUtilProxy.getLocation(user.getUserId());
+		return location;
+	}
+
+	public VisitedLocation trackUserLocation( User user) {
+		return gpsUtilProxy.trackUserLocation(user.getUserId());
 	}
 
 
 	public List<Attraction> getNearbyAttractions (User user) {
-		List<Attraction> nearAttractions = gpsUtilProxy.getNearbyAttractions(user);
-		List<Attraction> nearFiveAttractions = new ArrayList<>();
-		for (int i = 0; i <=4 ; i++) {
-			nearFiveAttractions.add(nearAttractions.get(i));
-		}
-		return nearFiveAttractions;
+		List<Attraction> nearAttractions = gpsUtilProxy.getNearbyAttractions(user.getUserId());
+		return nearAttractions;
 	}
 
 	public List<UserReward> getRewards (User user) {
-		List<UserReward> getUserRewardsList = rewardsCentralProxy.getRewards(user);
+		List<UserReward> getUserRewardsList = rewardsCentralProxy.getRewards(user.getUserId());
 		return getUserRewardsList;
 	}
 
@@ -79,24 +79,17 @@ public class TourGuideService {
 		List<VisitedLocation> usersCurrentVisitedLocationList = new ArrayList<>();
 		List<User> userList = getAllUsers();
 		for(User user : userList){
-			usersCurrentVisitedLocationList.add(gpsUtilProxy.getCurrentLocation(user));
+			usersCurrentVisitedLocationList.add(gpsUtilProxy.getCurrentLocation(user.getUserId()));
 		}
 		return usersCurrentVisitedLocationList;
 	}
 
 	public List<Provider> getTripDeals(User user) {
-		List<UserReward> userRewardList = rewardsCentralProxy.getRewards(user);
+		List<UserReward> userRewardList = rewardsCentralProxy.getRewards(user.getUserId());
 		int rewardsPoints = rewardsCentralProxy.getUserRewardsPointsSum(user, userRewardList);
 		List<Provider> getPrice = tripPricerProxy.getPrice(user, tripPricerApiKey, rewardsPoints);
 		return getPrice;
 	}
-
-
-	public VisitedLocation trackUserLocation(User user) {
-		VisitedLocation userLocation = gpsUtilProxy.trackUserLocation(user);
-		return userLocation;
-	}
-
 
 	public List<Attraction> getAttractions() {
 		List<Attraction> attractionList = gpsUtilProxy.getAllAttractions();
@@ -142,14 +135,10 @@ public class TourGuideService {
 
 
 	public int getRewardPoints(Attraction attraction, User user) {
-		gpsUtilProxy.trackUserLocation(user);
+		gpsUtilProxy.getUserVisitedLocation(user.getUserId());
 		return rewardsCentralProxy.getAttractionRewardPoints(attraction.attractionId, user.getUserId());
 	}
 
-
-	public Boolean isWithinAttractionProximity(Attraction attraction, Location location) {
-		return gpsUtilProxy.isWithinAttractionProximity(attraction,location);
-	}
 
 	private void addShutDownHook() {
 		Runtime.getRuntime().addShutdownHook(new Thread() { 
@@ -173,34 +162,11 @@ public class TourGuideService {
 			String phone = "000";
 			String email = userName + "@tourGuide.com";
 			User user = new User(UUID.randomUUID(), userName, phone, email);
-			generateUserLocationHistory(user);
 			
 			internalUserMap.put(userName, user);
 		});
 		logger.debug("Created " + InternalTestHelper.getInternalUserNumber() + " internal test users.");
 	}
-	
-	private void generateUserLocationHistory(User user) {
-		IntStream.range(0, 3).forEach(i-> {
-			user.addToVisitedLocations(new VisitedLocation(user.getUserId(), new Location(generateRandomLatitude(), generateRandomLongitude()), getRandomTime()));
-		});
-	}
-	
-	private double generateRandomLongitude() {
-		double leftLimit = -180;
-	    double rightLimit = 180;
-	    return leftLimit + new Random().nextDouble() * (rightLimit - leftLimit);
-	}
-	
-	private double generateRandomLatitude() {
-		double leftLimit = -85.05112878;
-	    double rightLimit = 85.05112878;
-	    return leftLimit + new Random().nextDouble() * (rightLimit - leftLimit);
-	}
-	
-	private Date getRandomTime() {
-		LocalDateTime localDateTime = LocalDateTime.now().minusDays(new Random().nextInt(30));
-	    return Date.from(localDateTime.toInstant(ZoneOffset.UTC));
-	}
+
 	
 }

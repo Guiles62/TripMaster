@@ -3,6 +3,7 @@ package rewardsCentral.controller;
 import com.jsoniter.output.JsonStream;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import rewardsCentral.model.User;
 import rewardsCentral.model.UserReward;
@@ -22,8 +23,10 @@ public class RewardsCentralController {
     }
 
     @RequestMapping("/getRewards")
-    public List<UserReward> getRewardsPoint(@RequestBody User user) {
-        return rewardsCentralService.getUserRewards(user);
+    public List<UserReward> getRewardsPoint(@RequestParam UUID userId, @RequestParam UUID attractionId) {
+        User user = rewardsCentralService.getUser(userId);
+        List<UserReward> userRewardList = rewardsCentralService.getUserRewards(user);
+        return userRewardList;
     }
 
     @RequestMapping("/getUserRewardsPointsSum")

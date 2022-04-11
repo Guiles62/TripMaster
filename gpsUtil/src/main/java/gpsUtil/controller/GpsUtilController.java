@@ -21,16 +21,18 @@ public class GpsUtilController {
         this.gpsUtilService = gpsUtilService;
     }
 
-    @GetMapping("/getLocation")
+    @RequestMapping ("/getLocation")
     public Location getLocation(@RequestParam UUID userId) {
-        VisitedLocation visitedLocation = gpsUtilService.getUserLocation(userId);
+        User user = gpsUtilService.getUser(userId);
+        VisitedLocation visitedLocation = gpsUtilService.getUserLocation(user);
         return visitedLocation.location;
     }
 
-    @PostMapping("/setUser")
-    public User setUserLocation(@RequestParam UUID userId) {
+    @RequestMapping("/getUserVisitedLocation")
+    public List<VisitedLocation> getUserVisitedLocation(@RequestParam UUID userId) {
         User user = gpsUtilService.getUser(userId);
-        return user;
+        List<VisitedLocation> userVisitedLocations = user.getVisitedLocations();
+        return userVisitedLocations;
     }
 
     @RequestMapping("/getNearbyAttractions")
@@ -42,12 +44,6 @@ public class GpsUtilController {
     public Boolean getNearAttraction(@RequestBody VisitedLocation visitedLocation, @RequestBody Attraction attraction) {
         Boolean nearAttraction = gpsUtilService.nearAttraction(visitedLocation, attraction);
         return nearAttraction;
-    }
-
-    @RequestMapping("/isWithinAttractionProximity")
-    public Boolean isWithinAttractionProximity(@RequestBody Attraction attraction, Location location) {
-        Boolean withinAttractionProximity = gpsUtilService.isWithinAttractionProximity(attraction,location);
-        return withinAttractionProximity;
     }
 
     @RequestMapping("/getCurrentLocation")

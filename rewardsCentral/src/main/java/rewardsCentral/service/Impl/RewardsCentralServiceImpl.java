@@ -20,6 +20,12 @@ public class RewardsCentralServiceImpl implements RewardsCentralService {
 
 
     @Override
+    public User getUser(UUID userid) {
+        User user = new User(userid);
+        return user;
+    }
+
+    @Override
     public List<UserReward> getUserRewards(User user) {
         return user.getUserRewards();
     }

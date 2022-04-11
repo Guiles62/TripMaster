@@ -41,11 +41,6 @@ public class GpsUtilServiceImpl implements GpsUtilService {
 
 
     @Override
-    public boolean isWithinAttractionProximity(Attraction attraction, Location location) {
-        return getDistance(attraction,location) > attractionProximityRange ? false : true;
-    }
-
-    @Override
     public boolean nearAttraction(VisitedLocation visitedLocation, Attraction attraction) {
         return getDistance(attraction, visitedLocation.location) > proximityBuffer ? false : true;
     }
@@ -66,8 +61,7 @@ public class GpsUtilServiceImpl implements GpsUtilService {
     }
 
     @Override
-    public VisitedLocation getUserLocation(UUID userId) {
-        User user = getUser(userId);
+    public VisitedLocation getUserLocation(User user) {
         VisitedLocation visitedLocation = (user.getVisitedLocations().size() > 0) ?
                 user.getLastVisitedLocation() :
                 trackUserLocation(user);
@@ -83,8 +77,7 @@ public class GpsUtilServiceImpl implements GpsUtilService {
 
     @Override
     public List<Attraction> getNearByAttractions(User user) {
-        UUID userId = user.getUserId();
-        VisitedLocation visitedLocation = getUserLocation(userId);
+        VisitedLocation visitedLocation = getUserLocation(user);
         List<Attraction> nearbyAttractions = new ArrayList<>();
         List<NearAttractions> nearAttractionsList = new ArrayList<>();
         Location location = visitedLocation.location;

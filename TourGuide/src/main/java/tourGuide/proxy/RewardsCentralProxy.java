@@ -16,7 +16,7 @@ import java.util.UUID;
 public interface RewardsCentralProxy {
 
     @RequestMapping(value = "/getRewards")
-    List<UserReward> getRewards(@RequestBody User user);
+    List<UserReward> getRewards(@RequestParam UUID userId);
 
     @RequestMapping(value = "/getUserRewardsPointsSum")
     int getUserRewardsPointsSum(@RequestBody User user,@RequestParam List<UserReward> userRewardList);
