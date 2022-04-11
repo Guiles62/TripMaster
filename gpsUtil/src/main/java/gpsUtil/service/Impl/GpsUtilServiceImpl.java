@@ -26,7 +26,6 @@ public class GpsUtilServiceImpl implements GpsUtilService {
 
     private final GpsUtil gpsUtil;
 
-
     public GpsUtilServiceImpl() {
         gpsUtil = new GpsUtil();
     }
@@ -70,7 +69,9 @@ public class GpsUtilServiceImpl implements GpsUtilService {
 
     @Override
     public VisitedLocation trackUserLocation(User user) {
-        VisitedLocation visitedLocation = gpsUtil.getUserLocation(user.getUserId());
+        gpsUtil.location.VisitedLocation userVisitedLocation = gpsUtil.getUserLocation(user.getUserId());
+        Location location = new Location(userVisitedLocation.location.latitude,userVisitedLocation.location.longitude);
+        VisitedLocation visitedLocation = new VisitedLocation(userVisitedLocation.userId,location,userVisitedLocation.timeVisited);
         user.addToVisitedLocations(visitedLocation);
         return visitedLocation;
     }
@@ -78,10 +79,11 @@ public class GpsUtilServiceImpl implements GpsUtilService {
     @Override
     public List<Attraction> getNearByAttractions(User user) {
         VisitedLocation visitedLocation = getUserLocation(user);
+        List<Attraction> attractionList = getAllAttractions();
         List<Attraction> nearbyAttractions = new ArrayList<>();
         List<NearAttractions> nearAttractionsList = new ArrayList<>();
         Location location = visitedLocation.location;
-        for (Attraction attraction : gpsUtil.getAttractions()) {
+        for (Attraction attraction : attractionList) {
             Double distance = getDistance(attraction, location);
             nearAttractionsList.add(new NearAttractions(attraction, distance));
         }
@@ -100,7 +102,12 @@ public class GpsUtilServiceImpl implements GpsUtilService {
 
     @Override
     public List<Attraction> getAllAttractions() {
-        return gpsUtil.getAttractions();
+        List<gpsUtil.location.Attraction> attractions = gpsUtil.getAttractions();
+        List<Attraction> attractionList = new ArrayList<>();
+        for (gpsUtil.location.Attraction attraction : attractions) {
+            attractionList.add(new Attraction(attraction.attractionName,attraction.city,attraction.state,attraction.latitude,attraction.longitude));
+        }
+        return attractionList;
     }
 
     @Override

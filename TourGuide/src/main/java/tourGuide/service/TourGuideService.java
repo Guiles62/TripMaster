@@ -1,20 +1,18 @@
 package tourGuide.service;
 
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
+
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import gpsUtil.location.Attraction;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-
-import gpsUtil.location.Location;
-import gpsUtil.location.VisitedLocation;
 import tourGuide.helper.InternalTestHelper;
+import tourGuide.model.Attraction;
+import tourGuide.model.Location;
+import tourGuide.model.VisitedLocation;
 import tourGuide.proxy.GpsUtilProxy;
 import tourGuide.proxy.RewardsCentralProxy;
 import tourGuide.proxy.TripPricerProxy;
@@ -59,7 +57,7 @@ public class TourGuideService {
 		return location;
 	}
 
-	public VisitedLocation trackUserLocation( User user) {
+	public VisitedLocation trackUserLocation(User user) {
 		return gpsUtilProxy.trackUserLocation(user.getUserId());
 	}
 
@@ -115,19 +113,7 @@ public class TourGuideService {
 		return tripPricerApiKey;
 	}
 
-	public void calculateRewards(User user) {
-		List<VisitedLocation> userLocations = user.getVisitedLocations();
-		List<Attraction> attractions = gpsUtilProxy.getAllAttractions();
-		for(VisitedLocation visitedLocation : userLocations) {
-			for(Attraction attraction : attractions) {
-				if(user.getUserRewards().stream().filter(r -> r.attraction.attractionName.equals(attraction.attractionName)).count() == 0) {
-					if(nearAttraction(visitedLocation, attraction)) {
-						user.addUserReward(new UserReward(visitedLocation, attraction, getRewardPoints(attraction,user)));
-					}
-				}
-			}
-		}
-	}
+
 
 
 	public Boolean nearAttraction (VisitedLocation visitedLocation, Attraction attraction) {

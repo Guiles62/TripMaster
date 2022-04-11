@@ -1,6 +1,6 @@
 package gpsUtil.model;
 
-import gpsUtil.location.Attraction;
+
 
 public class NearAttractions {
 

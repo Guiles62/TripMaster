@@ -1,4 +1,4 @@
-package gpsUtil.model;
+package rewardsCentral.model;
 
 
 
@@ -11,7 +11,7 @@ public class Attraction extends Location {
     public UUID attractionId;
 
 
-    public Attraction(String attractionName, String city, String state,double latitude, double longitude) {
+    public Attraction(String attractionName, String city, String state, double latitude, double longitude) {
         super(latitude, longitude);
         this.attractionName = attractionName;
         this.city = city;

@@ -1,4 +1,4 @@
-package gpsUtil.model;
+package rewardsCentral.model;
 
 import java.util.Date;
 import java.util.UUID;

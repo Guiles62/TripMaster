@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-import gpsUtil.location.VisitedLocation;
+import tourGuide.model.VisitedLocation;
 import tripPricer.Provider;
 
 public class User {
@@ -91,7 +91,10 @@ public class User {
 	}
 
 	public VisitedLocation getLastVisitedLocation() {
-		return visitedLocations.get(visitedLocations.size() - 1);
+		if (visitedLocations.size()!=0){
+			return visitedLocations.get(visitedLocations.size() - 1);
+		}
+		return null;
 	}
 	
 	public void setTripDeals(List<Provider> tripDeals) {

@@ -6,12 +6,14 @@ import static org.junit.Assert.assertTrue;
 import java.util.List;
 import java.util.UUID;
 
+
 import org.junit.Ignore;
 import org.junit.Test;
 
-import gpsUtil.location.Attraction;
-import gpsUtil.location.VisitedLocation;
+
 import tourGuide.helper.InternalTestHelper;
+import tourGuide.model.Attraction;
+import tourGuide.model.VisitedLocation;
 import tourGuide.proxy.GpsUtilProxy;
 import tourGuide.proxy.RewardsCentralProxy;
 import tourGuide.proxy.TripPricerProxy;

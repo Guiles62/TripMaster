@@ -1,11 +1,13 @@
 package tourGuide.proxy;
 
-import gpsUtil.location.Attraction;
-import gpsUtil.location.Location;
-import gpsUtil.location.VisitedLocation;
+
+
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
-import tourGuide.user.User;
+import tourGuide.model.Attraction;
+import tourGuide.model.Location;
+import tourGuide.model.VisitedLocation;
+
 
 import java.util.List;
 import java.util.UUID;

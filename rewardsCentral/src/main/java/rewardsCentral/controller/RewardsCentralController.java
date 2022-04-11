@@ -23,7 +23,7 @@ public class RewardsCentralController {
     }
 
     @RequestMapping("/getRewards")
-    public List<UserReward> getRewardsPoint(@RequestParam UUID userId, @RequestParam UUID attractionId) {
+    public List<UserReward> getRewards(@RequestParam UUID userId) {
         User user = rewardsCentralService.getUser(userId);
         List<UserReward> userRewardList = rewardsCentralService.getUserRewards(user);
         return userRewardList;
