@@ -97,7 +97,8 @@ public class TourGuideService {
 	}
 	
 	public User getUser(String userName) {
-		return internalUserMap.get(userName);
+		User user = internalUserMap.get(userName);
+		return user;
 	}
 	
 	public List<User> getAllUsers() {

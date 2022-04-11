@@ -1,9 +1,9 @@
 package gpsUtil.service.Impl;
 
 import gpsUtil.GpsUtil;
-import gpsUtil.location.Attraction;
-import gpsUtil.location.Location;
-import gpsUtil.location.VisitedLocation;
+import gpsUtil.model.Attraction;
+import gpsUtil.model.Location;
+import gpsUtil.model.VisitedLocation;
 import gpsUtil.model.NearAttractions;
 import gpsUtil.model.User;
 import gpsUtil.service.GpsUtilService;

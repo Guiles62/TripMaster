@@ -1,8 +1,8 @@
 package gpsUtil.service;
 
-import gpsUtil.location.Attraction;
-import gpsUtil.location.Location;
-import gpsUtil.location.VisitedLocation;
+import gpsUtil.model.Attraction;
+import gpsUtil.model.Location;
+import gpsUtil.model.VisitedLocation;
 import gpsUtil.model.User;
 
 import java.util.List;

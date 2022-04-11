@@ -1,8 +1,9 @@
 package gpsUtil.controller;
 
-import gpsUtil.location.Attraction;
-import gpsUtil.location.Location;
-import gpsUtil.location.VisitedLocation;
+
+import gpsUtil.model.Attraction;
+import gpsUtil.model.VisitedLocation;
+import gpsUtil.model.Location;
 import gpsUtil.model.User;
 import gpsUtil.service.GpsUtilService;
 import org.springframework.web.bind.annotation.*;

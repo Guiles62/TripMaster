@@ -1,13 +1,11 @@
 package gpsUtil.model;
 
 
-
-import gpsUtil.location.VisitedLocation;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import gpsUtil.model.VisitedLocation;
 
 public class User {
 

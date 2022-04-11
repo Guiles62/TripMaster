@@ -9,8 +9,8 @@ import gpsUtil.location.VisitedLocation;
 import tripPricer.Provider;
 
 public class User {
-	private final UUID userId;
-	private final String userName;
+	private UUID userId;
+	private String userName;
 	private String phoneNumber;
 	private String emailAddress;
 	private Date latestLocationTimestamp;
@@ -24,7 +24,10 @@ public class User {
 		this.phoneNumber = phoneNumber;
 		this.emailAddress = emailAddress;
 	}
-	
+
+	public User() {
+	}
+
 	public UUID getUserId() {
 		return userId;
 	}
@@ -56,15 +59,15 @@ public class User {
 	public Date getLatestLocationTimestamp() {
 		return latestLocationTimestamp;
 	}
-	
-	public void addToVisitedLocations(VisitedLocation visitedLocation) {
-		visitedLocations.add(visitedLocation);
-	}
-	
+
 	public List<VisitedLocation> getVisitedLocations() {
 		return visitedLocations;
 	}
-	
+
+	public void setVisitedLocations(List<VisitedLocation> visitedLocations) {
+		this.visitedLocations = visitedLocations;
+	}
+
 	public void clearVisitedLocations() {
 		visitedLocations.clear();
 	}
