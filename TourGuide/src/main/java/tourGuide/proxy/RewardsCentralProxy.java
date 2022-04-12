@@ -5,6 +5,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import tourGuide.model.Attraction;
 import tourGuide.user.User;
 import tourGuide.user.UserReward;
 
@@ -15,11 +16,15 @@ import java.util.UUID;
 public interface RewardsCentralProxy {
 
     @RequestMapping(value = "/getRewards")
-    List<UserReward> getRewards(@RequestParam UUID userId);
+    List<UserReward> getRewards(@RequestBody User user);
 
     @RequestMapping(value = "/getUserRewardsPointsSum")
     int getUserRewardsPointsSum(@RequestBody User user,@RequestParam List<UserReward> userRewardList);
 
     @RequestMapping("/getAttractionRewardPoints")
     int getAttractionRewardPoints(@RequestParam UUID userId,@RequestParam UUID attractionId);
+
+    @RequestMapping("/getAttractions")
+    List<Attraction> getAttractions();
+
 }

@@ -1,10 +1,11 @@
 package rewardsCentral.controller;
 
-import com.jsoniter.output.JsonStream;
+
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import rewardsCentral.model.Attraction;
 import rewardsCentral.model.User;
 import rewardsCentral.model.UserReward;
 import rewardsCentral.service.RewardsCentralService;
@@ -22,11 +23,9 @@ public class RewardsCentralController {
         this.rewardsCentralService = rewardsCentralService;
     }
 
-    @RequestMapping("/getRewards")
-    public List<UserReward> getRewards(@RequestParam UUID userId) {
-        User user = rewardsCentralService.getUser(userId);
-        List<UserReward> userRewardList = rewardsCentralService.getUserRewards(user);
-        return userRewardList;
+    @RequestMapping(value = "/getRewards")
+    public List<UserReward> getRewards(@RequestBody User user) {
+        return rewardsCentralService.getUserRewards(user);
     }
 
     @RequestMapping("/getUserRewardsPointsSum")
@@ -35,9 +34,8 @@ public class RewardsCentralController {
     }
 
     @RequestMapping("/getAttractionRewardPoints")
-    public int getAttractionRewardPoints(@RequestBody User user, UUID attractionId) {
-        return rewardsCentralService.getAttractionRewardPoints(user.getUserId(), attractionId);
+    public int getAttractionRewardPoints(@RequestParam UUID userId, @RequestParam UUID attractionId) {
+        return rewardsCentralService.getAttractionRewardPoints(userId, attractionId);
     }
-
 
 }

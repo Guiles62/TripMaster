@@ -68,8 +68,7 @@ public class TourGuideService {
 	}
 
 	public List<UserReward> getRewards (User user) {
-		List<UserReward> getUserRewardsList = rewardsCentralProxy.getRewards(user.getUserId());
-		return getUserRewardsList;
+		return rewardsCentralProxy.getRewards(user);
 	}
 
 
@@ -83,10 +82,14 @@ public class TourGuideService {
 	}
 
 	public List<Provider> getTripDeals(User user) {
-		List<UserReward> userRewardList = rewardsCentralProxy.getRewards(user.getUserId());
-		int rewardsPoints = rewardsCentralProxy.getUserRewardsPointsSum(user, userRewardList);
-		List<Provider> getPrice = tripPricerProxy.getPrice(user, tripPricerApiKey, rewardsPoints);
-		return getPrice;
+		List<Attraction> attractionList = getNearbyAttractions(user);
+		for (Attraction attraction : attractionList) {
+			List<UserReward> userRewardList = rewardsCentralProxy.getRewards(user);
+			int rewardsPoints = rewardsCentralProxy.getUserRewardsPointsSum(user, userRewardList);
+			List<Provider> getPrice = tripPricerProxy.getPrice(user, tripPricerApiKey, rewardsPoints);
+			return getPrice;
+		}
+		return getTripDeals(user);
 	}
 
 	public List<Attraction> getAttractions() {
@@ -96,6 +99,10 @@ public class TourGuideService {
 	
 	public User getUser(String userName) {
 		User user = internalUserMap.get(userName);
+		List<VisitedLocation> visitedLocations = gpsUtilProxy.getUserVisitedLocation(user.getUserId());
+		user.setVisitedLocations(visitedLocations);
+		List<Attraction> attractions = gpsUtilProxy.getAllAttractions();
+		user.setAttractions(attractions);
 		return user;
 	}
 	
@@ -122,7 +129,6 @@ public class TourGuideService {
 
 
 	public int getRewardPoints(Attraction attraction, User user) {
-		gpsUtilProxy.getUserVisitedLocation(user.getUserId());
 		return rewardsCentralProxy.getAttractionRewardPoints(attraction.attractionId, user.getUserId());
 	}
 

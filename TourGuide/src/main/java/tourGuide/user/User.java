@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import tourGuide.model.Attraction;
 import tourGuide.model.VisitedLocation;
 import tripPricer.Provider;
 
@@ -14,6 +15,7 @@ public class User {
 	private String phoneNumber;
 	private String emailAddress;
 	private Date latestLocationTimestamp;
+	private List<Attraction> attractions = new ArrayList<>();
 	private List<VisitedLocation> visitedLocations = new ArrayList<>();
 	private List<UserReward> userRewards = new ArrayList<>();
 	private UserPreferences userPreferences = new UserPreferences();
@@ -105,5 +107,11 @@ public class User {
 		return tripDeals;
 	}
 
+	public List<Attraction> getAttractions() {
+		return attractions;
+	}
 
+	public void setAttractions(List<Attraction> attractions) {
+		this.attractions = attractions;
+	}
 }

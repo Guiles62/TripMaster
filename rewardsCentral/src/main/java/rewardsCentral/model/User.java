@@ -12,6 +12,7 @@ public class User {
 	private String phoneNumber;
 	private String emailAddress;
 	private Date latestLocationTimestamp;
+	private List<Attraction> attractions = new ArrayList<>();
 	private List<VisitedLocation> visitedLocations = new ArrayList<>();
 	private List<UserReward> userRewards = new ArrayList<>();
 	private UserPreferences userPreferences = new UserPreferences();
@@ -20,6 +21,10 @@ public class User {
 		this.userName = userName;
 		this.phoneNumber = phoneNumber;
 		this.emailAddress = emailAddress;
+	}
+
+	public User(UUID userId) {
+		this.userId = userId;
 	}
 
 	public User() {
@@ -94,6 +99,11 @@ public class User {
 		return null;
 	}
 
+	public List<Attraction> getAttractions() {
+		return attractions;
+	}
 
-
+	public void setAttractions(List<Attraction> attractions) {
+		this.attractions = attractions;
+	}
 }
