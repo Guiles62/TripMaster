@@ -5,6 +5,7 @@ import rewardCentral.RewardCentral;
 import rewardsCentral.model.*;
 import rewardsCentral.service.RewardsCentralService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -12,7 +13,7 @@ import java.util.UUID;
 public class RewardsCentralServiceImpl implements RewardsCentralService {
 
     private static final double STATUTE_MILES_PER_NAUTICAL_MILE = 1.15077945;
-    private int defaultProximityBuffer = 10;
+    private int defaultProximityBuffer = 3000;
     private int proximityBuffer = defaultProximityBuffer;
     RewardCentral rewardCentral = new RewardCentral();
 
@@ -53,11 +54,13 @@ public class RewardsCentralServiceImpl implements RewardsCentralService {
     public void calculateRewards(User user) {
         List<VisitedLocation> userLocations = user.getVisitedLocations();
         List<Attraction> attractions = user.getAttractions();
+        List<UserReward> userRewards = new ArrayList<>();
         for(VisitedLocation visitedLocation : userLocations) {
-            for (Attraction attraction : user.getAttractions()) {
+            for (Attraction attraction : attractions) {
                 if (user.getUserRewards().stream().filter(r -> r.attraction.attractionName.equals(attraction.attractionName)).count() == 0) {
                     if (nearAttraction(visitedLocation, attraction)) {
-                        user.addUserReward(new UserReward(visitedLocation, attraction, getAttractionRewardPoints(attraction.attractionId, user.getUserId())));
+                        userRewards.add(new UserReward(visitedLocation, attraction, getAttractionRewardPoints(attraction.attractionId, user.getUserId())));
+                        user.setUserRewards(userRewards);
                     }
                 }
             }

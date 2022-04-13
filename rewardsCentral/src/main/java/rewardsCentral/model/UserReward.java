@@ -24,5 +24,20 @@ public class UserReward {
 	public int getRewardPoints() {
 		return rewardPoints;
 	}
-	
+
+	public VisitedLocation getVisitedLocation() {
+		return visitedLocation;
+	}
+
+	public void setVisitedLocation(VisitedLocation visitedLocation) {
+		this.visitedLocation = visitedLocation;
+	}
+
+	public Attraction getAttraction() {
+		return attraction;
+	}
+
+	public void setAttraction(Attraction attraction) {
+		this.attraction = attraction;
+	}
 }
