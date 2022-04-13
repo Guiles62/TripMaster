@@ -15,19 +15,14 @@ public class User {
 	private List<Attraction> attractions = new ArrayList<>();
 	private List<VisitedLocation> visitedLocations = new ArrayList<>();
 	private List<UserReward> userRewards = new ArrayList<>();
-	private UserPreferences userPreferences = new UserPreferences();
-	public User(UUID userId, String userName, String phoneNumber, String emailAddress) {
-		this.userId = userId;
-		this.userName = userName;
-		this.phoneNumber = phoneNumber;
-		this.emailAddress = emailAddress;
-	}
 
-	public User(UUID userId) {
-		this.userId = userId;
-	}
+
 
 	public User() {
+	}
+
+	public void setUserId(UUID userId) {
+		this.userId = userId;
 	}
 
 	public UUID getUserId() {
@@ -83,14 +78,7 @@ public class User {
 	public List<UserReward> getUserRewards() {
 		return userRewards;
 	}
-	
-	public UserPreferences getUserPreferences() {
-		return userPreferences;
-	}
-	
-	public void setUserPreferences(UserPreferences userPreferences) {
-		this.userPreferences = userPreferences;
-	}
+
 
 	public VisitedLocation getLastVisitedLocation() {
 		if (visitedLocations.size()!=0){

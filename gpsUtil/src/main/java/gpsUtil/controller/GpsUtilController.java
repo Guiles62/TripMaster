@@ -22,32 +22,33 @@ public class GpsUtilController {
         this.gpsUtilService = gpsUtilService;
     }
 
-    @RequestMapping ("/getLocation")
+    @PostMapping ("/getLocation")
     public Location getLocation(@RequestParam UUID userId) {
         User user = gpsUtilService.getUser(userId);
         VisitedLocation visitedLocation = gpsUtilService.getUserLocation(user);
         return visitedLocation.location;
     }
 
-    @RequestMapping("/getUserVisitedLocation")
+    @PostMapping("/getUserVisitedLocation")
     public List<VisitedLocation> getUserVisitedLocation(@RequestParam UUID userId) {
         User user = gpsUtilService.getUser(userId);
         List<VisitedLocation> userVisitedLocations = user.getVisitedLocations();
         return userVisitedLocations;
     }
 
-    @RequestMapping("/getNearbyAttractions")
+    @PostMapping("/getNearbyAttractions")
     public List<Attraction> getNearbyAttractions(@RequestParam UUID userId) {
         User user = gpsUtilService.getUser(userId);
         return gpsUtilService.getNearByAttractions(user);
     }
-    @RequestMapping("/nearAttractions")
+
+    @PostMapping("/nearAttractions")
     public Boolean getNearAttraction(@RequestBody VisitedLocation visitedLocation, @RequestBody Attraction attraction) {
         Boolean nearAttraction = gpsUtilService.nearAttraction(visitedLocation, attraction);
         return nearAttraction;
     }
 
-    @RequestMapping("/getCurrentLocation")
+    @PostMapping("/getCurrentLocation")
     public VisitedLocation getCurrentLocation(@RequestParam UUID userId) {
         User user = gpsUtilService.getUser(userId);
         VisitedLocation visitedLocation = user.getLastVisitedLocation();
@@ -60,7 +61,7 @@ public class GpsUtilController {
         return getAttractionsList;
     }
 
-    @GetMapping(value = "/trackUserLocation")
+    @PostMapping(value = "/trackUserLocation")
     public VisitedLocation trackUserLocation(@RequestParam UUID userId) {
         User user = gpsUtilService.getUser(userId);
         VisitedLocation visitedLocation = gpsUtilService.trackUserLocation(user);

@@ -33,7 +33,7 @@ public class TourGuideController {
         return "Greetings from TourGuide!";
     }
 
-    @RequestMapping("/getLocation")
+    @GetMapping("/getLocation")
     public Location getLocation(@RequestParam String userName) {
         User user = tourGuideService.getUser(userName);
     	Location location = tourGuideService.getLocation(user);
@@ -49,14 +49,14 @@ public class TourGuideController {
         // The distance in miles between the user's location and each of the attractions.
         // The reward points for visiting each Attraction.
         //    Note: Attraction reward points can be gathered from RewardsCentral
-    @RequestMapping("/getNearbyAttractions") 
+    @GetMapping("/getNearbyAttractions")
     public List<Attraction> getNearbyAttractions(@RequestParam String userName) {
         User user = tourGuideService.getUser(userName);
     	List<Attraction> nearAttractions = tourGuideService.getNearbyAttractions(user);
     	return nearAttractions;
     }
 
-    @RequestMapping("/getRewards") 
+    @GetMapping("/getRewards")
     public List<UserReward> getRewards(@RequestParam String userName) {
         User user = tourGuideService.getUser(userName);
         List<UserReward> getUserRewardsList = tourGuideService.getRewards(user);
@@ -64,7 +64,7 @@ public class TourGuideController {
     }
 
 
-    @RequestMapping("/getAllCurrentLocations")
+    @GetMapping("/getAllCurrentLocations")
     public List<VisitedLocation> getAllCurrentLocations() {
     	// TODO: Get a list of every user's most recent location as JSON
     	//- Note: does not use gpsUtil to query for their current location, 
@@ -79,12 +79,12 @@ public class TourGuideController {
     	return usersCurrentVisitedLocationList;
     }
 
-    @RequestMapping("/getTripDeals")
+    /*@RequestMapping("/getTripDeals")
     public List<Provider> getTripDeals(@RequestParam String userName) {
         User user = tourGuideService.getUser(userName);
     	List<Provider> providers = tourGuideService.getTripDeals(user);
     	return providers;
-    }
+    }*/
 
     @GetMapping("/getUser")
     public User getUser(@RequestParam String userName) {

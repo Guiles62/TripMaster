@@ -11,7 +11,6 @@ import java.util.UUID;
 public interface RewardsCentralService {
 
 
-    User getUser (UUID userId);
     List<UserReward> getUserRewards(User user);
     int getRewardsPointsSum(User user, List<UserReward> userRewards);
     int getAttractionRewardPoints(UUID userId, UUID attractionID);

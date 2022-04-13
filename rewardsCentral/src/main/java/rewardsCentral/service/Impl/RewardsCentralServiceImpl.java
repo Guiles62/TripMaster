@@ -5,7 +5,6 @@ import rewardCentral.RewardCentral;
 import rewardsCentral.model.*;
 import rewardsCentral.service.RewardsCentralService;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -17,14 +16,17 @@ public class RewardsCentralServiceImpl implements RewardsCentralService {
     private int proximityBuffer = defaultProximityBuffer;
     RewardCentral rewardCentral = new RewardCentral();
 
+    public void setProximityBuffer(int proximityBuffer) {
+        this.proximityBuffer = proximityBuffer;
+    }
+
+    public void setDefaultProximityBuffer() {
+        proximityBuffer = defaultProximityBuffer;
+    }
+
     public RewardsCentralServiceImpl() {
     }
 
-
-    public User getUser(UUID userId) {
-        User user = new User(userId);
-        return user;
-    }
 
     @Override
     public List<UserReward> getUserRewards(User user) {

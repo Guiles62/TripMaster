@@ -15,25 +15,25 @@ import java.util.UUID;
 @FeignClient( name = "gpsUtil", url = "localhost:8081")
 public interface GpsUtilProxy {
 
-    @RequestMapping(value = "/getLocation")
+    @PostMapping(value = "/getLocation")
     Location getLocation(@RequestParam UUID userId);
 
-    @RequestMapping("/getUserVisitedLocation")
+    @PostMapping("/getUserVisitedLocation")
     List<VisitedLocation> getUserVisitedLocation(@RequestParam UUID userId);
 
-    @RequestMapping(value = "/getNearbyAttractions")
+    @PostMapping(value = "/getNearbyAttractions")
     List<Attraction> getNearbyAttractions(@RequestParam UUID userId);
 
-    @RequestMapping(value = "/getCurrentLocation")
+    @PostMapping(value = "/getCurrentLocation")
     VisitedLocation getCurrentLocation(@RequestParam UUID userId);
 
     @GetMapping(value = "/getAllAttractions")
     List<Attraction> getAllAttractions();
 
-    @GetMapping(value = "/trackUserLocation")
+    @PostMapping(value = "/trackUserLocation")
     VisitedLocation trackUserLocation(@RequestParam UUID userId);
 
-    @RequestMapping("/nearAttraction")
+    @PostMapping("/nearAttraction")
     Boolean nearAttraction (@RequestParam VisitedLocation visitedLocation, @RequestParam Attraction attraction);
 
 }

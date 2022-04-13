@@ -1,10 +1,7 @@
 package rewardsCentral.controller;
 
 
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import rewardsCentral.model.Attraction;
 import rewardsCentral.model.User;
 import rewardsCentral.model.UserReward;
@@ -23,7 +20,7 @@ public class RewardsCentralController {
         this.rewardsCentralService = rewardsCentralService;
     }
 
-    @RequestMapping(value = "/getRewards")
+    @PostMapping(value = "/getRewards")
     public List<UserReward> getRewards(@RequestBody User user) {
         return rewardsCentralService.getUserRewards(user);
     }
