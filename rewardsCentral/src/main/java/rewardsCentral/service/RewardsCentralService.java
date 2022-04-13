@@ -12,7 +12,7 @@ public interface RewardsCentralService {
 
 
     List<UserReward> getUserRewards(User user);
-    int getRewardsPointsSum(User user, List<UserReward> userRewards);
+    int getRewardsPointsSum(User user);
     int getAttractionRewardPoints(UUID userId, UUID attractionID);
 
 

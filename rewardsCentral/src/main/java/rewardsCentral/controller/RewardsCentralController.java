@@ -26,8 +26,8 @@ public class RewardsCentralController {
     }
 
     @RequestMapping("/getUserRewardsPointsSum")
-    public int getRewardsPointSum(@RequestBody User user, List<UserReward> userRewardList) {
-        return rewardsCentralService.getRewardsPointsSum(user, userRewardList);
+    public int getRewardsPointSum(@RequestBody User user) {
+        return rewardsCentralService.getRewardsPointsSum(user);
     }
 
     @RequestMapping("/getAttractionRewardPoints")

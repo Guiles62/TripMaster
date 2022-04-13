@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import tourGuide.helper.InternalTestHelper;
 import tourGuide.model.Attraction;
 import tourGuide.model.Location;
+import tourGuide.model.Provider;
 import tourGuide.model.VisitedLocation;
 import tourGuide.proxy.GpsUtilProxy;
 import tourGuide.proxy.RewardsCentralProxy;
@@ -19,7 +20,7 @@ import tourGuide.proxy.TripPricerProxy;
 import tourGuide.tracker.Tracker;
 import tourGuide.user.User;
 import tourGuide.user.UserReward;
-import tripPricer.Provider;
+
 
 
 @Service
@@ -82,14 +83,9 @@ public class TourGuideService {
 	}
 
 	public List<Provider> getTripDeals(User user) {
-		List<Attraction> attractionList = getNearbyAttractions(user);
-		for (Attraction attraction : attractionList) {
-			List<UserReward> userRewardList = rewardsCentralProxy.getRewards(user);
-			int rewardsPoints = rewardsCentralProxy.getUserRewardsPointsSum(user, userRewardList);
-			List<Provider> getPrice = tripPricerProxy.getPrice(user, tripPricerApiKey, rewardsPoints);
-			return getPrice;
-		}
-		return getTripDeals(user);
+		String apiKey  = getApiKey();
+		List<Provider> getPrice = tripPricerProxy.getPrice(user,apiKey);
+		return getPrice;
 	}
 
 	public List<Attraction> getAttractions() {
@@ -103,6 +99,8 @@ public class TourGuideService {
 		user.setVisitedLocations(visitedLocations);
 		List<Attraction> attractions = gpsUtilProxy.getAllAttractions();
 		user.setAttractions(attractions);
+		List<UserReward> userRewards = rewardsCentralProxy.getRewards(user);
+		user.setUserRewards(userRewards);
 		return user;
 	}
 	

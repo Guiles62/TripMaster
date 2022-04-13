@@ -9,6 +9,7 @@ import org.javamoney.moneta.Money;
 public class UserPreferences {
 	
 	private int attractionProximity = Integer.MAX_VALUE;
+
 	private CurrencyUnit currency = Monetary.getCurrency("USD");
 	private Money lowerPricePoint = Money.of(0, currency);
 	private Money highPricePoint = Money.of(Integer.MAX_VALUE, currency);
@@ -19,7 +20,8 @@ public class UserPreferences {
 	
 	public UserPreferences() {
 	}
-	
+
+
 	public void setAttractionProximity(int attractionProximity) {
 		this.attractionProximity = attractionProximity;
 	}
@@ -75,5 +77,7 @@ public class UserPreferences {
 	public void setNumberOfChildren(int numberOfChildren) {
 		this.numberOfChildren = numberOfChildren;
 	}
+
+
 
 }

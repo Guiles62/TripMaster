@@ -13,13 +13,14 @@ import org.junit.Test;
 
 import tourGuide.helper.InternalTestHelper;
 import tourGuide.model.Attraction;
+import tourGuide.model.Provider;
 import tourGuide.model.VisitedLocation;
 import tourGuide.proxy.GpsUtilProxy;
 import tourGuide.proxy.RewardsCentralProxy;
 import tourGuide.proxy.TripPricerProxy;
 import tourGuide.service.TourGuideService;
 import tourGuide.user.User;
-import tripPricer.Provider;
+
 
 public class TestTourGuideService {
 

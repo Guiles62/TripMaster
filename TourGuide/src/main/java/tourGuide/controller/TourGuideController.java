@@ -13,11 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import tourGuide.model.Attraction;
 import tourGuide.model.Location;
+import tourGuide.model.Provider;
 import tourGuide.model.VisitedLocation;
 import tourGuide.service.TourGuideService;
 import tourGuide.user.User;
 import tourGuide.user.UserReward;
-import tripPricer.Provider;
+
 
 @RestController
 public class TourGuideController {
@@ -79,12 +80,12 @@ public class TourGuideController {
     	return usersCurrentVisitedLocationList;
     }
 
-    /*@RequestMapping("/getTripDeals")
+    @RequestMapping("/getTripDeals")
     public List<Provider> getTripDeals(@RequestParam String userName) {
         User user = tourGuideService.getUser(userName);
     	List<Provider> providers = tourGuideService.getTripDeals(user);
     	return providers;
-    }*/
+    }
 
     @GetMapping("/getUser")
     public User getUser(@RequestParam String userName) {

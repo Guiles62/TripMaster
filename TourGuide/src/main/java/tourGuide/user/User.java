@@ -6,8 +6,9 @@ import java.util.List;
 import java.util.UUID;
 
 import tourGuide.model.Attraction;
+import tourGuide.model.Provider;
 import tourGuide.model.VisitedLocation;
-import tripPricer.Provider;
+
 
 public class User {
 	private UUID userId;
