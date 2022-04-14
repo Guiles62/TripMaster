@@ -38,7 +38,8 @@ public class TripPricerServiceImpl implements TripPricerService {
         List<tripPricer.Provider> providers = tripPricer.getPrice(url,user.getUserId(),user.getUserPreferences().getNumberOfAdults(),
                 user.getUserPreferences().getNumberOfChildren(), user.getUserPreferences().getTripDuration(),rewardsPointsForPrice);
         for (tripPricer.Provider provider : providers) {
-            providerList.add(new Provider(provider.tripId, provider.name, provider.price));
+            Double price = (provider.price*100)/100;
+            providerList.add(new Provider(provider.tripId, provider.name, price));
         }
         return providerList;
     }

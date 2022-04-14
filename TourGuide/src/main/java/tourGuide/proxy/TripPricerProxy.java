@@ -14,8 +14,6 @@ import java.util.List;
 @FeignClient(name = "tripPricer", url = "localhost:8083")
 public interface TripPricerProxy {
 
-    @PostMapping(value = "/getTripDeals")
-    List<Provider>getTripDeals(@RequestBody User user, @RequestParam String apiKey, @RequestParam int rewardsPoints);
 
     @PostMapping(value = "/getPrice")
     List<Provider> getPrice(@RequestBody User user, @RequestParam String url);
