@@ -1,16 +1,14 @@
 package tripPricer.model;
 
-import org.javamoney.moneta.Money;
-
 import javax.money.CurrencyUnit;
 import javax.money.Monetary;
 
-public class UserPreferences {
+
+public class UserPreferences  {
 
     private int attractionProximity = Integer.MAX_VALUE;
-    private CurrencyUnit currency = Monetary.getCurrency("USD");
-    private Money lowerPricePoint = Money.of(0, currency);
-    private Money highPricePoint = Money.of(Integer.MAX_VALUE, currency);
+
+    private Money money;
     private int tripDuration = 1;
     private int ticketQuantity = 1;
     private int numberOfAdults = 1;
@@ -25,22 +23,6 @@ public class UserPreferences {
 
     public int getAttractionProximity() {
         return attractionProximity;
-    }
-
-    public Money getLowerPricePoint() {
-        return lowerPricePoint;
-    }
-
-    public void setLowerPricePoint(Money lowerPricePoint) {
-        this.lowerPricePoint = lowerPricePoint;
-    }
-
-    public Money getHighPricePoint() {
-        return highPricePoint;
-    }
-
-    public void setHighPricePoint(Money highPricePoint) {
-        this.highPricePoint = highPricePoint;
     }
 
     public int getTripDuration() {
@@ -75,4 +57,11 @@ public class UserPreferences {
         this.numberOfChildren = numberOfChildren;
     }
 
+    public Money getMoney() {
+        return money;
+    }
+
+    public void setMoney(Money money) {
+        this.money = money;
+    }
 }

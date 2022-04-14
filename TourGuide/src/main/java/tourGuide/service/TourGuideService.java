@@ -69,7 +69,8 @@ public class TourGuideService {
 	}
 
 	public List<UserReward> getRewards (User user) {
-		return rewardsCentralProxy.getRewards(user);
+		List<UserReward> userRewards = rewardsCentralProxy.getRewards(user);
+		return userRewards;
 	}
 
 
@@ -97,7 +98,7 @@ public class TourGuideService {
 		User user = internalUserMap.get(userName);
 		List<VisitedLocation> visitedLocations = gpsUtilProxy.getUserVisitedLocation(user.getUserId());
 		user.setVisitedLocations(visitedLocations);
-		List<Attraction> attractions = gpsUtilProxy.getAllAttractions();
+		List<Attraction> attractions = getNearbyAttractions(user);
 		user.setAttractions(attractions);
 		List<UserReward> userRewards = rewardsCentralProxy.getRewards(user);
 		user.setUserRewards(userRewards);

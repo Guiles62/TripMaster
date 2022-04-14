@@ -58,10 +58,8 @@ public class RewardsCentralServiceImpl implements RewardsCentralService {
         for(VisitedLocation visitedLocation : userLocations) {
             for (Attraction attraction : attractions) {
                 if (user.getUserRewards().stream().filter(r -> r.attraction.attractionName.equals(attraction.attractionName)).count() == 0) {
-                    if (nearAttraction(visitedLocation, attraction)) {
-                        userRewards.add(new UserReward(visitedLocation, attraction, getAttractionRewardPoints(attraction.attractionId, user.getUserId())));
-                        user.setUserRewards(userRewards);
-                    }
+                    userRewards.add(new UserReward(visitedLocation, attraction, getAttractionRewardPoints(attraction.attractionId, user.getUserId())));
+                    user.setUserRewards(userRewards);
                 }
             }
         }
