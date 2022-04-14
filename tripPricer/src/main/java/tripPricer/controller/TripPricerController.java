@@ -25,7 +25,7 @@ public class TripPricerController {
         }*/
     @PostMapping(value = "/getPrice")
     public List<Provider> getPrice(@RequestBody User user, @RequestParam String url) {
-        List<Provider> providers = tripPricerService.getPrice(user, url);
+        List<Provider> providers = tripPricerService.getTripDeals(user, url);
         return providers;
     }
 

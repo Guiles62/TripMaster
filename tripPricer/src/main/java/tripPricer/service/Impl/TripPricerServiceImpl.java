@@ -2,8 +2,8 @@ package tripPricer.service.Impl;
 
 
 import org.springframework.stereotype.Service;
+import tripPricer.TripPricer;
 import tripPricer.model.Provider;
-import tripPricer.model.TripPricer;
 import tripPricer.model.User;
 import tripPricer.model.UserReward;
 import tripPricer.service.TripPricerService;
@@ -19,12 +19,12 @@ public class TripPricerServiceImpl implements TripPricerService {
     }
 
 
-    /*@Override
-    public List<Provider> getTripDeals(User user, String apiKey, int rewardsPoints) {
-        List<Provider> providers = getPrice(user, apiKey, rewardsPoints);
+    @Override
+    public List<Provider> getTripDeals(User user, String apiKey) {
+        List<Provider> providers = getPrice(user, apiKey);
         user.setTripDeals(providers);
         return providers;
-    }*/
+    }
 
     @Override
     public List<Provider> getPrice(User user, String url) {
@@ -34,8 +34,9 @@ public class TripPricerServiceImpl implements TripPricerService {
         for (UserReward userReward : userRewards) {
             rewardsPoints += userReward.getRewardPoints();
         }
+        int rewardsPointsForPrice = rewardsPoints/10;
         List<tripPricer.Provider> providers = tripPricer.getPrice(url,user.getUserId(),user.getUserPreferences().getNumberOfAdults(),
-                user.getUserPreferences().getNumberOfChildren(), user.getUserPreferences().getTripDuration(),rewardsPoints);
+                user.getUserPreferences().getNumberOfChildren(), user.getUserPreferences().getTripDuration(),rewardsPointsForPrice);
         for (tripPricer.Provider provider : providers) {
             providerList.add(new Provider(provider.tripId, provider.name, provider.price));
         }
