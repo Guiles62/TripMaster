@@ -52,7 +52,7 @@ public class TripPricerControllerTest {
     @Test
     public void getPriceTest() throws Exception {
         mockMvc.perform(post("/getPrice?url=localhost:9090")
-                        .content(asJsonString(new User()))
+                        .content(asJsonString(user))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
