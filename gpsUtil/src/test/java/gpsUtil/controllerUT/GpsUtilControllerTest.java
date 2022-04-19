@@ -4,6 +4,7 @@ import gpsUtil.controller.GpsUtilController;
 import gpsUtil.model.Location;
 import gpsUtil.model.User;
 import gpsUtil.model.VisitedLocation;
+import gpsUtil.service.GpsUtilService;
 import gpsUtil.service.Impl.GpsUtilServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
@@ -45,7 +46,7 @@ public class GpsUtilControllerTest {
     private Location location;
 
     @MockBean
-    private GpsUtilServiceImpl gpsUtilService;
+    private GpsUtilService gpsUtilService;
 
 
     @Before
