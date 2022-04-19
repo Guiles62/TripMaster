@@ -87,10 +87,4 @@ public class TourGuideController {
     	return providers;
     }
 
-    @GetMapping("/getUser")
-    public User getUser(@RequestParam String userName) {
-        User user = tourGuideService.getUser(userName);
-        return user;
-    }
-
 }
