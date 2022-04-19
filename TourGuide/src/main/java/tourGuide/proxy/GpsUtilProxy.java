@@ -33,7 +33,5 @@ public interface GpsUtilProxy {
     @PostMapping(value = "/trackUserLocation")
     VisitedLocation trackUserLocation(@RequestParam UUID userId);
 
-    @PostMapping("/nearAttraction")
-    Boolean nearAttraction (@RequestParam VisitedLocation visitedLocation, @RequestParam Attraction attraction);
 
 }

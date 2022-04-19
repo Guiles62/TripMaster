@@ -18,11 +18,6 @@ public class TripPricerController {
         this.tripPricerService = tripPricerService;
     }
 
-    /*@PostMapping("/getTripDeals")
-        public List<Provider> getTripDeals(@RequestBody User user, @RequestParam String apiKey, @RequestParam int rewardsPoints) {
-            List<Provider> providers = tripPricerService.getTripDeals(user, apiKey, rewardsPoints);
-            return providers;
-        }*/
     @PostMapping(value = "/getPrice")
     public List<Provider> getPrice(@RequestBody User user, @RequestParam String url) {
         List<Provider> providers = tripPricerService.getTripDeals(user, url);

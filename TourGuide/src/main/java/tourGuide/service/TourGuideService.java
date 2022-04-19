@@ -119,19 +119,6 @@ public class TourGuideService {
 		return tripPricerApiKey;
 	}
 
-
-
-
-	public Boolean nearAttraction (VisitedLocation visitedLocation, Attraction attraction) {
-		return gpsUtilProxy.nearAttraction(visitedLocation,attraction);
-	}
-
-
-	public int getRewardPoints(Attraction attraction, User user) {
-		return rewardsCentralProxy.getAttractionRewardPoints(attraction.attractionId, user.getUserId());
-	}
-
-
 	private void addShutDownHook() {
 		Runtime.getRuntime().addShutdownHook(new Thread() { 
 		      public void run() {

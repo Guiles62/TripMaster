@@ -25,7 +25,7 @@ public class RewardsCentralController {
         return rewardsCentralService.getUserRewards(user);
     }
 
-    @RequestMapping("/getUserRewardsPointsSum")
+    /*@RequestMapping("/getUserRewardsPointsSum")
     public int getRewardsPointSum(@RequestBody User user) {
         return rewardsCentralService.getRewardsPointsSum(user);
     }
@@ -33,6 +33,6 @@ public class RewardsCentralController {
     @RequestMapping("/getAttractionRewardPoints")
     public int getAttractionRewardPoints(@RequestParam UUID userId, @RequestParam UUID attractionId) {
         return rewardsCentralService.getAttractionRewardPoints(userId, attractionId);
-    }
+    }*/
 
 }

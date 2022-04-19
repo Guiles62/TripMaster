@@ -41,15 +41,6 @@ public class RewardsCentralServiceImpl implements RewardsCentralService {
         return rewards;
     }
 
-    @Override
-    public int getRewardsPointsSum(User user) {
-        List<UserReward> userRewards = user.getUserRewards();
-        int sum = 0;
-        for (UserReward userReward : userRewards){
-            sum += userReward.getRewardPoints();
-        }
-        return sum;
-    }
 
     public void calculateRewards(User user) {
         List<VisitedLocation> userLocations = user.getVisitedLocations();

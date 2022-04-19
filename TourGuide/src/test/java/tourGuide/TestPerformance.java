@@ -13,9 +13,11 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 
-import gpsUtil.location.Attraction;
-import gpsUtil.location.VisitedLocation;
+
 import tourGuide.helper.InternalTestHelper;
+import tourGuide.model.Attraction;
+import tourGuide.model.Location;
+import tourGuide.model.VisitedLocation;
 import tourGuide.proxy.GpsUtilProxy;
 import tourGuide.proxy.RewardsCentralProxy;
 import tourGuide.proxy.TripPricerProxy;
@@ -79,11 +81,16 @@ public class TestPerformance {
 		TourGuideService tourGuideService = new TourGuideService(gpsUtilProxy,tripPricerProxy,rewardsCentralProxy);
 		
 	    Attraction attraction = tourGuideService.getAttractions().get(0);
-		List<User> allUsers = new ArrayList<>();
-		allUsers = tourGuideService.getAllUsers();
-		allUsers.forEach(u -> u.addToVisitedLocations(new VisitedLocation(u.getUserId(), attraction, new Date())));
-	     
-	    allUsers.forEach(u -> tourGuideService.calculateRewards(u));
+		Location location = new Location(attraction.latitude,attraction.longitude);
+		List<User> allUsers = tourGuideService.getAllUsers();
+		List<VisitedLocation> visitedLocations = new ArrayList<>();
+		for (User users : allUsers) {
+			UUID userId = users.getUserId();
+			Date date = new Date();
+			visitedLocations.add(new VisitedLocation(userId,location,date));
+			users.setVisitedLocations(visitedLocations);
+		}
+	    allUsers.forEach(u -> tourGuideService.getRewards(u));
 	    
 		for(User user : allUsers) {
 			assertTrue(user.getUserRewards().size() > 0);

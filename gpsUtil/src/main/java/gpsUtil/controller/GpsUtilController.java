@@ -42,12 +42,6 @@ public class GpsUtilController {
         return gpsUtilService.getNearByAttractions(user);
     }
 
-    @PostMapping("/nearAttractions")
-    public Boolean getNearAttraction(@RequestBody VisitedLocation visitedLocation, @RequestBody Attraction attraction) {
-        Boolean nearAttraction = gpsUtilService.nearAttraction(visitedLocation, attraction);
-        return nearAttraction;
-    }
-
     @PostMapping("/getCurrentLocation")
     public VisitedLocation getCurrentLocation(@RequestParam UUID userId) {
         User user = gpsUtilService.getUser(userId);
