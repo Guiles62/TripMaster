@@ -63,7 +63,7 @@ public class TestRewardsService {
 
 		InternalTestHelper.setInternalUserNumber(1);
 
-		tourGuideService.calculateRewards(tourGuideService.getAllUsers().get(0));
+		tourGuideService.getRewards(tourGuideService.getAllUsers().get(0));
 		List<UserReward> userRewards = tourGuideService.getRewards(tourGuideService.getAllUsers().get(0));
 		tourGuideService.tracker.stopTracking();
 

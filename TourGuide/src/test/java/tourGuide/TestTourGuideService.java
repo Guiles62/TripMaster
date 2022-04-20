@@ -13,6 +13,7 @@ import org.junit.Test;
 
 import tourGuide.helper.InternalTestHelper;
 import tourGuide.model.Attraction;
+import tourGuide.model.Location;
 import tourGuide.model.Provider;
 import tourGuide.model.VisitedLocation;
 import tourGuide.proxy.GpsUtilProxy;
@@ -20,6 +21,7 @@ import tourGuide.proxy.RewardsCentralProxy;
 import tourGuide.proxy.TripPricerProxy;
 import tourGuide.service.TourGuideService;
 import tourGuide.user.User;
+import tourGuide.user.UserReward;
 
 
 public class TestTourGuideService {
@@ -34,9 +36,9 @@ public class TestTourGuideService {
 		TourGuideService tourGuideService = new TourGuideService(gpsUtilProxy,tripPricerProxy,rewardsCentralProxy);
 		
 		User user = new User(UUID.randomUUID(), "jon", "000", "jon@tourGuide.com");
-		VisitedLocation visitedLocation = tourGuideService.trackUserLocation(user);
+		Location location = tourGuideService.getLocation(user);
 		tourGuideService.tracker.stopTracking();
-		assertTrue(visitedLocation.userId.equals(user.getUserId()));
+		assertTrue(location.latitude == user.getLastVisitedLocation().location.latitude);
 	}
 	
 	@Test
@@ -109,7 +111,8 @@ public class TestTourGuideService {
 		
 		assertEquals(5, attractions.size());
 	}
-	
+
+	@Test
 	public void getTripDeals() {
 
 		InternalTestHelper.setInternalUserNumber(0);
@@ -122,6 +125,44 @@ public class TestTourGuideService {
 		tourGuideService.tracker.stopTracking();
 		
 		assertEquals(10, providers.size());
+	}
+
+	@Test
+	public void getRewards() {
+
+		InternalTestHelper.setInternalUserNumber(0);
+		TourGuideService tourGuideService = new TourGuideService(gpsUtilProxy,tripPricerProxy,rewardsCentralProxy);
+
+		User user = new User(UUID.randomUUID(), "jon", "000", "jon@tourGuide.com");
+
+		List<UserReward> userRewards = tourGuideService.getRewards(user);
+
+		tourGuideService.tracker.stopTracking();
+
+		assertEquals(userRewards.size(), user.getUserRewards().size());
+	}
+
+	@Test
+	public void getAttractions() {
+
+		InternalTestHelper.setInternalUserNumber(0);
+		TourGuideService tourGuideService = new TourGuideService(gpsUtilProxy,tripPricerProxy,rewardsCentralProxy);
+
+		List<Attraction> attractions = tourGuideService.getAttractions();
+
+		assertEquals(26, attractions.size());
+	}
+
+	@Test
+	public void getAllCurrentLocation() {
+
+		InternalTestHelper.setInternalUserNumber(0);
+		TourGuideService tourGuideService = new TourGuideService(gpsUtilProxy,tripPricerProxy,rewardsCentralProxy);
+
+		List<VisitedLocation> visitedLocations = tourGuideService.getAllCurrentLocations();
+		List<User> userList = tourGuideService.getAllUsers();
+
+		assertEquals(visitedLocations.size(), userList.size());
 	}
 	
 	

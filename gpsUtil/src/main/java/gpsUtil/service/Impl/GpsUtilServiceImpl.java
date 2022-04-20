@@ -30,6 +30,10 @@ public class GpsUtilServiceImpl implements GpsUtilService {
         gpsUtil = new GpsUtil();
     }
 
+    public GpsUtilServiceImpl(GpsUtil gpsUtil) {
+        this.gpsUtil = gpsUtil;
+    }
+
     public void setProximityBuffer(int proximityBuffer) {
         this.proximityBuffer = proximityBuffer;
     }
