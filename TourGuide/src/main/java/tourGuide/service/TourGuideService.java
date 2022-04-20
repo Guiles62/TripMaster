@@ -26,9 +26,9 @@ import tourGuide.user.UserReward;
 @Service
 public class TourGuideService {
 
-	private final GpsUtilProxy gpsUtilProxy;
-	private final TripPricerProxy tripPricerProxy;
-	private final RewardsCentralProxy rewardsCentralProxy;
+	private GpsUtilProxy gpsUtilProxy;
+	private TripPricerProxy tripPricerProxy;
+	private RewardsCentralProxy rewardsCentralProxy;
 
 	private Logger logger = LoggerFactory.getLogger(TourGuideService.class);
 	public Tracker tracker;

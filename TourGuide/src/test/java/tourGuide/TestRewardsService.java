@@ -48,18 +48,10 @@ public class TestRewardsService {
 		assertTrue(userRewards.size() == 1);
 	}
 	
-	@Test
-	public void isWithinAttractionProximity() {
-		TourGuideService tourGuideService = new TourGuideService(gpsUtilProxy,tripPricerProxy,rewardsCentralProxy);
-		Attraction attraction = tourGuideService.getAttractions().get(0);
-		assertTrue(tourGuideService.isWithinAttractionProximity(attraction, attraction));
-	}
-	
 	@Ignore // Needs fixed - can throw ConcurrentModificationException
 	@Test
 	public void nearAllAttractions() {
 		TourGuideService tourGuideService = new TourGuideService(gpsUtilProxy,tripPricerProxy,rewardsCentralProxy);
-		rewardsService.setProximityBuffer(Integer.MAX_VALUE);
 
 		InternalTestHelper.setInternalUserNumber(1);
 
