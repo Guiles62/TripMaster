@@ -55,30 +55,35 @@ public class TourGuideControllerUT {
     @Before
     public void setup() {
         tourGuideController = new TourGuideController(tourGuideService);
+        List<Attraction> attractions = new ArrayList<>();
         user = new User();
+        user.setUserName("username");
+        attraction = new Attraction("name","city","state",1.2,1.1);
+        attractions.add(attraction);
         visitedLocation.setLocation(location);
         List<VisitedLocation> visitedLocations = new ArrayList<>();
-        user.setVisitedLocations(visitedLocations);
         visitedLocations.add(visitedLocation);
+        user.setVisitedLocations(visitedLocations);
+        user.setAttractions(attractions);
         when(tourGuideService.getUser("username")).thenReturn(user);
     }
 
     @Test
     public void getLocationTest() throws Exception {
         when(tourGuideService.getLocation(user)).thenReturn(location);
-        mockMvc.perform(get("/getLocation?username=username")).andExpect(status().isOk());
+        mockMvc.perform(get("/getLocation?userName=username")).andExpect(status().isOk());
     }
 
     @Test
     public void getNearByAttractionsTest() throws Exception {
         when(tourGuideService.getNearbyAttractions(user)).thenReturn(user.getAttractions());
-        mockMvc.perform(get("/getNearbyAttractions?username=username")).andExpect(status().isOk());
+        mockMvc.perform(get("/getNearbyAttractions?userName=username")).andExpect(status().isOk());
     }
 
     @Test
     public void getRewardsTest() throws Exception {
         when(tourGuideService.getRewards(user)).thenReturn(user.getUserRewards());
-        mockMvc.perform(get("/getRewards?username=username")).andExpect(status().isOk());
+        mockMvc.perform(get("/getRewards?userName=username")).andExpect(status().isOk());
     }
 
     @Test
@@ -92,7 +97,7 @@ public class TourGuideControllerUT {
     public void getTripDeals() throws Exception {
         List<Provider> providers = new ArrayList<>();
         when(tourGuideService.getTripDeals(user)).thenReturn(providers);
-        mockMvc.perform(get("/getTripDeals?username=username")).andExpect(status().isOk());
+        mockMvc.perform(get("/getTripDeals?userName=username")).andExpect(status().isOk());
     }
 
 }

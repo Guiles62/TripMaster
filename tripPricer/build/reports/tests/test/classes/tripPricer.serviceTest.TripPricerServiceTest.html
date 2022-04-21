@@ -23,7 +23,7 @@
 <tr>
 <td>
 <div class="infoBox" id="tests">
-<div class="counter">1</div>
+<div class="counter">2</div>
 <p>tests</p>
 </div>
 </td>
@@ -41,7 +41,7 @@
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">2.665s</div>
+<div class="counter">0.061s</div>
 <p>duration</p>
 </div>
 </td>
@@ -79,7 +79,12 @@
 </thead>
 <tr>
 <td class="success">getPriceTest</td>
-<td class="success">2.665s</td>
+<td class="success">0.023s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">getTripDealsTest</td>
+<td class="success">0.038s</td>
 <td class="success">passed</td>
 </tr>
 </table>
@@ -87,33 +92,33 @@
 <div id="tab1" class="tab">
 <h2>Standard output</h2>
 <span class="code">
-<pre>11:58:14.289 [Test worker] DEBUG org.springframework.test.context.junit4.SpringJUnit4ClassRunner - SpringJUnit4ClassRunner constructor called with [class tripPricer.serviceTest.TripPricerServiceTest]
-11:58:14.298 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating CacheAwareContextLoaderDelegate from class [org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate]
-11:58:14.310 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating BootstrapContext using constructor [public org.springframework.test.context.support.DefaultBootstrapContext(java.lang.Class,org.springframework.test.context.CacheAwareContextLoaderDelegate)]
-11:58:14.334 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating TestContextBootstrapper for test class [tripPricer.serviceTest.TripPricerServiceTest] from class [org.springframework.boot.test.context.SpringBootTestContextBootstrapper]
-11:58:14.349 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Neither @ContextConfiguration nor @ContextHierarchy found for test class [tripPricer.serviceTest.TripPricerServiceTest], using SpringBootContextLoader
-11:58:14.353 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [tripPricer.serviceTest.TripPricerServiceTest]: class path resource [tripPricer/serviceTest/TripPricerServiceTest-context.xml] does not exist
-11:58:14.353 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [tripPricer.serviceTest.TripPricerServiceTest]: class path resource [tripPricer/serviceTest/TripPricerServiceTestContext.groovy] does not exist
-11:58:14.353 [Test worker] INFO org.springframework.test.context.support.AbstractContextLoader - Could not detect default resource locations for test class [tripPricer.serviceTest.TripPricerServiceTest]: no resource found for suffixes {-context.xml, Context.groovy}.
-11:58:14.354 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [tripPricer.serviceTest.TripPricerServiceTest]: TripPricerServiceTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-11:58:14.397 [Test worker] DEBUG org.springframework.test.context.support.ActiveProfilesUtils - Could not find an 'annotation declaring class' for annotation type [org.springframework.test.context.ActiveProfiles] and class [tripPricer.serviceTest.TripPricerServiceTest]
-11:58:14.483 [Test worker] DEBUG org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider - Identified candidate component class: file [C:\Users\guile\OneDrive\Bureau\Formation\P8\JavaPathENProject8\tripPricer\build\classes\java\main\tripPricer\TripPricerApplication.class]
-11:58:14.485 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration tripPricer.TripPricerApplication for test class tripPricer.serviceTest.TripPricerServiceTest
-11:58:14.587 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - @TestExecutionListeners is not present for class [tripPricer.serviceTest.TripPricerServiceTest]: using defaults.
-11:58:14.587 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
-11:58:14.599 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Skipping candidate TestExecutionListener [org.springframework.test.context.transaction.TransactionalTestExecutionListener] due to a missing dependency. Specify custom listener classes or make the default listener classes and their required dependencies available. Offending class: [org/springframework/transaction/interceptor/TransactionAttributeSource]
-11:58:14.600 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Skipping candidate TestExecutionListener [org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener] due to a missing dependency. Specify custom listener classes or make the default listener classes and their required dependencies available. Offending class: [org/springframework/transaction/interceptor/TransactionAttribute]
-11:58:14.600 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@60592435, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@6e0eec0d, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@4a0b8b25, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@258fbe54, org.springframework.test.context.support.DirtiesContextTestExecutionListener@cde4e5c, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@15a9a54e, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@36d567d, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@5b48255a, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@251a3cc1, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@7dc16ef9]
-11:58:14.604 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved @ProfileValueSourceConfiguration [null] for test class [tripPricer.serviceTest.TripPricerServiceTest]
-11:58:14.605 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved ProfileValueSource type [class org.springframework.test.annotation.SystemProfileValueSource] for class [tripPricer.serviceTest.TripPricerServiceTest]
-11:58:14.608 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved @ProfileValueSourceConfiguration [null] for test class [tripPricer.serviceTest.TripPricerServiceTest]
-11:58:14.608 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved ProfileValueSource type [class org.springframework.test.annotation.SystemProfileValueSource] for class [tripPricer.serviceTest.TripPricerServiceTest]
-11:58:14.608 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved @ProfileValueSourceConfiguration [null] for test class [tripPricer.serviceTest.TripPricerServiceTest]
-11:58:14.609 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved ProfileValueSource type [class org.springframework.test.annotation.SystemProfileValueSource] for class [tripPricer.serviceTest.TripPricerServiceTest]
-11:58:14.613 [Test worker] DEBUG org.springframework.test.context.support.AbstractDirtiesContextTestExecutionListener - Before test class: context [DefaultTestContext@afe3907 testClass = TripPricerServiceTest, testInstance = [null], testMethod = [null], testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@2160b4a4 testClass = TripPricerServiceTest, locations = '{}', classes = '{class tripPricer.TripPricerApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@166a26eb, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@1dc53b64, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@5b64e9c7, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@73a7d135], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -&gt; true]], class annotated with @DirtiesContext [false] with mode [null].
-11:58:14.613 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved @ProfileValueSourceConfiguration [null] for test class [tripPricer.serviceTest.TripPricerServiceTest]
-11:58:14.613 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved ProfileValueSource type [class org.springframework.test.annotation.SystemProfileValueSource] for class [tripPricer.serviceTest.TripPricerServiceTest]
-11:58:15.024 [Test worker] DEBUG org.springframework.test.context.support.TestPropertySourceUtils - Adding inlined properties to environment: {spring.jmx.enabled=false, org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true, server.port=-1}
+<pre>12:00:31.414 [Test worker] DEBUG org.springframework.test.context.junit4.SpringJUnit4ClassRunner - SpringJUnit4ClassRunner constructor called with [class tripPricer.serviceTest.TripPricerServiceTest]
+12:00:31.423 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating CacheAwareContextLoaderDelegate from class [org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate]
+12:00:31.436 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating BootstrapContext using constructor [public org.springframework.test.context.support.DefaultBootstrapContext(java.lang.Class,org.springframework.test.context.CacheAwareContextLoaderDelegate)]
+12:00:31.461 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating TestContextBootstrapper for test class [tripPricer.serviceTest.TripPricerServiceTest] from class [org.springframework.boot.test.context.SpringBootTestContextBootstrapper]
+12:00:31.475 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Neither @ContextConfiguration nor @ContextHierarchy found for test class [tripPricer.serviceTest.TripPricerServiceTest], using SpringBootContextLoader
+12:00:31.480 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [tripPricer.serviceTest.TripPricerServiceTest]: class path resource [tripPricer/serviceTest/TripPricerServiceTest-context.xml] does not exist
+12:00:31.480 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [tripPricer.serviceTest.TripPricerServiceTest]: class path resource [tripPricer/serviceTest/TripPricerServiceTestContext.groovy] does not exist
+12:00:31.480 [Test worker] INFO org.springframework.test.context.support.AbstractContextLoader - Could not detect default resource locations for test class [tripPricer.serviceTest.TripPricerServiceTest]: no resource found for suffixes {-context.xml, Context.groovy}.
+12:00:31.481 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [tripPricer.serviceTest.TripPricerServiceTest]: TripPricerServiceTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+12:00:31.523 [Test worker] DEBUG org.springframework.test.context.support.ActiveProfilesUtils - Could not find an 'annotation declaring class' for annotation type [org.springframework.test.context.ActiveProfiles] and class [tripPricer.serviceTest.TripPricerServiceTest]
+12:00:31.608 [Test worker] DEBUG org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider - Identified candidate component class: file [C:\Users\guile\OneDrive\Bureau\Formation\P8\JavaPathENProject8\tripPricer\build\classes\java\main\tripPricer\TripPricerApplication.class]
+12:00:31.610 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration tripPricer.TripPricerApplication for test class tripPricer.serviceTest.TripPricerServiceTest
+12:00:31.711 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - @TestExecutionListeners is not present for class [tripPricer.serviceTest.TripPricerServiceTest]: using defaults.
+12:00:31.711 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+12:00:31.724 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Skipping candidate TestExecutionListener [org.springframework.test.context.transaction.TransactionalTestExecutionListener] due to a missing dependency. Specify custom listener classes or make the default listener classes and their required dependencies available. Offending class: [org/springframework/transaction/interceptor/TransactionAttributeSource]
+12:00:31.724 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Skipping candidate TestExecutionListener [org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener] due to a missing dependency. Specify custom listener classes or make the default listener classes and their required dependencies available. Offending class: [org/springframework/transaction/interceptor/TransactionAttribute]
+12:00:31.725 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@4d7cced7, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@b94d925, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@701a1b61, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@6a9cbbc8, org.springframework.test.context.support.DirtiesContextTestExecutionListener@413dda3a, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@6c4d7ec9, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@4c2ca132, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@43610184, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@6c22ffd8, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@6b9e7fa3]
+12:00:31.729 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved @ProfileValueSourceConfiguration [null] for test class [tripPricer.serviceTest.TripPricerServiceTest]
+12:00:31.729 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved ProfileValueSource type [class org.springframework.test.annotation.SystemProfileValueSource] for class [tripPricer.serviceTest.TripPricerServiceTest]
+12:00:31.731 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved @ProfileValueSourceConfiguration [null] for test class [tripPricer.serviceTest.TripPricerServiceTest]
+12:00:31.731 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved ProfileValueSource type [class org.springframework.test.annotation.SystemProfileValueSource] for class [tripPricer.serviceTest.TripPricerServiceTest]
+12:00:31.732 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved @ProfileValueSourceConfiguration [null] for test class [tripPricer.serviceTest.TripPricerServiceTest]
+12:00:31.732 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved ProfileValueSource type [class org.springframework.test.annotation.SystemProfileValueSource] for class [tripPricer.serviceTest.TripPricerServiceTest]
+12:00:31.736 [Test worker] DEBUG org.springframework.test.context.support.AbstractDirtiesContextTestExecutionListener - Before test class: context [DefaultTestContext@493a662e testClass = TripPricerServiceTest, testInstance = [null], testMethod = [null], testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@64e2833a testClass = TripPricerServiceTest, locations = '{}', classes = '{class tripPricer.TripPricerApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@ba15139, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@402ddc82, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@65860ac5, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@280e8462], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -&gt; true]], class annotated with @DirtiesContext [false] with mode [null].
+12:00:31.736 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved @ProfileValueSourceConfiguration [null] for test class [tripPricer.serviceTest.TripPricerServiceTest]
+12:00:31.736 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved ProfileValueSource type [class org.springframework.test.annotation.SystemProfileValueSource] for class [tripPricer.serviceTest.TripPricerServiceTest]
+12:00:32.188 [Test worker] DEBUG org.springframework.test.context.support.TestPropertySourceUtils - Adding inlined properties to environment: {spring.jmx.enabled=false, org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true, server.port=-1}
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -123,11 +128,11 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::        (v2.1.6.RELEASE)
 
-2022-04-21 11:58:15.240  INFO 24496 --- [    Test worker] t.serviceTest.TripPricerServiceTest      : Starting TripPricerServiceTest on DESKTOP-HBE7KI5 with PID 24496 (started by guile in C:\Users\guile\OneDrive\Bureau\Formation\P8\JavaPathENProject8\tripPricer)
-2022-04-21 11:58:15.241  INFO 24496 --- [    Test worker] t.serviceTest.TripPricerServiceTest      : No active profile set, falling back to default profiles: default
-2022-04-21 11:58:16.579  INFO 24496 --- [    Test worker] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2022-04-21 11:58:17.106  INFO 24496 --- [    Test worker] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
-2022-04-21 11:58:17.154  INFO 24496 --- [    Test worker] t.serviceTest.TripPricerServiceTest      : Started TripPricerServiceTest in 2.104 seconds (JVM running for 3.523)
+2022-04-21 12:00:32.409  INFO 22352 --- [    Test worker] t.serviceTest.TripPricerServiceTest      : Starting TripPricerServiceTest on DESKTOP-HBE7KI5 with PID 22352 (started by guile in C:\Users\guile\OneDrive\Bureau\Formation\P8\JavaPathENProject8\tripPricer)
+2022-04-21 12:00:32.411  INFO 22352 --- [    Test worker] t.serviceTest.TripPricerServiceTest      : No active profile set, falling back to default profiles: default
+2022-04-21 12:00:33.748  INFO 22352 --- [    Test worker] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2022-04-21 12:00:34.274  INFO 22352 --- [    Test worker] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
+2022-04-21 12:00:34.322  INFO 22352 --- [    Test worker] t.serviceTest.TripPricerServiceTest      : Started TripPricerServiceTest in 2.107 seconds (JVM running for 3.567)
 </pre>
 </span>
 </div>
@@ -139,7 +144,7 @@
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 7.1</a> at 21 avr. 2022 11:58:19</p>
+<a href="http://www.gradle.org">Gradle 7.1</a> at 21 avr. 2022 12:00:34</p>
 </div>
 </div>
 </body>
