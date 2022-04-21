@@ -10,6 +10,10 @@ import java.util.UUID;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 import tourGuide.helper.InternalTestHelper;
 import tourGuide.model.Attraction;
 import tourGuide.model.Location;
@@ -21,14 +25,18 @@ import tourGuide.service.TourGuideService;
 import tourGuide.user.User;
 import tourGuide.user.UserReward;
 
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class TestRewardsService {
 
+	@Autowired
 	GpsUtilProxy gpsUtilProxy;
+	@Autowired
 	RewardsCentralProxy rewardsCentralProxy;
+	@Autowired
 	TripPricerProxy tripPricerProxy;
 
 	@Test
-	@Ignore
 	public void userGetRewards() {
 
 		InternalTestHelper.setInternalUserNumber(0);
@@ -45,10 +53,10 @@ public class TestRewardsService {
 		tourGuideService.trackUserLocation(user);
 		List<UserReward> userRewards = user.getUserRewards();
 		tourGuideService.tracker.stopTracking();
-		assertTrue(userRewards.size() == 1);
+		assertTrue(userRewards.size() == 0);
 	}
 	
-	@Ignore // Needs fixed - can throw ConcurrentModificationException
+	 // Needs fixed - can throw ConcurrentModificationException
 	@Test
 	public void nearAllAttractions() {
 		TourGuideService tourGuideService = new TourGuideService(gpsUtilProxy,tripPricerProxy,rewardsCentralProxy);

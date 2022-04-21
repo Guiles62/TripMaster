@@ -1,6 +1,7 @@
 package gpsUtil.serviceTest;
 
 import gpsUtil.GpsUtil;
+import gpsUtil.location.Attraction;
 import gpsUtil.model.Location;
 import gpsUtil.model.User;
 import gpsUtil.model.VisitedLocation;
@@ -9,7 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.stubbing.OngoingStubbing;
+import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -21,7 +22,9 @@ import java.util.UUID;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -29,11 +32,11 @@ public class GpsUtilServiceImplTest {
 
     private GpsUtilServiceImpl gpsUtilService;
 
-    @MockBean
-    GpsUtil gpsUtil;
 
-    @InjectMocks
-    private User user;
+    GpsUtil gpsUtil = mock(GpsUtil.class);
+
+
+    User user = mock(User.class);
 
 
     private VisitedLocation visitedLocation;
@@ -66,20 +69,31 @@ public class GpsUtilServiceImplTest {
 
     @Test
     public void trackUserLocationTest() {
-        when(gpsUtilService.trackUserLocation(user)).thenReturn(visitedLocation);
+        gpsUtil.location.VisitedLocation userVisitedLocation = new gpsUtil.location.VisitedLocation(
+                user.getUserId(),
+                new gpsUtil.location.Location(1.20,1.10),
+                new Date());
+        Mockito.when(gpsUtil.getUserLocation(user.getUserId())).thenReturn(userVisitedLocation);
         assertTrue(gpsUtilService.trackUserLocation(user) == user.getLastVisitedLocation());
     }
 
     @Test
     public void getNearByAttractionsTest() {
-        gpsUtilService.getNearByAttractions(user);
-        assertEquals(0, gpsUtilService.getNearByAttractions(user).size());
+        List<gpsUtil.location.Attraction> attractions = new ArrayList<gpsUtil.location.Attraction>();
+        attractions.add(new Attraction("city","ccc","ccc",12.1,12.4));
+        attractions.add(new Attraction("city","aaa","ccc",12.1,12.4));
+        attractions.add(new Attraction("city","bbb","ccc",12.1,12.4));
+        attractions.add(new Attraction("city","ddd","ccc",12.1,12.4));
+        attractions.add(new Attraction("city","eee","ccc",12.1,12.4));
+        Mockito.when(gpsUtil.getAttractions()).thenReturn(attractions);
+        assertEquals(5, gpsUtilService.getNearByAttractions(user).size());
     }
 
     @Test
     public void getAllAttractionsTest() {
-        gpsUtilService.getAllAttractions();
-        assertEquals(0,gpsUtilService.getAllAttractions().size());
+        List<gpsUtil.location.Attraction> attractions = new ArrayList<gpsUtil.location.Attraction>();
+        attractions.add(new Attraction("city","ccc","ccc",12.1,12.4));
+        Mockito.when(gpsUtil.getAttractions()).thenReturn(attractions);
+        assertEquals(1,gpsUtilService.getAllAttractions().size());
     }
-
 }

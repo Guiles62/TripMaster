@@ -68,8 +68,8 @@ public class User {
 	}
 
 	public void setVisitedLocations(List&lt;VisitedLocation&gt; visitedLocations) {
-<span class="fc" id="L71">		this.visitedLocations = visitedLocations;</span>
-<span class="fc" id="L72">	}</span>
+<span class="nc" id="L71">		this.visitedLocations = visitedLocations;</span>
+<span class="nc" id="L72">	}</span>
 
 	public void clearVisitedLocations() {
 <span class="nc" id="L75">		visitedLocations.clear();</span>
@@ -80,8 +80,8 @@ public class User {
 	}
 
 	public void setUserRewards(List&lt;UserReward&gt; userRewards) {
-<span class="fc" id="L83">		this.userRewards = userRewards;</span>
-<span class="fc" id="L84">	}</span>
+<span class="nc" id="L83">		this.userRewards = userRewards;</span>
+<span class="nc" id="L84">	}</span>
 
 	public UserPreferences getUserPreferences() {
 <span class="fc" id="L87">		return userPreferences;</span>
@@ -92,8 +92,8 @@ public class User {
 <span class="nc" id="L92">	}</span>
 
 	public VisitedLocation getLastVisitedLocation() {
-<span class="fc bfc" id="L95" title="All 2 branches covered.">		if (visitedLocations.size()!=0){</span>
-<span class="fc" id="L96">			return visitedLocations.get(visitedLocations.size() - 1);</span>
+<span class="pc bpc" id="L95" title="1 of 2 branches missed.">		if (visitedLocations.size()!=0){</span>
+<span class="nc" id="L96">			return visitedLocations.get(visitedLocations.size() - 1);</span>
 		}
 <span class="fc" id="L98">		return null;</span>
 	}
@@ -111,7 +111,7 @@ public class User {
 	}
 
 	public void setAttractions(List&lt;Attraction&gt; attractions) {
-<span class="fc" id="L114">		this.attractions = attractions;</span>
-<span class="fc" id="L115">	}</span>
+<span class="nc" id="L114">		this.attractions = attractions;</span>
+<span class="nc" id="L115">	}</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>
