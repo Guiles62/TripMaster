@@ -20,8 +20,8 @@ public class TripPricerController {
 
     @PostMapping(value = &quot;/getPrice&quot;)
     public List&lt;Provider&gt; getPrice(@RequestBody User user, @RequestParam String url) {
-<span class="fc" id="L23">        List&lt;Provider&gt; providers = tripPricerService.getTripDeals(user, url);</span>
-<span class="fc" id="L24">        return providers;</span>
+<span class="nc" id="L23">        List&lt;Provider&gt; providers = tripPricerService.getTripDeals(user, url);</span>
+<span class="nc" id="L24">        return providers;</span>
     }
 
 }

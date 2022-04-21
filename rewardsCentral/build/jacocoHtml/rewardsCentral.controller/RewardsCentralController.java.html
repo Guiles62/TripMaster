@@ -22,7 +22,7 @@ public class RewardsCentralController {
 
     @PostMapping(value = &quot;/getRewards&quot;)
     public List&lt;UserReward&gt; getRewards(@RequestBody User user) {
-<span class="fc" id="L25">        return rewardsCentralService.getUserRewards(user);</span>
+<span class="nc" id="L25">        return rewardsCentralService.getUserRewards(user);</span>
     }
 
     /*@RequestMapping(&quot;/getUserRewardsPointsSum&quot;)
