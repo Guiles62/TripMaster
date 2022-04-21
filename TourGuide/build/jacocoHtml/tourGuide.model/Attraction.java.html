@@ -12,12 +12,12 @@ public class Attraction extends Location {
 
 
     public Attraction(String attractionName, String city, String state, double latitude, double longitude) {
-<span class="fc" id="L15">        super(latitude, longitude);</span>
-<span class="fc" id="L16">        this.attractionName = attractionName;</span>
-<span class="fc" id="L17">        this.city = city;</span>
-<span class="fc" id="L18">        this.state = state;</span>
-<span class="fc" id="L19">        this.attractionId = UUID.randomUUID();</span>
-<span class="fc" id="L20">    }</span>
+<span class="nc" id="L15">        super(latitude, longitude);</span>
+<span class="nc" id="L16">        this.attractionName = attractionName;</span>
+<span class="nc" id="L17">        this.city = city;</span>
+<span class="nc" id="L18">        this.state = state;</span>
+<span class="nc" id="L19">        this.attractionId = UUID.randomUUID();</span>
+<span class="nc" id="L20">    }</span>
 
 <span class="fc" id="L22">    public Attraction() {</span>
 <span class="fc" id="L23">    }</span>
@@ -27,31 +27,31 @@ public class Attraction extends Location {
     }
 
     public void setAttractionName(String attractionName) {
-<span class="nc" id="L30">        this.attractionName = attractionName;</span>
-<span class="nc" id="L31">    }</span>
+<span class="fc" id="L30">        this.attractionName = attractionName;</span>
+<span class="fc" id="L31">    }</span>
 
     public String getCity() {
 <span class="fc" id="L34">        return city;</span>
     }
 
     public void setCity(String city) {
-<span class="nc" id="L38">        this.city = city;</span>
-<span class="nc" id="L39">    }</span>
+<span class="fc" id="L38">        this.city = city;</span>
+<span class="fc" id="L39">    }</span>
 
     public String getState() {
 <span class="fc" id="L42">        return state;</span>
     }
 
     public void setState(String state) {
-<span class="nc" id="L46">        this.state = state;</span>
-<span class="nc" id="L47">    }</span>
+<span class="fc" id="L46">        this.state = state;</span>
+<span class="fc" id="L47">    }</span>
 
     public UUID getAttractionId() {
 <span class="fc" id="L50">        return attractionId;</span>
     }
 
     public void setAttractionId(UUID attractionId) {
-<span class="nc" id="L54">        this.attractionId = attractionId;</span>
-<span class="nc" id="L55">    }</span>
+<span class="fc" id="L54">        this.attractionId = attractionId;</span>
+<span class="fc" id="L55">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

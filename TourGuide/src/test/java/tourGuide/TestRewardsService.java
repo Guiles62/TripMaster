@@ -60,14 +60,14 @@ public class TestRewardsService {
 	@Test
 	public void nearAllAttractions() {
 		TourGuideService tourGuideService = new TourGuideService(gpsUtilProxy,tripPricerProxy,rewardsCentralProxy);
-
+		User user = tourGuideService.getUser("internalUser0");
 		InternalTestHelper.setInternalUserNumber(1);
 
-		tourGuideService.getRewards(tourGuideService.getAllUsers().get(0));
-		List<UserReward> userRewards = tourGuideService.getRewards(tourGuideService.getAllUsers().get(0));
+		tourGuideService.getRewards(user);
+		List<UserReward> userRewards = tourGuideService.getRewards(user);
 		tourGuideService.tracker.stopTracking();
 
-		assertEquals(tourGuideService.getAttractions().size(), userRewards.size());
+		assertEquals(tourGuideService.getNearbyAttractions(user).size(), userRewards.size());
 	}
 	
 }
