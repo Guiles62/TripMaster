@@ -11,34 +11,55 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
-import tourGuide.model.Attraction;
-import tourGuide.model.Location;
-import tourGuide.model.Provider;
-import tourGuide.model.VisitedLocation;
+import tourGuide.model.*;
 import tourGuide.service.TourGuideService;
 import tourGuide.user.User;
 import tourGuide.user.UserReward;
 
+/**
+ * &lt;b&gt;TourGuideController call TourGuideService to display data&lt;/b&gt;
+ * &lt;p&gt;
+ *     contains methods
+ *     &lt;ul&gt;
+ *         &lt;li&gt;index&lt;/li&gt;
+ *         &lt;li&gt;getLocation&lt;/li&gt;
+ *         &lt;li&gt;getNearbyAttractions&lt;/li&gt;
+ *         &lt;li&gt;getRewards&lt;/li&gt;
+ *         &lt;li&gt;getAllCurrentLocations&lt;/li&gt;
+ *         &lt;li&gt;getTripDeals&lt;/li&gt;
+ *     &lt;/ul&gt;
+ * &lt;/p&gt;
+ * @author Guillaume C
+ */
 
 @RestController
 public class TourGuideController {
 
 	TourGuideService tourGuideService;
 
-<span class="fc" id="L28">    public TourGuideController(TourGuideService tourGuideService) {</span>
-<span class="fc" id="L29">        this.tourGuideService = tourGuideService;</span>
-<span class="fc" id="L30">    }</span>
+<span class="fc" id="L40">    public TourGuideController(TourGuideService tourGuideService) {</span>
+<span class="fc" id="L41">        this.tourGuideService = tourGuideService;</span>
+<span class="fc" id="L42">    }</span>
 
+    /**
+     * method which display index message
+     * @return Greetings from TourGuide!
+     */
     @RequestMapping(&quot;/&quot;)
     public String index() {
-<span class="nc" id="L34">        return &quot;Greetings from TourGuide!&quot;;</span>
+<span class="nc" id="L50">        return &quot;Greetings from TourGuide!&quot;;</span>
     }
 
+    /**
+     * call service to find the user location
+     * @param userName is the username of user
+     * @return a JSON object that contains longitude and latitude
+     */
     @GetMapping(&quot;/getLocation&quot;)
     public Location getLocation(@RequestParam String userName) {
-<span class="nc" id="L39">        User user = tourGuideService.getUser(userName);</span>
-<span class="nc" id="L40">    	Location location = tourGuideService.getLocation(user);</span>
-<span class="nc" id="L41">		return location;</span>
+<span class="nc" id="L60">        User user = tourGuideService.getUser(userName);</span>
+<span class="nc" id="L61">    	Location location = tourGuideService.getLocation(user);</span>
+<span class="nc" id="L62">		return location;</span>
     }
 
     //  TODO: Change this method to no longer return a List of Attractions.
@@ -50,21 +71,36 @@ public class TourGuideController {
         // The distance in miles between the user's location and each of the attractions.
         // The reward points for visiting each Attraction.
         //    Note: Attraction reward points can be gathered from RewardsCentral
-    @GetMapping(&quot;/getNearbyAttractions&quot;)
-    public List&lt;Attraction&gt; getNearbyAttractions(@RequestParam String userName) {
-<span class="nc" id="L55">        User user = tourGuideService.getUser(userName);</span>
-<span class="nc" id="L56">    	List&lt;Attraction&gt; nearAttractions = tourGuideService.getNearbyAttractions(user);</span>
-<span class="nc" id="L57">    	return nearAttractions;</span>
+
+    /**
+     * call service to display the closest five tourist attractions to the user
+     * @param userName is the username of user
+     * @return a JSON object that display the location, name, city, state and attractionId of the closest 5 attractions
+     */
+    @GetMapping(&quot;/getNearByAttractions&quot;)
+    public List&lt;NearByAttractions&gt; getNearbyAttractions(@RequestParam String userName) {
+<span class="fc" id="L82">        User user = tourGuideService.getUser(userName);</span>
+<span class="fc" id="L83">    	List&lt;NearByAttractions&gt; nearAttractions = tourGuideService.getNearbyAttractions(user);</span>
+<span class="fc" id="L84">    	return nearAttractions;</span>
     }
 
+    /**
+     * call service to display user rewards
+     * @param userName is the username of user
+     * @return a JSON object that display user's visitedLocation, attractions and show rewardsPoints
+     */
     @GetMapping(&quot;/getRewards&quot;)
     public List&lt;UserReward&gt; getRewards(@RequestParam String userName) {
-<span class="nc" id="L62">        User user = tourGuideService.getUser(userName);</span>
-<span class="nc" id="L63">        List&lt;UserReward&gt; getUserRewardsList = tourGuideService.getRewards(user);</span>
-<span class="nc" id="L64">    	return getUserRewardsList;</span>
+<span class="nc" id="L94">        User user = tourGuideService.getUser(userName);</span>
+<span class="nc" id="L95">        List&lt;UserReward&gt; getUserRewardsList = tourGuideService.getRewards(user);</span>
+<span class="nc" id="L96">    	return getUserRewardsList;</span>
     }
 
 
+    /**
+     * call service to display location of all users
+     * @return a JSON object that display all users by userId and their locations
+     */
     @GetMapping(&quot;/getAllCurrentLocations&quot;)
     public List&lt;VisitedLocation&gt; getAllCurrentLocations() {
     	// TODO: Get a list of every user's most recent location as JSON
@@ -76,15 +112,20 @@ public class TourGuideController {
     	//        &quot;019b04a9-067a-4c76-8817-ee75088c3822&quot;: {&quot;longitude&quot;:-48.188821,&quot;latitude&quot;:74.84371} 
     	//        ...
     	//     }
-<span class="nc" id="L79">        List&lt;VisitedLocation&gt;usersCurrentVisitedLocationList = tourGuideService.getAllCurrentLocations();</span>
-<span class="nc" id="L80">    	return usersCurrentVisitedLocationList;</span>
+<span class="nc" id="L115">        List&lt;VisitedLocation&gt;usersCurrentVisitedLocationList = tourGuideService.getAllCurrentLocations();</span>
+<span class="nc" id="L116">    	return usersCurrentVisitedLocationList;</span>
     }
 
+    /**
+     * call service to display user's tripDeals
+     * @param userName is the username of user
+     * @return a JSON object that display user's tripDeals with name of attraction, price for the trip and tripId
+     */
     @RequestMapping(&quot;/getTripDeals&quot;)
     public List&lt;Provider&gt; getTripDeals(@RequestParam String userName) {
-<span class="nc" id="L85">        User user = tourGuideService.getUser(userName);</span>
-<span class="nc" id="L86">    	List&lt;Provider&gt; providers = tourGuideService.getTripDeals(user);</span>
-<span class="nc" id="L87">    	return providers;</span>
+<span class="nc" id="L126">        User user = tourGuideService.getUser(userName);</span>
+<span class="nc" id="L127">    	List&lt;Provider&gt; providers = tourGuideService.getTripDeals(user);</span>
+<span class="nc" id="L128">    	return providers;</span>
     }
 
 }

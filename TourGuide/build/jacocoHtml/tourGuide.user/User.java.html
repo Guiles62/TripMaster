@@ -16,11 +16,11 @@ public class User {
 	private String phoneNumber;
 	private String emailAddress;
 	private Date latestLocationTimestamp;
-<span class="pc" id="L19">	private List&lt;Attraction&gt; attractions = new ArrayList&lt;&gt;();</span>
-<span class="pc" id="L20">	private List&lt;VisitedLocation&gt; visitedLocations = new ArrayList&lt;&gt;();</span>
-<span class="pc" id="L21">	private List&lt;UserReward&gt; userRewards = new ArrayList&lt;&gt;();</span>
-<span class="pc" id="L22">	private UserPreferences userPreferences = new UserPreferences();</span>
-<span class="pc" id="L23">	private List&lt;Provider&gt; tripDeals = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L19">	private List&lt;Attraction&gt; attractions = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L20">	private List&lt;VisitedLocation&gt; visitedLocations = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L21">	private List&lt;UserReward&gt; userRewards = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L22">	private UserPreferences userPreferences = new UserPreferences();</span>
+<span class="fc" id="L23">	private List&lt;Provider&gt; tripDeals = new ArrayList&lt;&gt;();</span>
 <span class="fc" id="L24">	public User(UUID userId, String userName, String phoneNumber, String emailAddress) {</span>
 <span class="fc" id="L25">		this.userId = userId;</span>
 <span class="fc" id="L26">		this.userName = userName;</span>
@@ -28,27 +28,27 @@ public class User {
 <span class="fc" id="L28">		this.emailAddress = emailAddress;</span>
 <span class="fc" id="L29">	}</span>
 
-<span class="nc" id="L31">	public User() {</span>
-<span class="nc" id="L32">	}</span>
+<span class="fc" id="L31">	public User() {</span>
+<span class="fc" id="L32">	}</span>
 
 	public UUID getUserId() {
-<span class="fc" id="L35">		return userId;</span>
+<span class="nc" id="L35">		return userId;</span>
 	}
 	
 	public String getUserName() {
-<span class="fc" id="L39">		return userName;</span>
+<span class="nc" id="L39">		return userName;</span>
 	}
 
 	public void setUserName(String userName) {
-<span class="nc" id="L43">		this.userName = userName;</span>
-<span class="nc" id="L44">	}</span>
+<span class="fc" id="L43">		this.userName = userName;</span>
+<span class="fc" id="L44">	}</span>
 
 	public void setPhoneNumber(String phoneNumber) {
 <span class="nc" id="L47">		this.phoneNumber = phoneNumber;</span>
 <span class="nc" id="L48">	}</span>
 	
 	public String getPhoneNumber() {
-<span class="fc" id="L51">		return phoneNumber;</span>
+<span class="nc" id="L51">		return phoneNumber;</span>
 	}
 
 	public void setEmailAddress(String emailAddress) {
@@ -56,7 +56,7 @@ public class User {
 <span class="nc" id="L56">	}</span>
 	
 	public String getEmailAddress() {
-<span class="fc" id="L59">		return emailAddress;</span>
+<span class="nc" id="L59">		return emailAddress;</span>
 	}
 	
 	public void setLatestLocationTimestamp(Date latestLocationTimestamp) {
@@ -64,11 +64,11 @@ public class User {
 <span class="nc" id="L64">	}</span>
 	
 	public Date getLatestLocationTimestamp() {
-<span class="fc" id="L67">		return latestLocationTimestamp;</span>
+<span class="nc" id="L67">		return latestLocationTimestamp;</span>
 	}
 
 	public List&lt;VisitedLocation&gt; getVisitedLocations() {
-<span class="fc" id="L71">		return visitedLocations;</span>
+<span class="nc" id="L71">		return visitedLocations;</span>
 	}
 
 	public void setVisitedLocations(List&lt;VisitedLocation&gt; visitedLocations) {
@@ -80,15 +80,15 @@ public class User {
 <span class="nc" id="L80">	}</span>
 
 	public List&lt;UserReward&gt; getUserRewards() {
-<span class="fc" id="L83">		return userRewards;</span>
+<span class="nc" id="L83">		return userRewards;</span>
 	}
 
 	public void setUserRewards(List&lt;UserReward&gt; userRewards) {
-<span class="fc" id="L87">		this.userRewards = userRewards;</span>
-<span class="fc" id="L88">	}</span>
+<span class="nc" id="L87">		this.userRewards = userRewards;</span>
+<span class="nc" id="L88">	}</span>
 
 	public UserPreferences getUserPreferences() {
-<span class="fc" id="L91">		return userPreferences;</span>
+<span class="nc" id="L91">		return userPreferences;</span>
 	}
 	
 	public void setUserPreferences(UserPreferences userPreferences) {
@@ -96,8 +96,8 @@ public class User {
 <span class="nc" id="L96">	}</span>
 
 	public VisitedLocation getLastVisitedLocation() {
-<span class="pc bpc" id="L99" title="1 of 2 branches missed.">		if (visitedLocations.size()!=0){</span>
-<span class="fc" id="L100">			return visitedLocations.get(visitedLocations.size() - 1);</span>
+<span class="nc bnc" id="L99" title="All 2 branches missed.">		if (visitedLocations.size()!=0){</span>
+<span class="nc" id="L100">			return visitedLocations.get(visitedLocations.size() - 1);</span>
 		}
 <span class="nc" id="L102">		return null;</span>
 	}
@@ -107,11 +107,11 @@ public class User {
 <span class="nc" id="L107">	}</span>
 	
 	public List&lt;Provider&gt; getTripDeals() {
-<span class="fc" id="L110">		return tripDeals;</span>
+<span class="nc" id="L110">		return tripDeals;</span>
 	}
 
 	public List&lt;Attraction&gt; getAttractions() {
-<span class="fc" id="L114">		return attractions;</span>
+<span class="nc" id="L114">		return attractions;</span>
 	}
 
 	public void setAttractions(List&lt;Attraction&gt; attractions) {

@@ -10,10 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import tourGuide.helper.InternalTestHelper;
-import tourGuide.model.Attraction;
-import tourGuide.model.Location;
-import tourGuide.model.Provider;
-import tourGuide.model.VisitedLocation;
+import tourGuide.model.*;
 import tourGuide.proxy.GpsUtilProxy;
 import tourGuide.proxy.RewardsCentralProxy;
 import tourGuide.proxy.TripPricerProxy;
@@ -22,7 +19,28 @@ import tourGuide.user.User;
 import tourGuide.user.UserReward;
 
 
-
+/**
+ * &lt;b&gt;TourGuideService is the class that will call the different proxies of the other microservices to retrieve the data and process it&lt;/b&gt;
+ * &lt;p&gt;
+ *     contains methods
+ *     &lt;ul&gt;
+ *         &lt;li&gt;getLocation&lt;/li&gt;
+ *         &lt;li&gt;trackUserLocation&lt;/li&gt;
+ *         &lt;li&gt;getNearbyAttractions&lt;/li&gt;
+ *         &lt;li&gt;getRewards&lt;/li&gt;
+ *         &lt;li&gt;getAllCurrentLocations&lt;/li&gt;
+ *         &lt;li&gt;getTripDeals&lt;/li&gt;
+ *         &lt;li&gt;getAttractions&lt;/li&gt;
+ *         &lt;li&gt;getUser&lt;/li&gt;
+ *         &lt;li&gt;getAllUsers&lt;/li&gt;
+ *         &lt;li&gt;addUser&lt;/li&gt;
+ *         &lt;li&gt;getApiKey&lt;/li&gt;
+ *         &lt;li&gt;addShutDownHook&lt;/li&gt;
+ *         &lt;li&gt;initializeInternalUsers&lt;/li&gt;
+ *     &lt;/ul&gt;
+ * &lt;/p&gt;
+ * @author Guillaume C
+ */
 @Service
 public class TourGuideService {
 
@@ -30,122 +48,202 @@ public class TourGuideService {
 	private TripPricerProxy tripPricerProxy;
 	private RewardsCentralProxy rewardsCentralProxy;
 
-<span class="fc" id="L33">	private Logger logger = LoggerFactory.getLogger(TourGuideService.class);</span>
+<span class="nc" id="L51">	private Logger logger = LoggerFactory.getLogger(TourGuideService.class);</span>
 	public Tracker tracker;
-<span class="fc" id="L35">	boolean testMode = true;</span>
+<span class="nc" id="L53">	boolean testMode = true;</span>
+	private static final double STATUTE_MILES_PER_NAUTICAL_MILE = 1.15077945;
 
 
 
-<span class="fc" id="L39">	public TourGuideService(GpsUtilProxy gpsUtilProxy, TripPricerProxy tripPricerProxy, RewardsCentralProxy rewardsCentralProxy) {</span>
-<span class="fc" id="L40">		this.gpsUtilProxy = gpsUtilProxy;</span>
-<span class="fc" id="L41">		this.tripPricerProxy = tripPricerProxy;</span>
-<span class="fc" id="L42">		this.rewardsCentralProxy = rewardsCentralProxy;</span>
+<span class="nc" id="L58">	public TourGuideService(GpsUtilProxy gpsUtilProxy, TripPricerProxy tripPricerProxy, RewardsCentralProxy rewardsCentralProxy) {</span>
+<span class="nc" id="L59">		this.gpsUtilProxy = gpsUtilProxy;</span>
+<span class="nc" id="L60">		this.tripPricerProxy = tripPricerProxy;</span>
+<span class="nc" id="L61">		this.rewardsCentralProxy = rewardsCentralProxy;</span>
 
 
-<span class="pc bpc" id="L45" title="1 of 2 branches missed.">		if(testMode) {</span>
-<span class="fc" id="L46">			logger.info(&quot;TestMode enabled&quot;);</span>
-<span class="fc" id="L47">			logger.debug(&quot;Initializing users&quot;);</span>
-<span class="fc" id="L48">			initializeInternalUsers();</span>
-<span class="fc" id="L49">			logger.debug(&quot;Finished initializing users&quot;);</span>
+<span class="nc bnc" id="L64" title="All 2 branches missed.">		if(testMode) {</span>
+<span class="nc" id="L65">			logger.info(&quot;TestMode enabled&quot;);</span>
+<span class="nc" id="L66">			logger.debug(&quot;Initializing users&quot;);</span>
+<span class="nc" id="L67">			initializeInternalUsers();</span>
+<span class="nc" id="L68">			logger.debug(&quot;Finished initializing users&quot;);</span>
 		}
-<span class="fc" id="L51">		tracker = new Tracker(this);</span>
-<span class="fc" id="L52">		addShutDownHook();</span>
+<span class="nc" id="L70">		tracker = new Tracker(this);</span>
+<span class="nc" id="L71">		addShutDownHook();</span>
 
-<span class="fc" id="L54">	}</span>
+<span class="nc" id="L73">	}</span>
 
+	/**
+	 * call gpsUtilProxy to get user's location from gpsUtil microservice
+	 * @param user user for whom we want the last localization
+	 * @return the user's location
+	 */
 	public Location getLocation (User user) {
-<span class="nc" id="L57">		Location location = gpsUtilProxy.getLocation(user.getUserId());</span>
-<span class="nc" id="L58">		return location;</span>
+<span class="nc" id="L81">		Location location = gpsUtilProxy.getLocation(user.getUserId());</span>
+<span class="nc" id="L82">		return location;</span>
 	}
 
+	/**
+	 * call the gpsUtilProxy to get user's current location from gpsUtil microservice
+	 * @param user user for whom we want the last visitedLocation
+	 * @return the last visitedLocation
+	 */
 	public VisitedLocation trackUserLocation(User user) {
-<span class="fc" id="L62">		return gpsUtilProxy.trackUserLocation(user.getUserId());</span>
+<span class="nc" id="L91">		return gpsUtilProxy.trackUserLocation(user.getUserId());</span>
 	}
 
 
-	public List&lt;Attraction&gt; getNearbyAttractions (User user) {
-<span class="fc" id="L67">		List&lt;Attraction&gt; nearAttractions = gpsUtilProxy.getNearbyAttractions(user.getUserId());</span>
-<span class="fc" id="L68">		return nearAttractions;</span>
+	/**
+	 * call the gpsProxy to get the closest 5 attractions to the user from gpsUtil microservice
+	 * @param user user we use to find the 5 attractions near him
+	 * @return a list of 5 attractions
+	 */
+	public List&lt;NearByAttractions&gt; getNearbyAttractions (User user) {
+<span class="nc" id="L101">		List&lt;Attraction&gt; nearAttractions = gpsUtilProxy.getNearbyAttractions(user.getUserId());</span>
+<span class="nc" id="L102">		List&lt;NearByAttractions&gt; nearByAttractions = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L103" title="All 2 branches missed.">		for (Attraction attraction : nearAttractions) {</span>
+<span class="nc" id="L104">			int rewardsPoints = rewardsCentralProxy.getAttractionRewardPoints(user.getUserId(),attraction.attractionId);</span>
+<span class="nc" id="L105">			Location location = new Location(attraction.latitude,attraction.longitude);</span>
+<span class="nc" id="L106">			double distance = getDistance(user.getLastVisitedLocation().location,location);</span>
+<span class="nc" id="L107">			nearByAttractions.add(new NearByAttractions(attraction,distance,rewardsPoints));</span>
+<span class="nc" id="L108">		}</span>
+<span class="nc" id="L109">		return nearByAttractions;</span>
 	}
 
+	/**
+	 * call the rewardsCentralProxy to get a list of rewards for a user from rewardCentral microservice
+	 * @param user user we want to get his rewards
+	 * @return a list of UserRewards
+	 */
 	public List&lt;UserReward&gt; getRewards (User user) {
-<span class="fc" id="L72">		List&lt;UserReward&gt; userRewards = rewardsCentralProxy.getRewards(user);</span>
-<span class="fc" id="L73">		return userRewards;</span>
+<span class="nc" id="L118">		List&lt;UserReward&gt; userRewards = rewardsCentralProxy.getRewards(user);</span>
+<span class="nc" id="L119">		return userRewards;</span>
 	}
 
 
+	/**
+	 * call the gpsUtilProxy to get all the users locations from gpsUtil microservice
+	 * @return a list of users visitedLocations
+	 */
 	public List&lt;VisitedLocation&gt;getAllCurrentLocations() {
-<span class="nc" id="L78">		List&lt;VisitedLocation&gt; usersCurrentVisitedLocationList = new ArrayList&lt;&gt;();</span>
-<span class="nc" id="L79">		List&lt;User&gt; userList = getAllUsers();</span>
-<span class="nc bnc" id="L80" title="All 2 branches missed.">		for(User user : userList){</span>
-<span class="nc" id="L81">			usersCurrentVisitedLocationList.add(gpsUtilProxy.getCurrentLocation(user.getUserId()));</span>
-<span class="nc" id="L82">		}</span>
-<span class="nc" id="L83">		return usersCurrentVisitedLocationList;</span>
+<span class="nc" id="L128">		List&lt;VisitedLocation&gt; usersCurrentVisitedLocationList = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L129">		List&lt;User&gt; userList = getAllUsers();</span>
+<span class="nc bnc" id="L130" title="All 2 branches missed.">		for(User user : userList){</span>
+<span class="nc" id="L131">			usersCurrentVisitedLocationList.add(gpsUtilProxy.getCurrentLocation(user.getUserId()));</span>
+<span class="nc" id="L132">		}</span>
+<span class="nc" id="L133">		return usersCurrentVisitedLocationList;</span>
 	}
 
+	/**
+	 * call the tripPricerProxy to get user tripDeals from tripPricer microservice
+	 * @param user is the user we use to get his tripDeals
+	 * @return a list of provider with prices
+	 */
 	public List&lt;Provider&gt; getTripDeals(User user) {
-<span class="nc" id="L87">		String apiKey  = getApiKey();</span>
-<span class="nc" id="L88">		List&lt;Provider&gt; getPrice = tripPricerProxy.getPrice(user,apiKey);</span>
-<span class="nc" id="L89">		return getPrice;</span>
+<span class="nc" id="L142">		String apiKey  = getApiKey();</span>
+<span class="nc" id="L143">		List&lt;Provider&gt; getPrice = tripPricerProxy.getPrice(user,apiKey);</span>
+<span class="nc" id="L144">		return getPrice;</span>
 	}
 
+	/**
+	 * call the gpsUtilProxy to get all the attractions from gpsUtil microservice
+	 * @return a list of all Attractions
+	 */
 	public List&lt;Attraction&gt; getAttractions() {
-<span class="fc" id="L93">		List&lt;Attraction&gt; attractionList = gpsUtilProxy.getAllAttractions();</span>
-<span class="fc" id="L94">		return attractionList;</span>
+<span class="nc" id="L152">		List&lt;Attraction&gt; attractionList = gpsUtilProxy.getAllAttractions();</span>
+<span class="nc" id="L153">		return attractionList;</span>
 	}
-	
+
+	/**
+	 * this method calls the different microservices to retrieve the user
+	 * @param userName username of the user
+	 * @return the user
+	 */
 	public User getUser(String userName) {
-<span class="fc" id="L98">		User user = internalUserMap.get(userName);</span>
-<span class="fc" id="L99">		List&lt;VisitedLocation&gt; visitedLocations = gpsUtilProxy.getUserVisitedLocation(user.getUserId());</span>
-<span class="fc" id="L100">		user.setVisitedLocations(visitedLocations);</span>
-<span class="fc" id="L101">		List&lt;Attraction&gt; attractions = getNearbyAttractions(user);</span>
-<span class="fc" id="L102">		user.setAttractions(attractions);</span>
-<span class="fc" id="L103">		List&lt;UserReward&gt; userRewards = rewardsCentralProxy.getRewards(user);</span>
-<span class="fc" id="L104">		user.setUserRewards(userRewards);</span>
-<span class="fc" id="L105">		return user;</span>
+<span class="nc" id="L162">		User user = internalUserMap.get(userName);</span>
+<span class="nc" id="L163">		List&lt;VisitedLocation&gt; visitedLocations = gpsUtilProxy.getUserVisitedLocation(user.getUserId());</span>
+<span class="nc" id="L164">		user.setVisitedLocations(visitedLocations);</span>
+<span class="nc" id="L165">		List&lt;NearByAttractions&gt; attractions = getNearbyAttractions(user);</span>
+<span class="nc" id="L166">		List&lt;Attraction&gt; attractionList = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L167" title="All 2 branches missed.">		for (NearByAttractions attractions1 : attractions){</span>
+<span class="nc" id="L168">			attractionList.add(attractions1.getAttraction());</span>
+<span class="nc" id="L169">			user.setAttractions(attractionList);</span>
+<span class="nc" id="L170">		}</span>
+
+<span class="nc" id="L172">		List&lt;UserReward&gt; userRewards = rewardsCentralProxy.getRewards(user);</span>
+<span class="nc" id="L173">		user.setUserRewards(userRewards);</span>
+<span class="nc" id="L174">		return user;</span>
 	}
-	
+
+	public double getDistance(Location loc1, Location loc2) {
+<span class="nc" id="L178">		double lat1 = Math.toRadians(loc1.latitude);</span>
+<span class="nc" id="L179">		double lon1 = Math.toRadians(loc1.longitude);</span>
+<span class="nc" id="L180">		double lat2 = Math.toRadians(loc2.latitude);</span>
+<span class="nc" id="L181">		double lon2 = Math.toRadians(loc2.longitude);</span>
+
+<span class="nc" id="L183">		double angle = Math.acos(Math.sin(lat1) * Math.sin(lat2)</span>
+<span class="nc" id="L184">				+ Math.cos(lat1) * Math.cos(lat2) * Math.cos(lon1 - lon2));</span>
+
+<span class="nc" id="L186">		double nauticalMiles = 60 * Math.toDegrees(angle);</span>
+<span class="nc" id="L187">		double statuteMiles = STATUTE_MILES_PER_NAUTICAL_MILE * nauticalMiles;</span>
+<span class="nc" id="L188">		return statuteMiles;</span>
+	}
+
+	/**
+	 * get all users
+	 * @return a list of users
+	 */
 	public List&lt;User&gt; getAllUsers() {
-<span class="fc" id="L109">		return internalUserMap.values().stream().collect(Collectors.toList());</span>
+<span class="nc" id="L196">		return internalUserMap.values().stream().collect(Collectors.toList());</span>
 	}
-	
+
+	/**
+	 * add user to list
+	 * @param user the user to add
+	 */
 	public void addUser(User user) {
-<span class="nc bnc" id="L113" title="All 2 branches missed.">		if(!internalUserMap.containsKey(user.getUserName())) {</span>
-<span class="nc" id="L114">			internalUserMap.put(user.getUserName(), user);</span>
+<span class="nc bnc" id="L204" title="All 2 branches missed.">		if(!internalUserMap.containsKey(user.getUserName())) {</span>
+<span class="nc" id="L205">			internalUserMap.put(user.getUserName(), user);</span>
 		}
-<span class="nc" id="L116">	}</span>
+<span class="nc" id="L207">	}</span>
 
+	/**
+	 * get the ApiKey
+	 * @return a string of the tripPricerApiKey
+	 */
 	public String getApiKey() {
-<span class="nc" id="L119">		return tripPricerApiKey;</span>
+<span class="nc" id="L214">		return tripPricerApiKey;</span>
 	}
 
+	/**
+	 * shutdown tracker
+	 */
 	private void addShutDownHook() {
-<span class="fc" id="L123">		Runtime.getRuntime().addShutdownHook(new Thread() { </span>
+<span class="nc" id="L221">		Runtime.getRuntime().addShutdownHook(new Thread() { </span>
 		      public void run() {
-<span class="fc" id="L125">		        tracker.stopTracking();</span>
-<span class="fc" id="L126">		      } </span>
+<span class="nc" id="L223">		        tracker.stopTracking();</span>
+<span class="nc" id="L224">		      } </span>
 		    }); 
-<span class="fc" id="L128">	}</span>
+<span class="nc" id="L226">	}</span>
 	
 	/**********************************************************************************
 	 * 
 	 * Methods Below: For Internal Testing
 	 * 
 	 **********************************************************************************/
-<span class="fc" id="L135">	private final String tripPricerApiKey = &quot;test-server-api-key&quot;;</span>
+<span class="nc" id="L233">	private final String tripPricerApiKey = &quot;test-server-api-key&quot;;</span>
 	// Database connection will be used for external users, but for testing purposes internal users are provided and stored in memory
-<span class="fc" id="L137">	private final Map&lt;String, User&gt; internalUserMap = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L235">	private final Map&lt;String, User&gt; internalUserMap = new HashMap&lt;&gt;();</span>
 	private void initializeInternalUsers() {
-<span class="fc" id="L139">		IntStream.range(0, InternalTestHelper.getInternalUserNumber()).forEach(i -&gt; {</span>
-<span class="fc" id="L140">			String userName = &quot;internalUser&quot; + i;</span>
-<span class="fc" id="L141">			String phone = &quot;000&quot;;</span>
-<span class="fc" id="L142">			String email = userName + &quot;@tourGuide.com&quot;;</span>
-<span class="fc" id="L143">			User user = new User(UUID.randomUUID(), userName, phone, email);</span>
+<span class="nc" id="L237">		IntStream.range(0, InternalTestHelper.getInternalUserNumber()).forEach(i -&gt; {</span>
+<span class="nc" id="L238">			String userName = &quot;internalUser&quot; + i;</span>
+<span class="nc" id="L239">			String phone = &quot;000&quot;;</span>
+<span class="nc" id="L240">			String email = userName + &quot;@tourGuide.com&quot;;</span>
+<span class="nc" id="L241">			User user = new User(UUID.randomUUID(), userName, phone, email);</span>
 			
-<span class="fc" id="L145">			internalUserMap.put(userName, user);</span>
-<span class="fc" id="L146">		});</span>
-<span class="fc" id="L147">		logger.debug(&quot;Created &quot; + InternalTestHelper.getInternalUserNumber() + &quot; internal test users.&quot;);</span>
-<span class="fc" id="L148">	}</span>
+<span class="nc" id="L243">			internalUserMap.put(userName, user);</span>
+<span class="nc" id="L244">		});</span>
+<span class="nc" id="L245">		logger.debug(&quot;Created &quot; + InternalTestHelper.getInternalUserNumber() + &quot; internal test users.&quot;);</span>
+<span class="nc" id="L246">	}</span>
 
 	
 }

@@ -5,12 +5,12 @@ import javax.money.Monetary;
 
 public class Money {
 
-<span class="nc" id="L8">    private CurrencyUnit currency = Monetary.getCurrency(&quot;USD&quot;);</span>
-<span class="nc" id="L9">    private org.javamoney.moneta.Money lowerPricePoint = org.javamoney.moneta.Money.of(0, currency);</span>
-<span class="nc" id="L10">    private org.javamoney.moneta.Money highPricePoint = org.javamoney.moneta.Money.of(Integer.MAX_VALUE, currency);</span>
+<span class="fc" id="L8">    private CurrencyUnit currency = Monetary.getCurrency(&quot;USD&quot;);</span>
+<span class="fc" id="L9">    private org.javamoney.moneta.Money lowerPricePoint = org.javamoney.moneta.Money.of(0, currency);</span>
+<span class="fc" id="L10">    private org.javamoney.moneta.Money highPricePoint = org.javamoney.moneta.Money.of(Integer.MAX_VALUE, currency);</span>
 
-<span class="nc" id="L12">    public Money() {</span>
-<span class="nc" id="L13">    }</span>
+<span class="fc" id="L12">    public Money() {</span>
+<span class="fc" id="L13">    }</span>
 
     public CurrencyUnit getCurrency() {
 <span class="nc" id="L16">        return currency;</span>
