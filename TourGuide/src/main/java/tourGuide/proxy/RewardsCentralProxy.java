@@ -16,10 +16,7 @@ public interface RewardsCentralProxy {
     @PostMapping(value = "/getRewards")
     List<UserReward> getRewards(@RequestBody User user);
 
-    @RequestMapping(value = "/getUserRewardsPointsSum")
-    int getUserRewardsPointsSum(@RequestBody User user);
-
-    @RequestMapping("/getAttractionRewardPoints")
+    @PostMapping("/getAttractionRewardPoints")
     int getAttractionRewardPoints(@RequestParam UUID userId,@RequestParam UUID attractionId);
 
     @RequestMapping("/getAttractions")

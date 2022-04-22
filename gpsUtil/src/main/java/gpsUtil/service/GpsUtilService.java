@@ -8,7 +8,22 @@ import gpsUtil.model.User;
 import java.util.List;
 import java.util.UUID;
 
-
+/**
+ * <b>GpsUtilService is the interface that will implemented by GpUtilServiceImpl</b>
+ * <p>
+ *     contains methods
+ *     <ul>
+ *         <li>getUser</li>
+ *         <li>nearAttraction</li>
+ *         <li>getDistance</li>
+ *         <li>getUserLocation</li>
+ *         <li>trackUserLocation</li>
+ *         <li>getNearByAttractions</li>
+ *         <li>getAllAttractions</li>
+ *     </ul>
+ * </p>
+ * @author Guillaume C
+ */
 public interface GpsUtilService {
 
     User getUser(UUID userId);

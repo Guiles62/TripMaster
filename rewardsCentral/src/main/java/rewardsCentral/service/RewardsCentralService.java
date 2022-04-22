@@ -8,6 +8,17 @@ import rewardsCentral.model.UserReward;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * <b>RewardsCentralService is the interface that will implemented by RewardsCentralServiceImpl</b>
+ * <p>
+ *     contains methods
+ *     <ul>
+ *         <li>getUserRewards</li>
+ *         <li>getAttractionsRewardPoints</li>
+ *     </ul>
+ * </p>
+ * @author Guillaume C
+ */
 public interface RewardsCentralService {
 
 

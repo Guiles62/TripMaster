@@ -9,6 +9,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * <b>RewardsCentralServiceImpl is the class which implement RewardsCentralService and call RewardCentral jar</b>
+ * <p>
+ *     contains methods
+ *     <ul>
+ *         <li>getUserRewards</li>
+ *         <li>getAttractionRewardPoints</li>
+ *         <li>calculateRewards</li>
+ *     </ul>
+ * </p>
+ * @author Guillaume C
+ */
 @Service
 public class RewardsCentralServiceImpl implements RewardsCentralService {
 
@@ -29,12 +41,23 @@ public class RewardsCentralServiceImpl implements RewardsCentralService {
     }
 
 
+    /**
+     * call the calculateRewards method to get the user's rewards
+     * @param user the user we use
+     * @return a list of userReward
+     */
     @Override
     public List<UserReward> getUserRewards(User user) {
         calculateRewards(user);
         return user.getUserRewards();
     }
 
+    /**
+     * call RewardCentral jar to get attraction points for a user
+     * @param userID the user id
+     * @param attractionId the attraction id
+     * @return a Integer rewards
+     */
     @Override
     public int getAttractionRewardPoints(UUID userID,UUID attractionId) {
         int rewards = rewardCentral.getAttractionRewardPoints(userID,attractionId);
@@ -42,6 +65,10 @@ public class RewardsCentralServiceImpl implements RewardsCentralService {
     }
 
 
+    /**
+     * calculate the user's rewards
+     * @param user the user we use
+     */
     public void calculateRewards(User user) {
         List<VisitedLocation> userLocations = user.getVisitedLocations();
         List<Attraction> attractions = user.getAttractions();
@@ -56,10 +83,22 @@ public class RewardsCentralServiceImpl implements RewardsCentralService {
         }
     }
 
+    /**
+     * indicate if a distance between a user's visitedLocation and an attraction is greater than a proximityBuffer
+     * @param visitedLocation the user's visitedLocation
+     * @param attraction the attraction
+     * @return a boolean that indicates if the distance is greater than proximityBuffer or not
+     */
     public boolean nearAttraction(VisitedLocation visitedLocation, Attraction attraction) {
         return getDistance(attraction, visitedLocation.location) > proximityBuffer ? false : true;
     }
 
+    /**
+     * calculate the distance between 2 points
+     * @param loc1 is the first location
+     * @param loc2 is the second location
+     * @return a distance in nautical miles
+     */
     public double getDistance(Location loc1, Location loc2) {
         double lat1 = Math.toRadians(loc1.latitude);
         double lon1 = Math.toRadians(loc1.longitude);

@@ -76,8 +76,19 @@ public class TourGuideControllerUT {
 
     @Test
     public void getNearByAttractionsTest() throws Exception {
-        when(tourGuideService.getNearbyAttractions(user)).thenReturn(user.getAttractions());
-        mockMvc.perform(get("/getNearbyAttractions?userName=username")).andExpect(status().isOk());
+        List<NearByAttractions> attractions = new ArrayList<>();
+        NearByAttractions attraction1 = new NearByAttractions(attraction,100,50);
+        NearByAttractions attraction2 = new NearByAttractions(attraction,50,50);
+        NearByAttractions attraction3 = new NearByAttractions(attraction,50,50);
+        NearByAttractions attraction4 = new NearByAttractions(attraction,50,50);
+        NearByAttractions attraction5 = new NearByAttractions(attraction,50,50);
+        attractions.add(attraction1);
+        attractions.add(attraction2);
+        attractions.add(attraction3);
+        attractions.add(attraction4);
+        attractions.add(attraction5);
+        when(tourGuideService.getNearbyAttractions(user)).thenReturn(attractions);
+        mockMvc.perform(get("/getNearByAttractions?userName=username")).andExpect(status().isOk());
     }
 
     @Test

@@ -16,10 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import tourGuide.helper.InternalTestHelper;
-import tourGuide.model.Attraction;
-import tourGuide.model.Location;
-import tourGuide.model.Provider;
-import tourGuide.model.VisitedLocation;
+import tourGuide.model.*;
 import tourGuide.proxy.GpsUtilProxy;
 import tourGuide.proxy.RewardsCentralProxy;
 import tourGuide.proxy.TripPricerProxy;
@@ -115,7 +112,7 @@ public class TestTourGuideService {
 		User user = new User(UUID.randomUUID(), "jon", "000", "jon@tourGuide.com");
 		VisitedLocation visitedLocation = tourGuideService.trackUserLocation(user);
 		
-		List<Attraction> attractions = tourGuideService.getNearbyAttractions(user);
+		List<NearByAttractions> attractions = tourGuideService.getNearbyAttractions(user);
 		
 		tourGuideService.tracker.stopTracking();
 		
