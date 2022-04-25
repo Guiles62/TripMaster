@@ -67,7 +67,7 @@ public class TestRewardsService {
 		List<UserReward> userRewards = tourGuideService.getRewards(user);
 		tourGuideService.tracker.stopTracking();
 
-		assertEquals(tourGuideService.getNearbyAttractions(user).size(), userRewards.size());
+		assertEquals(tourGuideService.getNearByAttractions(user).size(), userRewards.size());
 	}
 	
 }

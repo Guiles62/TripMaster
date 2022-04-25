@@ -10,38 +10,62 @@ import tripPricer.service.TripPricerService;
 
 import java.util.ArrayList;
 import java.util.List;
+
+/**
+ * &lt;b&gt;TripPricerServiceImpl is the class which implement TripPricerService and call TripPricer jar&lt;/b&gt;
+ * &lt;p&gt;
+ *     contains methods
+ *     &lt;ul&gt;
+ *         &lt;li&gt;getTripDeals&lt;/li&gt;
+ *         &lt;li&gt;getPrice&lt;/li&gt;
+ *     &lt;/ul&gt;
+ * &lt;/p&gt;
+ * @author Guillaume C
+ */
 @Service
 public class TripPricerServiceImpl implements TripPricerService {
 
-<span class="fc" id="L16">    private TripPricer tripPricer = new TripPricer();</span>
+<span class="fc" id="L28">    private TripPricer tripPricer = new TripPricer();</span>
 
-<span class="fc" id="L18">    public TripPricerServiceImpl() {</span>
-<span class="fc" id="L19">    }</span>
+<span class="fc" id="L30">    public TripPricerServiceImpl() {</span>
+<span class="fc" id="L31">    }</span>
 
 
+    /**
+     * call the method getPrice to calculate a list of provider
+     * @param user the user we use
+     * @param apiKey the apiKey we use
+     * @return a list of provider
+     */
     @Override
     public List&lt;Provider&gt; getTripDeals(User user, String apiKey) {
-<span class="fc" id="L24">        List&lt;Provider&gt; providers = getPrice(user, apiKey);</span>
-<span class="fc" id="L25">        user.setTripDeals(providers);</span>
-<span class="fc" id="L26">        return providers;</span>
+<span class="fc" id="L42">        List&lt;Provider&gt; providers = getPrice(user, apiKey);</span>
+<span class="fc" id="L43">        user.setTripDeals(providers);</span>
+<span class="fc" id="L44">        return providers;</span>
     }
 
+    /**
+     * calculate the user's provider
+     * @param user the user we use
+     * @param url the url we use
+     * @return a list of provider calculate with the user's rewards
+     */
     @Override
     public List&lt;Provider&gt; getPrice(User user, String url) {
-<span class="fc" id="L31">        List&lt;Provider&gt; providerList = new ArrayList&lt;&gt;();</span>
-<span class="fc" id="L32">        List&lt;UserReward&gt; userRewards = user.getUserRewards();</span>
-<span class="fc" id="L33">        int rewardsPoints = 0;</span>
-<span class="pc bpc" id="L34" title="1 of 2 branches missed.">        for (UserReward userReward : userRewards) {</span>
-<span class="nc" id="L35">            rewardsPoints += userReward.getRewardPoints();</span>
-<span class="nc" id="L36">        }</span>
-<span class="fc" id="L37">        int rewardsPointsForPrice = rewardsPoints/10;</span>
-<span class="fc" id="L38">        List&lt;tripPricer.Provider&gt; providers = tripPricer.getPrice(url,user.getUserId(),user.getUserPreferences().getNumberOfAdults(),</span>
-<span class="fc" id="L39">                user.getUserPreferences().getNumberOfChildren(), user.getUserPreferences().getTripDuration(),rewardsPointsForPrice);</span>
-<span class="fc bfc" id="L40" title="All 2 branches covered.">        for (tripPricer.Provider provider : providers) {</span>
-<span class="fc" id="L41">            Double price = (provider.price*100)/100;</span>
-<span class="fc" id="L42">            providerList.add(new Provider(provider.tripId, provider.name, price));</span>
-<span class="fc" id="L43">        }</span>
-<span class="fc" id="L44">        return providerList;</span>
+<span class="fc" id="L55">        List&lt;Provider&gt; providerList = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L56">        List&lt;UserReward&gt; userRewards = user.getUserRewards();</span>
+<span class="fc" id="L57">        int rewardsPoints = 0;</span>
+<span class="pc bpc" id="L58" title="1 of 2 branches missed.">        for (UserReward userReward : userRewards) {</span>
+<span class="nc" id="L59">            rewardsPoints += userReward.getRewardPoints();</span>
+<span class="nc" id="L60">        }</span>
+<span class="fc" id="L61">        int rewardsPointsForPrice = rewardsPoints/10;</span>
+<span class="fc" id="L62">        List&lt;tripPricer.Provider&gt; providers = tripPricer.getPrice(url,user.getUserId(),user.getUserPreferences().getNumberOfAdults(),</span>
+<span class="fc" id="L63">                user.getUserPreferences().getNumberOfChildren(), user.getUserPreferences().getTripDuration(),rewardsPointsForPrice);</span>
+<span class="fc bfc" id="L64" title="All 2 branches covered.">        for (tripPricer.Provider provider : providers) {</span>
+<span class="fc" id="L65">            Double price = (provider.price*100)/100;</span>
+<span class="fc" id="L66">            providerList.add(new Provider(provider.tripId, provider.name, price));</span>
+<span class="fc" id="L67">        }</span>
+<span class="fc" id="L68">        return providerList;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

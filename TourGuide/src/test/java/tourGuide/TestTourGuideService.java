@@ -3,6 +3,7 @@ package tourGuide;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -101,18 +102,19 @@ public class TestTourGuideService {
 		
 		assertEquals(user.getUserId(), visitedLocation.userId);
 	}
-	
-	 // Not yet implemented
+
 	@Test
 	public void getNearbyAttractions() {
 
 		InternalTestHelper.setInternalUserNumber(0);
 		TourGuideService tourGuideService = new TourGuideService(gpsUtilProxy,tripPricerProxy,rewardsCentralProxy);
-		
+
 		User user = new User(UUID.randomUUID(), "jon", "000", "jon@tourGuide.com");
+		List<VisitedLocation> userVisitedLocation = new ArrayList<>();
 		VisitedLocation visitedLocation = tourGuideService.trackUserLocation(user);
-		
-		List<NearByAttractions> attractions = tourGuideService.getNearbyAttractions(user);
+		userVisitedLocation.add(visitedLocation);
+		user.setVisitedLocations(userVisitedLocation);
+		List<NearByAttractions> attractions = tourGuideService.getNearByAttractions(user);
 		
 		tourGuideService.tracker.stopTracking();
 		

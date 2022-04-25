@@ -10,30 +10,45 @@ import rewardsCentral.service.RewardsCentralService;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * &lt;b&gt;RewardsCentralController RewardsCentralService to get data&lt;/b&gt;
+ * &lt;p&gt;
+ *     contains methods
+ *     &lt;ul&gt;
+ *         &lt;li&gt;getRewards&lt;/li&gt;
+ *     &lt;/ul&gt;
+ * &lt;/p&gt;
+ * @author Guillaume C
+ */
 @RestController
 public class RewardsCentralController {
 
     private RewardsCentralService rewardsCentralService;
 
 
-<span class="fc" id="L19">    public RewardsCentralController(RewardsCentralService rewardsCentralService) {</span>
-<span class="fc" id="L20">        this.rewardsCentralService = rewardsCentralService;</span>
-<span class="fc" id="L21">    }</span>
+<span class="fc" id="L29">    public RewardsCentralController(RewardsCentralService rewardsCentralService) {</span>
+<span class="fc" id="L30">        this.rewardsCentralService = rewardsCentralService;</span>
+<span class="fc" id="L31">    }</span>
 
+    /**
+     * call the rewardsCentralService to get user's rewards
+     * @param user the user we use
+     * @return a list of userRewards
+     */
     @PostMapping(value = &quot;/getRewards&quot;)
     public List&lt;UserReward&gt; getRewards(@RequestBody User user) {
-<span class="nc" id="L25">        return rewardsCentralService.getUserRewards(user);</span>
+<span class="nc" id="L40">        return rewardsCentralService.getUserRewards(user);</span>
     }
 
     /*@RequestMapping(&quot;/getUserRewardsPointsSum&quot;)
     public int getRewardsPointSum(@RequestBody User user) {
         return rewardsCentralService.getRewardsPointsSum(user);
-    }
+    }*/
 
     @RequestMapping(&quot;/getAttractionRewardPoints&quot;)
     public int getAttractionRewardPoints(@RequestParam UUID userId, @RequestParam UUID attractionId) {
-        return rewardsCentralService.getAttractionRewardPoints(userId, attractionId);
-    }*/
+<span class="nc" id="L50">        return rewardsCentralService.getAttractionRewardPoints(userId, attractionId);</span>
+    }
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

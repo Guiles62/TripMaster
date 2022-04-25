@@ -78,10 +78,10 @@ public class TourGuideController {
      * @return a JSON object that display the location, name, city, state and attractionId of the closest 5 attractions
      */
     @GetMapping(&quot;/getNearByAttractions&quot;)
-    public List&lt;NearByAttractions&gt; getNearbyAttractions(@RequestParam String userName) {
-<span class="fc" id="L82">        User user = tourGuideService.getUser(userName);</span>
-<span class="fc" id="L83">    	List&lt;NearByAttractions&gt; nearAttractions = tourGuideService.getNearbyAttractions(user);</span>
-<span class="fc" id="L84">    	return nearAttractions;</span>
+    public List&lt;NearByAttractions&gt; getNearByAttractions(@RequestParam String userName) {
+<span class="nc" id="L82">        User user = tourGuideService.getUser(userName);</span>
+<span class="nc" id="L83">    	List&lt;NearByAttractions&gt; nearAttractions = tourGuideService.getNearByAttractions(user);</span>
+<span class="nc" id="L84">    	return nearAttractions;</span>
     }
 
     /**

@@ -32,6 +32,7 @@ import tourGuide.user.UserReward;
  *         <li>getTripDeals</li>
  *         <li>getAttractions</li>
  *         <li>getUser</li>
+ *         <li>getDistance</li>
  *         <li>getAllUsers</li>
  *         <li>addUser</li>
  *         <li>getApiKey</li>
@@ -97,7 +98,7 @@ public class TourGuideService {
 	 * @param user user we use to find the 5 attractions near him
 	 * @return a list of 5 attractions
 	 */
-	public List<NearByAttractions> getNearbyAttractions (User user) {
+	public List<NearByAttractions> getNearByAttractions (User user) {
 		List<Attraction> nearAttractions = gpsUtilProxy.getNearbyAttractions(user.getUserId());
 		List<NearByAttractions> nearByAttractions = new ArrayList<>();
 		for (Attraction attraction : nearAttractions) {
@@ -128,7 +129,8 @@ public class TourGuideService {
 		List<VisitedLocation> usersCurrentVisitedLocationList = new ArrayList<>();
 		List<User> userList = getAllUsers();
 		for(User user : userList){
-			usersCurrentVisitedLocationList.add(gpsUtilProxy.getCurrentLocation(user.getUserId()));
+			VisitedLocation currentLocation = gpsUtilProxy.getCurrentLocation(user.getUserId());
+			usersCurrentVisitedLocationList.add(currentLocation);
 		}
 		return usersCurrentVisitedLocationList;
 	}
@@ -162,7 +164,7 @@ public class TourGuideService {
 		User user = internalUserMap.get(userName);
 		List<VisitedLocation> visitedLocations = gpsUtilProxy.getUserVisitedLocation(user.getUserId());
 		user.setVisitedLocations(visitedLocations);
-		List<NearByAttractions> attractions = getNearbyAttractions(user);
+		List<NearByAttractions> attractions = getNearByAttractions(user);
 		List<Attraction> attractionList = new ArrayList<>();
 		for (NearByAttractions attractions1 : attractions){
 			attractionList.add(attractions1.getAttraction());
@@ -174,6 +176,12 @@ public class TourGuideService {
 		return user;
 	}
 
+	/**
+	 * calculate the distance between 2 points
+	 * @param loc1 is the first location
+	 * @param loc2 is the second location
+	 * @return a distance in nautical miles
+	 */
 	public double getDistance(Location loc1, Location loc2) {
 		double lat1 = Math.toRadians(loc1.latitude);
 		double lon1 = Math.toRadians(loc1.longitude);

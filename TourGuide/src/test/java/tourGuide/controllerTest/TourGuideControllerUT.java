@@ -87,7 +87,7 @@ public class TourGuideControllerUT {
         attractions.add(attraction3);
         attractions.add(attraction4);
         attractions.add(attraction5);
-        when(tourGuideService.getNearbyAttractions(user)).thenReturn(attractions);
+        when(tourGuideService.getNearByAttractions(user)).thenReturn(attractions);
         mockMvc.perform(get("/getNearByAttractions?userName=username")).andExpect(status().isOk());
     }
 
