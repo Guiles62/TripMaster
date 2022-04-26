@@ -12,21 +12,21 @@ public class User {
 	private String phoneNumber;
 	private String emailAddress;
 	private Date latestLocationTimestamp;
-<span class="fc" id="L15">	private List&lt;Attraction&gt; attractions = new ArrayList&lt;&gt;();</span>
-<span class="fc" id="L16">	private List&lt;VisitedLocation&gt; visitedLocations = new ArrayList&lt;&gt;();</span>
-<span class="fc" id="L17">	private List&lt;UserReward&gt; userRewards = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L15">	private List&lt;Attraction&gt; attractions = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L16">	private List&lt;VisitedLocation&gt; visitedLocations = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L17">	private List&lt;UserReward&gt; userRewards = new ArrayList&lt;&gt;();</span>
 
 
 
-<span class="fc" id="L21">	public User() {</span>
-<span class="fc" id="L22">	}</span>
+<span class="nc" id="L21">	public User() {</span>
+<span class="nc" id="L22">	}</span>
 
 	public void setUserId(UUID userId) {
-<span class="fc" id="L25">		this.userId = userId;</span>
-<span class="fc" id="L26">	}</span>
+<span class="nc" id="L25">		this.userId = userId;</span>
+<span class="nc" id="L26">	}</span>
 
 	public UUID getUserId() {
-<span class="fc" id="L29">		return userId;</span>
+<span class="nc" id="L29">		return userId;</span>
 	}
 	
 	public String getUserName() {
@@ -58,24 +58,24 @@ public class User {
 	}
 
 	public List&lt;VisitedLocation&gt; getVisitedLocations() {
-<span class="fc" id="L61">		return visitedLocations;</span>
+<span class="nc" id="L61">		return visitedLocations;</span>
 	}
 
 	public void setVisitedLocations(List&lt;VisitedLocation&gt; visitedLocations) {
-<span class="fc" id="L65">		this.visitedLocations = visitedLocations;</span>
-<span class="fc" id="L66">	}</span>
+<span class="nc" id="L65">		this.visitedLocations = visitedLocations;</span>
+<span class="nc" id="L66">	}</span>
 
 	public void clearVisitedLocations() {
 <span class="nc" id="L69">		visitedLocations.clear();</span>
 <span class="nc" id="L70">	}</span>
 
 	public List&lt;UserReward&gt; getUserRewards() {
-<span class="fc" id="L73">		return userRewards;</span>
+<span class="nc" id="L73">		return userRewards;</span>
 	}
 
 	public void setUserRewards(List&lt;UserReward&gt; userRewards) {
-<span class="fc" id="L77">		this.userRewards = userRewards;</span>
-<span class="fc" id="L78">	}</span>
+<span class="nc" id="L77">		this.userRewards = userRewards;</span>
+<span class="nc" id="L78">	}</span>
 
 	public VisitedLocation getLastVisitedLocation() {
 <span class="nc bnc" id="L81" title="All 2 branches missed.">		if (visitedLocations.size()!=0){</span>
@@ -85,11 +85,11 @@ public class User {
 	}
 
 	public List&lt;Attraction&gt; getAttractions() {
-<span class="fc" id="L88">		return attractions;</span>
+<span class="nc" id="L88">		return attractions;</span>
 	}
 
 	public void setAttractions(List&lt;Attraction&gt; attractions) {
-<span class="fc" id="L92">		this.attractions = attractions;</span>
-<span class="fc" id="L93">	}</span>
+<span class="nc" id="L92">		this.attractions = attractions;</span>
+<span class="nc" id="L93">	}</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

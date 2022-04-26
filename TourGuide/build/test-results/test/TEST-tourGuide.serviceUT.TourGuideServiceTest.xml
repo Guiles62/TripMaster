@@ -1,41 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="tourGuide.serviceUT.TourGuideServiceTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2022-04-25T08:13:04" hostname="DESKTOP-HBE7KI5" time="0.124">
+<testsuite name="tourGuide.serviceUT.TourGuideServiceTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2022-04-25T14:11:09" hostname="DESKTOP-HBE7KI5" time="0.046">
   <properties/>
-  <testcase name="getAllCurrentLocationsTest" classname="tourGuide.serviceUT.TourGuideServiceTest" time="0.1"/>
-  <testcase name="getNearbyAttractionsTest" classname="tourGuide.serviceUT.TourGuideServiceTest" time="0.007"/>
+  <testcase name="getAllCurrentLocationsTest" classname="tourGuide.serviceUT.TourGuideServiceTest" time="0.021"/>
+  <testcase name="getNearbyAttractionsTest" classname="tourGuide.serviceUT.TourGuideServiceTest" time="0.006"/>
   <testcase name="getRewardsTest" classname="tourGuide.serviceUT.TourGuideServiceTest" time="0.003"/>
   <testcase name="trackUserLocationTest" classname="tourGuide.serviceUT.TourGuideServiceTest" time="0.002"/>
-  <testcase name="getAttractionsTest" classname="tourGuide.serviceUT.TourGuideServiceTest" time="0.003"/>
-  <testcase name="getTripDealsTest" classname="tourGuide.serviceUT.TourGuideServiceTest" time="0.003"/>
+  <testcase name="getAttractionsTest" classname="tourGuide.serviceUT.TourGuideServiceTest" time="0.002"/>
+  <testcase name="getTripDealsTest" classname="tourGuide.serviceUT.TourGuideServiceTest" time="0.002"/>
   <testcase name="getLocationTest" classname="tourGuide.serviceUT.TourGuideServiceTest" time="0.003"/>
   <testcase name="getUserTest" classname="tourGuide.serviceUT.TourGuideServiceTest" time="0.003"/>
-  <system-out><![CDATA[10:12:59.525 [Test worker] DEBUG org.springframework.test.context.junit4.SpringJUnit4ClassRunner - SpringJUnit4ClassRunner constructor called with [class tourGuide.serviceUT.TourGuideServiceTest]
-10:12:59.533 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating CacheAwareContextLoaderDelegate from class [org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate]
-10:12:59.547 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating BootstrapContext using constructor [public org.springframework.test.context.support.DefaultBootstrapContext(java.lang.Class,org.springframework.test.context.CacheAwareContextLoaderDelegate)]
-10:12:59.574 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating TestContextBootstrapper for test class [tourGuide.serviceUT.TourGuideServiceTest] from class [org.springframework.boot.test.context.SpringBootTestContextBootstrapper]
-10:12:59.591 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Neither @ContextConfiguration nor @ContextHierarchy found for test class [tourGuide.serviceUT.TourGuideServiceTest], using SpringBootContextLoader
-10:12:59.595 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [tourGuide.serviceUT.TourGuideServiceTest]: class path resource [tourGuide/serviceUT/TourGuideServiceTest-context.xml] does not exist
-10:12:59.595 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [tourGuide.serviceUT.TourGuideServiceTest]: class path resource [tourGuide/serviceUT/TourGuideServiceTestContext.groovy] does not exist
-10:12:59.596 [Test worker] INFO org.springframework.test.context.support.AbstractContextLoader - Could not detect default resource locations for test class [tourGuide.serviceUT.TourGuideServiceTest]: no resource found for suffixes {-context.xml, Context.groovy}.
-10:12:59.596 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [tourGuide.serviceUT.TourGuideServiceTest]: TourGuideServiceTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-10:12:59.653 [Test worker] DEBUG org.springframework.test.context.support.ActiveProfilesUtils - Could not find an 'annotation declaring class' for annotation type [org.springframework.test.context.ActiveProfiles] and class [tourGuide.serviceUT.TourGuideServiceTest]
-10:12:59.739 [Test worker] DEBUG org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider - Identified candidate component class: file [C:\Users\guile\OneDrive\Bureau\Formation\P8\JavaPathENProject8\TourGuide\build\classes\java\main\tourGuide\Application.class]
-10:12:59.740 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration tourGuide.Application for test class tourGuide.serviceUT.TourGuideServiceTest
-10:12:59.844 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - @TestExecutionListeners is not present for class [tourGuide.serviceUT.TourGuideServiceTest]: using defaults.
-10:12:59.844 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
-10:12:59.857 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Skipping candidate TestExecutionListener [org.springframework.test.context.transaction.TransactionalTestExecutionListener] due to a missing dependency. Specify custom listener classes or make the default listener classes and their required dependencies available. Offending class: [org/springframework/transaction/interceptor/TransactionAttributeSource]
-10:12:59.857 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Skipping candidate TestExecutionListener [org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener] due to a missing dependency. Specify custom listener classes or make the default listener classes and their required dependencies available. Offending class: [org/springframework/transaction/interceptor/TransactionAttribute]
-10:12:59.858 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@2dc21583, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@6cbdd1c5, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@60816371, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@678586f0, org.springframework.test.context.support.DirtiesContextTestExecutionListener@5ad6f98e, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@586728e8, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@3316527e, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@786ff0ea, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@15186ce0, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@745926c3]
-10:12:59.861 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved @ProfileValueSourceConfiguration [null] for test class [tourGuide.serviceUT.TourGuideServiceTest]
-10:12:59.862 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved ProfileValueSource type [class org.springframework.test.annotation.SystemProfileValueSource] for class [tourGuide.serviceUT.TourGuideServiceTest]
-10:12:59.864 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved @ProfileValueSourceConfiguration [null] for test class [tourGuide.serviceUT.TourGuideServiceTest]
-10:12:59.864 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved ProfileValueSource type [class org.springframework.test.annotation.SystemProfileValueSource] for class [tourGuide.serviceUT.TourGuideServiceTest]
-10:12:59.864 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved @ProfileValueSourceConfiguration [null] for test class [tourGuide.serviceUT.TourGuideServiceTest]
-10:12:59.864 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved ProfileValueSource type [class org.springframework.test.annotation.SystemProfileValueSource] for class [tourGuide.serviceUT.TourGuideServiceTest]
-10:12:59.868 [Test worker] DEBUG org.springframework.test.context.support.AbstractDirtiesContextTestExecutionListener - Before test class: context [DefaultTestContext@63262071 testClass = TourGuideServiceTest, testInstance = [null], testMethod = [null], testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@2d4f67e testClass = TourGuideServiceTest, locations = '{}', classes = '{class tourGuide.Application}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@b112b13, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@58a2b917, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@2440022a, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@38f77cd9], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -> true]], class annotated with @DirtiesContext [false] with mode [null].
-10:12:59.869 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved @ProfileValueSourceConfiguration [null] for test class [tourGuide.serviceUT.TourGuideServiceTest]
-10:12:59.869 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved ProfileValueSource type [class org.springframework.test.annotation.SystemProfileValueSource] for class [tourGuide.serviceUT.TourGuideServiceTest]
-10:13:00.366 [Test worker] DEBUG org.springframework.test.context.support.TestPropertySourceUtils - Adding inlined properties to environment: {spring.jmx.enabled=false, org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true, server.port=-1}
+  <system-out><![CDATA[16:11:04.312 [Test worker] DEBUG org.springframework.test.context.junit4.SpringJUnit4ClassRunner - SpringJUnit4ClassRunner constructor called with [class tourGuide.serviceUT.TourGuideServiceTest]
+16:11:04.322 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating CacheAwareContextLoaderDelegate from class [org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate]
+16:11:04.336 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating BootstrapContext using constructor [public org.springframework.test.context.support.DefaultBootstrapContext(java.lang.Class,org.springframework.test.context.CacheAwareContextLoaderDelegate)]
+16:11:04.361 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating TestContextBootstrapper for test class [tourGuide.serviceUT.TourGuideServiceTest] from class [org.springframework.boot.test.context.SpringBootTestContextBootstrapper]
+16:11:04.376 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Neither @ContextConfiguration nor @ContextHierarchy found for test class [tourGuide.serviceUT.TourGuideServiceTest], using SpringBootContextLoader
+16:11:04.380 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [tourGuide.serviceUT.TourGuideServiceTest]: class path resource [tourGuide/serviceUT/TourGuideServiceTest-context.xml] does not exist
+16:11:04.380 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [tourGuide.serviceUT.TourGuideServiceTest]: class path resource [tourGuide/serviceUT/TourGuideServiceTestContext.groovy] does not exist
+16:11:04.381 [Test worker] INFO org.springframework.test.context.support.AbstractContextLoader - Could not detect default resource locations for test class [tourGuide.serviceUT.TourGuideServiceTest]: no resource found for suffixes {-context.xml, Context.groovy}.
+16:11:04.381 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [tourGuide.serviceUT.TourGuideServiceTest]: TourGuideServiceTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+16:11:04.432 [Test worker] DEBUG org.springframework.test.context.support.ActiveProfilesUtils - Could not find an 'annotation declaring class' for annotation type [org.springframework.test.context.ActiveProfiles] and class [tourGuide.serviceUT.TourGuideServiceTest]
+16:11:04.521 [Test worker] DEBUG org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider - Identified candidate component class: file [C:\Users\guile\OneDrive\Bureau\Formation\P8\JavaPathENProject8\TourGuide\build\classes\java\main\tourGuide\Application.class]
+16:11:04.521 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration tourGuide.Application for test class tourGuide.serviceUT.TourGuideServiceTest
+16:11:04.627 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - @TestExecutionListeners is not present for class [tourGuide.serviceUT.TourGuideServiceTest]: using defaults.
+16:11:04.628 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+16:11:04.641 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Skipping candidate TestExecutionListener [org.springframework.test.context.transaction.TransactionalTestExecutionListener] due to a missing dependency. Specify custom listener classes or make the default listener classes and their required dependencies available. Offending class: [org/springframework/transaction/TransactionDefinition]
+16:11:04.642 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Skipping candidate TestExecutionListener [org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener] due to a missing dependency. Specify custom listener classes or make the default listener classes and their required dependencies available. Offending class: [org/springframework/transaction/interceptor/TransactionAttribute]
+16:11:04.642 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@2dc21583, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@6cbdd1c5, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@60816371, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@678586f0, org.springframework.test.context.support.DirtiesContextTestExecutionListener@5ad6f98e, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@586728e8, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@3316527e, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@786ff0ea, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@15186ce0, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@745926c3]
+16:11:04.645 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved @ProfileValueSourceConfiguration [null] for test class [tourGuide.serviceUT.TourGuideServiceTest]
+16:11:04.646 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved ProfileValueSource type [class org.springframework.test.annotation.SystemProfileValueSource] for class [tourGuide.serviceUT.TourGuideServiceTest]
+16:11:04.647 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved @ProfileValueSourceConfiguration [null] for test class [tourGuide.serviceUT.TourGuideServiceTest]
+16:11:04.647 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved ProfileValueSource type [class org.springframework.test.annotation.SystemProfileValueSource] for class [tourGuide.serviceUT.TourGuideServiceTest]
+16:11:04.652 [Test worker] DEBUG org.springframework.test.context.support.AbstractDirtiesContextTestExecutionListener - Before test class: context [DefaultTestContext@6eaa6b0c testClass = TourGuideServiceTest, testInstance = [null], testMethod = [null], testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@4afcae7 testClass = TourGuideServiceTest, locations = '{}', classes = '{class tourGuide.Application}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@b112b13, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@58a2b917, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@2440022a, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@38f77cd9], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -> true]], class annotated with @DirtiesContext [false] with mode [null].
+16:11:04.652 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved @ProfileValueSourceConfiguration [null] for test class [tourGuide.serviceUT.TourGuideServiceTest]
+16:11:04.652 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved ProfileValueSource type [class org.springframework.test.annotation.SystemProfileValueSource] for class [tourGuide.serviceUT.TourGuideServiceTest]
+16:11:05.166 [Test worker] DEBUG org.springframework.test.context.support.TestPropertySourceUtils - Adding inlined properties to environment: {spring.jmx.enabled=false, org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true, server.port=-1}
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -45,86 +43,86 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::        (v2.1.6.RELEASE)
 
-2022-04-25 10:13:01.225  INFO 25320 --- [    Test worker] t.serviceUT.TourGuideServiceTest         : No active profile set, falling back to default profiles: default
-2022-04-25 10:13:01.990  INFO 25320 --- [    Test worker] o.s.cloud.context.scope.GenericScope     : BeanFactory id=799bd1f0-11ea-3e55-828e-c2fc222d9970
-2022-04-25 10:13:02.045  INFO 25320 --- [    Test worker] trationDelegate$BeanPostProcessorChecker : Bean 'tourGuide.proxy.GpsUtilProxy' of type [org.springframework.cloud.openfeign.FeignClientFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2022-04-25 10:13:02.046  INFO 25320 --- [    Test worker] trationDelegate$BeanPostProcessorChecker : Bean 'tourGuide.proxy.RewardsCentralProxy' of type [org.springframework.cloud.openfeign.FeignClientFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2022-04-25 10:13:02.047  INFO 25320 --- [    Test worker] trationDelegate$BeanPostProcessorChecker : Bean 'tourGuide.proxy.TripPricerProxy' of type [org.springframework.cloud.openfeign.FeignClientFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2022-04-25 10:13:02.420  INFO 25320 --- [    Test worker] tourGuide.service.TourGuideService       : TestMode enabled
-2022-04-25 10:13:02.420 DEBUG 25320 --- [    Test worker] tourGuide.service.TourGuideService       : Initializing users
-2022-04-25 10:13:02.422 DEBUG 25320 --- [    Test worker] tourGuide.service.TourGuideService       : Created 100 internal test users.
-2022-04-25 10:13:02.422 DEBUG 25320 --- [    Test worker] tourGuide.service.TourGuideService       : Finished initializing users
-2022-04-25 10:13:02.426 DEBUG 25320 --- [pool-1-thread-1] tourGuide.tracker.Tracker                : Begin Tracker. Tracking 100 users.
-2022-04-25 10:13:02.986  INFO 25320 --- [    Test worker] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
-2022-04-25 10:13:03.127  INFO 25320 --- [    Test worker] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [public org.springframework.http.ResponseEntity<springfox.documentation.spring.web.json.Json> springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String,javax.servlet.http.HttpServletRequest)]
-2022-04-25 10:13:03.291  WARN 25320 --- [    Test worker] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
-2022-04-25 10:13:03.291  INFO 25320 --- [    Test worker] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
-2022-04-25 10:13:03.296  WARN 25320 --- [    Test worker] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
-2022-04-25 10:13:03.297  INFO 25320 --- [    Test worker] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
-2022-04-25 10:13:03.497  INFO 25320 --- [    Test worker] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2022-04-25 10:13:03.983  INFO 25320 --- [    Test worker] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
-2022-04-25 10:13:04.005  INFO 25320 --- [    Test worker] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
-2022-04-25 10:13:04.036  INFO 25320 --- [    Test worker] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
-2022-04-25 10:13:04.153  INFO 25320 --- [    Test worker] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_1
-2022-04-25 10:13:04.155  INFO 25320 --- [    Test worker] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_2
-2022-04-25 10:13:04.156  INFO 25320 --- [    Test worker] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_3
-2022-04-25 10:13:04.202  INFO 25320 --- [    Test worker] t.serviceUT.TourGuideServiceTest         : Started TourGuideServiceTest in 3.827 seconds (JVM running for 5.38)
-2022-04-25 10:13:04.224  INFO 25320 --- [    Test worker] tourGuide.service.TourGuideService       : TestMode enabled
-2022-04-25 10:13:04.224 DEBUG 25320 --- [    Test worker] tourGuide.service.TourGuideService       : Initializing users
-2022-04-25 10:13:04.224 DEBUG 25320 --- [    Test worker] tourGuide.service.TourGuideService       : Created 100 internal test users.
-2022-04-25 10:13:04.224 DEBUG 25320 --- [    Test worker] tourGuide.service.TourGuideService       : Finished initializing users
-2022-04-25 10:13:04.225 DEBUG 25320 --- [pool-2-thread-1] tourGuide.tracker.Tracker                : Begin Tracker. Tracking 100 users.
-2022-04-25 10:13:04.319 DEBUG 25320 --- [pool-2-thread-1] tourGuide.tracker.Tracker                : Tracker Time Elapsed: 0 seconds.
-2022-04-25 10:13:04.319 DEBUG 25320 --- [pool-2-thread-1] tourGuide.tracker.Tracker                : Tracker sleeping
-2022-04-25 10:13:04.322  INFO 25320 --- [    Test worker] tourGuide.service.TourGuideService       : TestMode enabled
-2022-04-25 10:13:04.322 DEBUG 25320 --- [    Test worker] tourGuide.service.TourGuideService       : Initializing users
-2022-04-25 10:13:04.322 DEBUG 25320 --- [    Test worker] tourGuide.service.TourGuideService       : Created 100 internal test users.
-2022-04-25 10:13:04.322 DEBUG 25320 --- [    Test worker] tourGuide.service.TourGuideService       : Finished initializing users
-2022-04-25 10:13:04.323 DEBUG 25320 --- [pool-3-thread-1] tourGuide.tracker.Tracker                : Begin Tracker. Tracking 100 users.
-2022-04-25 10:13:04.329  INFO 25320 --- [    Test worker] tourGuide.service.TourGuideService       : TestMode enabled
-2022-04-25 10:13:04.329 DEBUG 25320 --- [    Test worker] tourGuide.service.TourGuideService       : Initializing users
-2022-04-25 10:13:04.329 DEBUG 25320 --- [pool-3-thread-1] tourGuide.tracker.Tracker                : Tracker Time Elapsed: 0 seconds.
-2022-04-25 10:13:04.329 DEBUG 25320 --- [pool-3-thread-1] tourGuide.tracker.Tracker                : Tracker sleeping
-2022-04-25 10:13:04.329 DEBUG 25320 --- [    Test worker] tourGuide.service.TourGuideService       : Created 100 internal test users.
-2022-04-25 10:13:04.329 DEBUG 25320 --- [    Test worker] tourGuide.service.TourGuideService       : Finished initializing users
-2022-04-25 10:13:04.329 DEBUG 25320 --- [pool-4-thread-1] tourGuide.tracker.Tracker                : Begin Tracker. Tracking 100 users.
-2022-04-25 10:13:04.331 DEBUG 25320 --- [pool-4-thread-1] tourGuide.tracker.Tracker                : Tracker Time Elapsed: 0 seconds.
-2022-04-25 10:13:04.331 DEBUG 25320 --- [pool-4-thread-1] tourGuide.tracker.Tracker                : Tracker sleeping
-2022-04-25 10:13:04.331  INFO 25320 --- [    Test worker] tourGuide.service.TourGuideService       : TestMode enabled
-2022-04-25 10:13:04.332 DEBUG 25320 --- [    Test worker] tourGuide.service.TourGuideService       : Initializing users
-2022-04-25 10:13:04.332 DEBUG 25320 --- [    Test worker] tourGuide.service.TourGuideService       : Created 100 internal test users.
-2022-04-25 10:13:04.332 DEBUG 25320 --- [    Test worker] tourGuide.service.TourGuideService       : Finished initializing users
-2022-04-25 10:13:04.332 DEBUG 25320 --- [pool-5-thread-1] tourGuide.tracker.Tracker                : Begin Tracker. Tracking 100 users.
-2022-04-25 10:13:04.334  INFO 25320 --- [    Test worker] tourGuide.service.TourGuideService       : TestMode enabled
-2022-04-25 10:13:04.334 DEBUG 25320 --- [    Test worker] tourGuide.service.TourGuideService       : Initializing users
-2022-04-25 10:13:04.334 DEBUG 25320 --- [    Test worker] tourGuide.service.TourGuideService       : Created 100 internal test users.
-2022-04-25 10:13:04.335 DEBUG 25320 --- [    Test worker] tourGuide.service.TourGuideService       : Finished initializing users
-2022-04-25 10:13:04.335 DEBUG 25320 --- [pool-5-thread-1] tourGuide.tracker.Tracker                : Tracker Time Elapsed: 0 seconds.
-2022-04-25 10:13:04.335 DEBUG 25320 --- [pool-5-thread-1] tourGuide.tracker.Tracker                : Tracker sleeping
-2022-04-25 10:13:04.335 DEBUG 25320 --- [pool-6-thread-1] tourGuide.tracker.Tracker                : Begin Tracker. Tracking 100 users.
-2022-04-25 10:13:04.337  INFO 25320 --- [    Test worker] tourGuide.service.TourGuideService       : TestMode enabled
-2022-04-25 10:13:04.337 DEBUG 25320 --- [    Test worker] tourGuide.service.TourGuideService       : Initializing users
-2022-04-25 10:13:04.337 DEBUG 25320 --- [    Test worker] tourGuide.service.TourGuideService       : Created 100 internal test users.
-2022-04-25 10:13:04.337 DEBUG 25320 --- [    Test worker] tourGuide.service.TourGuideService       : Finished initializing users
-2022-04-25 10:13:04.338 DEBUG 25320 --- [pool-6-thread-1] tourGuide.tracker.Tracker                : Tracker Time Elapsed: 0 seconds.
-2022-04-25 10:13:04.338 DEBUG 25320 --- [pool-7-thread-1] tourGuide.tracker.Tracker                : Begin Tracker. Tracking 100 users.
-2022-04-25 10:13:04.338 DEBUG 25320 --- [pool-6-thread-1] tourGuide.tracker.Tracker                : Tracker sleeping
-2022-04-25 10:13:04.339 DEBUG 25320 --- [pool-7-thread-1] tourGuide.tracker.Tracker                : Tracker Time Elapsed: 0 seconds.
-2022-04-25 10:13:04.339 DEBUG 25320 --- [pool-7-thread-1] tourGuide.tracker.Tracker                : Tracker sleeping
-2022-04-25 10:13:04.340  INFO 25320 --- [    Test worker] tourGuide.service.TourGuideService       : TestMode enabled
-2022-04-25 10:13:04.340 DEBUG 25320 --- [    Test worker] tourGuide.service.TourGuideService       : Initializing users
-2022-04-25 10:13:04.340 DEBUG 25320 --- [    Test worker] tourGuide.service.TourGuideService       : Created 100 internal test users.
-2022-04-25 10:13:04.340 DEBUG 25320 --- [    Test worker] tourGuide.service.TourGuideService       : Finished initializing users
-2022-04-25 10:13:04.341 DEBUG 25320 --- [pool-8-thread-1] tourGuide.tracker.Tracker                : Begin Tracker. Tracking 100 users.
-2022-04-25 10:13:04.342 DEBUG 25320 --- [pool-8-thread-1] tourGuide.tracker.Tracker                : Tracker Time Elapsed: 0 seconds.
-2022-04-25 10:13:04.342 DEBUG 25320 --- [pool-8-thread-1] tourGuide.tracker.Tracker                : Tracker sleeping
-2022-04-25 10:13:04.343  INFO 25320 --- [    Test worker] tourGuide.service.TourGuideService       : TestMode enabled
-2022-04-25 10:13:04.343 DEBUG 25320 --- [    Test worker] tourGuide.service.TourGuideService       : Initializing users
-2022-04-25 10:13:04.343 DEBUG 25320 --- [    Test worker] tourGuide.service.TourGuideService       : Created 100 internal test users.
-2022-04-25 10:13:04.343 DEBUG 25320 --- [    Test worker] tourGuide.service.TourGuideService       : Finished initializing users
-2022-04-25 10:13:04.344 DEBUG 25320 --- [pool-9-thread-1] tourGuide.tracker.Tracker                : Begin Tracker. Tracking 100 users.
-2022-04-25 10:13:04.344 DEBUG 25320 --- [pool-9-thread-1] tourGuide.tracker.Tracker                : Tracker Time Elapsed: 0 seconds.
-2022-04-25 10:13:04.345 DEBUG 25320 --- [pool-9-thread-1] tourGuide.tracker.Tracker                : Tracker sleeping
+2022-04-25 16:11:06.051  INFO 23184 --- [    Test worker] t.serviceUT.TourGuideServiceTest         : No active profile set, falling back to default profiles: default
+2022-04-25 16:11:06.839  INFO 23184 --- [    Test worker] o.s.cloud.context.scope.GenericScope     : BeanFactory id=799bd1f0-11ea-3e55-828e-c2fc222d9970
+2022-04-25 16:11:06.897  INFO 23184 --- [    Test worker] trationDelegate$BeanPostProcessorChecker : Bean 'tourGuide.proxy.GpsUtilProxy' of type [org.springframework.cloud.openfeign.FeignClientFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-04-25 16:11:06.898  INFO 23184 --- [    Test worker] trationDelegate$BeanPostProcessorChecker : Bean 'tourGuide.proxy.RewardsCentralProxy' of type [org.springframework.cloud.openfeign.FeignClientFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-04-25 16:11:06.899  INFO 23184 --- [    Test worker] trationDelegate$BeanPostProcessorChecker : Bean 'tourGuide.proxy.TripPricerProxy' of type [org.springframework.cloud.openfeign.FeignClientFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-04-25 16:11:07.287  INFO 23184 --- [    Test worker] tourGuide.service.TourGuideService       : TestMode enabled
+2022-04-25 16:11:07.287 DEBUG 23184 --- [    Test worker] tourGuide.service.TourGuideService       : Initializing users
+2022-04-25 16:11:07.290 DEBUG 23184 --- [    Test worker] tourGuide.service.TourGuideService       : Created 100 internal test users.
+2022-04-25 16:11:07.290 DEBUG 23184 --- [    Test worker] tourGuide.service.TourGuideService       : Finished initializing users
+2022-04-25 16:11:07.294 DEBUG 23184 --- [pool-1-thread-1] tourGuide.tracker.Tracker                : Begin Tracker. Tracking 100 users.
+2022-04-25 16:11:07.999  INFO 23184 --- [    Test worker] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
+2022-04-25 16:11:08.130  INFO 23184 --- [    Test worker] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [public org.springframework.http.ResponseEntity<springfox.documentation.spring.web.json.Json> springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String,javax.servlet.http.HttpServletRequest)]
+2022-04-25 16:11:08.292  WARN 23184 --- [    Test worker] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2022-04-25 16:11:08.293  INFO 23184 --- [    Test worker] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2022-04-25 16:11:08.298  WARN 23184 --- [    Test worker] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2022-04-25 16:11:08.298  INFO 23184 --- [    Test worker] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2022-04-25 16:11:08.413  INFO 23184 --- [    Test worker] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2022-04-25 16:11:08.954  INFO 23184 --- [    Test worker] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2022-04-25 16:11:08.977  INFO 23184 --- [    Test worker] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2022-04-25 16:11:09.009  INFO 23184 --- [    Test worker] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2022-04-25 16:11:09.122  INFO 23184 --- [    Test worker] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_1
+2022-04-25 16:11:09.124  INFO 23184 --- [    Test worker] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_2
+2022-04-25 16:11:09.125  INFO 23184 --- [    Test worker] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_3
+2022-04-25 16:11:09.172  INFO 23184 --- [    Test worker] t.serviceUT.TourGuideServiceTest         : Started TourGuideServiceTest in 3.997 seconds (JVM running for 5.594)
+2022-04-25 16:11:09.270  INFO 23184 --- [    Test worker] tourGuide.service.TourGuideService       : TestMode enabled
+2022-04-25 16:11:09.270 DEBUG 23184 --- [    Test worker] tourGuide.service.TourGuideService       : Initializing users
+2022-04-25 16:11:09.271 DEBUG 23184 --- [    Test worker] tourGuide.service.TourGuideService       : Created 100 internal test users.
+2022-04-25 16:11:09.271 DEBUG 23184 --- [    Test worker] tourGuide.service.TourGuideService       : Finished initializing users
+2022-04-25 16:11:09.272 DEBUG 23184 --- [pool-2-thread-1] tourGuide.tracker.Tracker                : Begin Tracker. Tracking 100 users.
+2022-04-25 16:11:09.285 DEBUG 23184 --- [pool-2-thread-1] tourGuide.tracker.Tracker                : Tracker Time Elapsed: 0 seconds.
+2022-04-25 16:11:09.285 DEBUG 23184 --- [pool-2-thread-1] tourGuide.tracker.Tracker                : Tracker sleeping
+2022-04-25 16:11:09.289  INFO 23184 --- [    Test worker] tourGuide.service.TourGuideService       : TestMode enabled
+2022-04-25 16:11:09.289 DEBUG 23184 --- [    Test worker] tourGuide.service.TourGuideService       : Initializing users
+2022-04-25 16:11:09.289 DEBUG 23184 --- [    Test worker] tourGuide.service.TourGuideService       : Created 100 internal test users.
+2022-04-25 16:11:09.289 DEBUG 23184 --- [    Test worker] tourGuide.service.TourGuideService       : Finished initializing users
+2022-04-25 16:11:09.289 DEBUG 23184 --- [pool-3-thread-1] tourGuide.tracker.Tracker                : Begin Tracker. Tracking 100 users.
+2022-04-25 16:11:09.295  INFO 23184 --- [    Test worker] tourGuide.service.TourGuideService       : TestMode enabled
+2022-04-25 16:11:09.295 DEBUG 23184 --- [pool-3-thread-1] tourGuide.tracker.Tracker                : Tracker Time Elapsed: 0 seconds.
+2022-04-25 16:11:09.296 DEBUG 23184 --- [    Test worker] tourGuide.service.TourGuideService       : Initializing users
+2022-04-25 16:11:09.296 DEBUG 23184 --- [pool-3-thread-1] tourGuide.tracker.Tracker                : Tracker sleeping
+2022-04-25 16:11:09.296 DEBUG 23184 --- [    Test worker] tourGuide.service.TourGuideService       : Created 100 internal test users.
+2022-04-25 16:11:09.296 DEBUG 23184 --- [    Test worker] tourGuide.service.TourGuideService       : Finished initializing users
+2022-04-25 16:11:09.297 DEBUG 23184 --- [pool-4-thread-1] tourGuide.tracker.Tracker                : Begin Tracker. Tracking 100 users.
+2022-04-25 16:11:09.299  INFO 23184 --- [    Test worker] tourGuide.service.TourGuideService       : TestMode enabled
+2022-04-25 16:11:09.299 DEBUG 23184 --- [    Test worker] tourGuide.service.TourGuideService       : Initializing users
+2022-04-25 16:11:09.299 DEBUG 23184 --- [pool-4-thread-1] tourGuide.tracker.Tracker                : Tracker Time Elapsed: 0 seconds.
+2022-04-25 16:11:09.299 DEBUG 23184 --- [pool-4-thread-1] tourGuide.tracker.Tracker                : Tracker sleeping
+2022-04-25 16:11:09.299 DEBUG 23184 --- [    Test worker] tourGuide.service.TourGuideService       : Created 100 internal test users.
+2022-04-25 16:11:09.299 DEBUG 23184 --- [    Test worker] tourGuide.service.TourGuideService       : Finished initializing users
+2022-04-25 16:11:09.299 DEBUG 23184 --- [pool-5-thread-1] tourGuide.tracker.Tracker                : Begin Tracker. Tracking 100 users.
+2022-04-25 16:11:09.302  INFO 23184 --- [    Test worker] tourGuide.service.TourGuideService       : TestMode enabled
+2022-04-25 16:11:09.302 DEBUG 23184 --- [    Test worker] tourGuide.service.TourGuideService       : Initializing users
+2022-04-25 16:11:09.302 DEBUG 23184 --- [    Test worker] tourGuide.service.TourGuideService       : Created 100 internal test users.
+2022-04-25 16:11:09.302 DEBUG 23184 --- [    Test worker] tourGuide.service.TourGuideService       : Finished initializing users
+2022-04-25 16:11:09.302 DEBUG 23184 --- [pool-5-thread-1] tourGuide.tracker.Tracker                : Tracker Time Elapsed: 0 seconds.
+2022-04-25 16:11:09.302 DEBUG 23184 --- [pool-5-thread-1] tourGuide.tracker.Tracker                : Tracker sleeping
+2022-04-25 16:11:09.302 DEBUG 23184 --- [pool-6-thread-1] tourGuide.tracker.Tracker                : Begin Tracker. Tracking 100 users.
+2022-04-25 16:11:09.305  INFO 23184 --- [    Test worker] tourGuide.service.TourGuideService       : TestMode enabled
+2022-04-25 16:11:09.305 DEBUG 23184 --- [    Test worker] tourGuide.service.TourGuideService       : Initializing users
+2022-04-25 16:11:09.305 DEBUG 23184 --- [pool-6-thread-1] tourGuide.tracker.Tracker                : Tracker Time Elapsed: 0 seconds.
+2022-04-25 16:11:09.305 DEBUG 23184 --- [    Test worker] tourGuide.service.TourGuideService       : Created 100 internal test users.
+2022-04-25 16:11:09.305 DEBUG 23184 --- [pool-6-thread-1] tourGuide.tracker.Tracker                : Tracker sleeping
+2022-04-25 16:11:09.305 DEBUG 23184 --- [    Test worker] tourGuide.service.TourGuideService       : Finished initializing users
+2022-04-25 16:11:09.305 DEBUG 23184 --- [pool-7-thread-1] tourGuide.tracker.Tracker                : Begin Tracker. Tracking 100 users.
+2022-04-25 16:11:09.306 DEBUG 23184 --- [pool-7-thread-1] tourGuide.tracker.Tracker                : Tracker Time Elapsed: 0 seconds.
+2022-04-25 16:11:09.306 DEBUG 23184 --- [pool-7-thread-1] tourGuide.tracker.Tracker                : Tracker sleeping
+2022-04-25 16:11:09.307  INFO 23184 --- [    Test worker] tourGuide.service.TourGuideService       : TestMode enabled
+2022-04-25 16:11:09.307 DEBUG 23184 --- [    Test worker] tourGuide.service.TourGuideService       : Initializing users
+2022-04-25 16:11:09.307 DEBUG 23184 --- [    Test worker] tourGuide.service.TourGuideService       : Created 100 internal test users.
+2022-04-25 16:11:09.308 DEBUG 23184 --- [    Test worker] tourGuide.service.TourGuideService       : Finished initializing users
+2022-04-25 16:11:09.308 DEBUG 23184 --- [pool-8-thread-1] tourGuide.tracker.Tracker                : Begin Tracker. Tracking 100 users.
+2022-04-25 16:11:09.309 DEBUG 23184 --- [pool-8-thread-1] tourGuide.tracker.Tracker                : Tracker Time Elapsed: 0 seconds.
+2022-04-25 16:11:09.309 DEBUG 23184 --- [pool-8-thread-1] tourGuide.tracker.Tracker                : Tracker sleeping
+2022-04-25 16:11:09.310  INFO 23184 --- [    Test worker] tourGuide.service.TourGuideService       : TestMode enabled
+2022-04-25 16:11:09.311 DEBUG 23184 --- [    Test worker] tourGuide.service.TourGuideService       : Initializing users
+2022-04-25 16:11:09.311 DEBUG 23184 --- [    Test worker] tourGuide.service.TourGuideService       : Created 100 internal test users.
+2022-04-25 16:11:09.311 DEBUG 23184 --- [    Test worker] tourGuide.service.TourGuideService       : Finished initializing users
+2022-04-25 16:11:09.311 DEBUG 23184 --- [pool-9-thread-1] tourGuide.tracker.Tracker                : Begin Tracker. Tracking 100 users.
+2022-04-25 16:11:09.312 DEBUG 23184 --- [pool-9-thread-1] tourGuide.tracker.Tracker                : Tracker Time Elapsed: 0 seconds.
+2022-04-25 16:11:09.312 DEBUG 23184 --- [pool-9-thread-1] tourGuide.tracker.Tracker                : Tracker sleeping
 ]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

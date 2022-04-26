@@ -25,9 +25,9 @@ import java.util.UUID;
 public class RewardsCentralServiceImpl implements RewardsCentralService {
 
     private static final double STATUTE_MILES_PER_NAUTICAL_MILE = 1.15077945;
-<span class="fc" id="L28">    private int defaultProximityBuffer = 3000;</span>
-<span class="fc" id="L29">    private int proximityBuffer = defaultProximityBuffer;</span>
-<span class="fc" id="L30">    RewardCentral rewardCentral = new RewardCentral();</span>
+<span class="nc" id="L28">    private int defaultProximityBuffer = 3000;</span>
+<span class="nc" id="L29">    private int proximityBuffer = defaultProximityBuffer;</span>
+<span class="nc" id="L30">    RewardCentral rewardCentral = new RewardCentral();</span>
 
     public void setProximityBuffer(int proximityBuffer) {
 <span class="nc" id="L33">        this.proximityBuffer = proximityBuffer;</span>
@@ -37,8 +37,8 @@ public class RewardsCentralServiceImpl implements RewardsCentralService {
 <span class="nc" id="L37">        proximityBuffer = defaultProximityBuffer;</span>
 <span class="nc" id="L38">    }</span>
 
-<span class="fc" id="L40">    public RewardsCentralServiceImpl() {</span>
-<span class="fc" id="L41">    }</span>
+<span class="nc" id="L40">    public RewardsCentralServiceImpl() {</span>
+<span class="nc" id="L41">    }</span>
 
 
     /**
@@ -48,8 +48,8 @@ public class RewardsCentralServiceImpl implements RewardsCentralService {
      */
     @Override
     public List&lt;UserReward&gt; getUserRewards(User user) {
-<span class="fc" id="L51">        calculateRewards(user);</span>
-<span class="fc" id="L52">        return user.getUserRewards();</span>
+<span class="nc" id="L51">        calculateRewards(user);</span>
+<span class="nc" id="L52">        return user.getUserRewards();</span>
     }
 
     /**
@@ -60,8 +60,8 @@ public class RewardsCentralServiceImpl implements RewardsCentralService {
      */
     @Override
     public int getAttractionRewardPoints(UUID userID,UUID attractionId) {
-<span class="fc" id="L63">        int rewards = rewardCentral.getAttractionRewardPoints(userID,attractionId);</span>
-<span class="fc" id="L64">        return rewards;</span>
+<span class="nc" id="L63">        int rewards = rewardCentral.getAttractionRewardPoints(userID,attractionId);</span>
+<span class="nc" id="L64">        return rewards;</span>
     }
 
 
@@ -70,18 +70,18 @@ public class RewardsCentralServiceImpl implements RewardsCentralService {
      * @param user the user we use
      */
     public void calculateRewards(User user) {
-<span class="fc" id="L73">        List&lt;VisitedLocation&gt; userLocations = user.getVisitedLocations();</span>
-<span class="fc" id="L74">        List&lt;Attraction&gt; attractions = user.getAttractions();</span>
-<span class="fc" id="L75">        List&lt;UserReward&gt; userRewards = new ArrayList&lt;&gt;();</span>
-<span class="fc bfc" id="L76" title="All 2 branches covered.">        for(VisitedLocation visitedLocation : userLocations) {</span>
-<span class="fc bfc" id="L77" title="All 2 branches covered.">            for (Attraction attraction : attractions) {</span>
-<span class="fc bfc" id="L78" title="All 2 branches covered.">                if (user.getUserRewards().stream().filter(r -&gt; r.attraction.attractionName.equals(attraction.attractionName)).count() == 0) {</span>
-<span class="fc" id="L79">                    userRewards.add(new UserReward(visitedLocation, attraction, getAttractionRewardPoints(attraction.attractionId, user.getUserId())));</span>
-<span class="fc" id="L80">                    user.setUserRewards(userRewards);</span>
+<span class="nc" id="L73">        List&lt;VisitedLocation&gt; userLocations = user.getVisitedLocations();</span>
+<span class="nc" id="L74">        List&lt;Attraction&gt; attractions = user.getAttractions();</span>
+<span class="nc" id="L75">        List&lt;UserReward&gt; userRewards = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L76" title="All 2 branches missed.">        for(VisitedLocation visitedLocation : userLocations) {</span>
+<span class="nc bnc" id="L77" title="All 2 branches missed.">            for (Attraction attraction : attractions) {</span>
+<span class="nc bnc" id="L78" title="All 2 branches missed.">                if (user.getUserRewards().stream().filter(r -&gt; r.attraction.attractionName.equals(attraction.attractionName)).count() == 0) {</span>
+<span class="nc" id="L79">                    userRewards.add(new UserReward(visitedLocation, attraction, getAttractionRewardPoints(attraction.attractionId, user.getUserId())));</span>
+<span class="nc" id="L80">                    user.setUserRewards(userRewards);</span>
                 }
-<span class="fc" id="L82">            }</span>
-<span class="fc" id="L83">        }</span>
-<span class="fc" id="L84">    }</span>
+<span class="nc" id="L82">            }</span>
+<span class="nc" id="L83">        }</span>
+<span class="nc" id="L84">    }</span>
 
     /**
      * indicate if a distance between a user's visitedLocation and an attraction is greater than a proximityBuffer

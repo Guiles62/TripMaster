@@ -5,9 +5,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 import tourGuide.model.Attraction;
 import tourGuide.model.Location;
@@ -77,6 +75,17 @@ public class TourGuideServiceTest {
     }
 
     @Test
+    public void getUserTest() {
+        User user1 = tourGuideService.getUser("internalUser0");
+        assertTrue(user1.getUserName().contains("internalUser0"));
+    }
+
+    @Test
+    public void getAllCurrentLocationsTest() {
+        assertTrue(tourGuideService.getAllCurrentLocations().size() == 100);
+    }
+
+    @Test
     public void getLocationTest() {
         when(tourGuideService.trackUserLocation(user)).thenReturn(visitedLocation);
         when(tourGuideService.getLocation(user)).thenReturn(location);
@@ -113,10 +122,7 @@ public class TourGuideServiceTest {
         assertTrue(tourGuideService.getRewards(user) == user.getUserRewards());
     }
 
-    @Test
-    public void getAllCurrentLocationsTest() {
-        assertTrue(tourGuideService.getAllCurrentLocations().size() == 100);
-    }
+
 
     @Test
     public void getTripDealsTest() {
@@ -142,9 +148,5 @@ public class TourGuideServiceTest {
         assertTrue(tourGuideService.getAttractions().size() == 5);
     }
 
-    @Test
-    public void getUserTest() {
-        User user1 = tourGuideService.getUser("internalUser0");
-        assertTrue(user1.getUserName().contains("internalUser0"));
-    }
+
 }
