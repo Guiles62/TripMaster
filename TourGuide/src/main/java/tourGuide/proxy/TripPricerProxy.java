@@ -11,7 +11,7 @@ import tourGuide.user.User;
 
 import java.util.List;
 
-@FeignClient(name = "tripPricer", url = "localhost:8083")
+@FeignClient(name = "tripPricer", url = "trippricer:8083")
 public interface TripPricerProxy {
 
 

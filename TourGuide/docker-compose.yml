@@ -1,29 +1,29 @@
 version: '3'
 services:
   gpsUtil:
-    image: gpsutilapp
+    image: gpsutil
     container_name: gpsutilappcontainer
     ports:
       - "8081:8081"
 
   rewardsCentral:
-    image: rewardscentralapp
+    image: rewardscentral
     container_name: rewardappcontainer
     ports:
       - "8082:8082"
 
   tripPricer:
-    image: trippricerapp
+    image: trippricer
     container_name: tripappcontainer
     ports:
       - "8083:8083"
 
   TourGuide:
     depends_on:
-      - gpsutilapp
-      - trippricerapp
-      - rewardscentralapp
-    image: tourguideapp
+      - gpsutil
+      - trippricer
+      - rewardscentral
+    image: tourguide
     container_name: tourguideappcontainer
     ports:
       - "8080:8080"

@@ -75,15 +75,16 @@ public class TourGuideServiceTest {
     }
 
     @Test
+    public void getAllCurrentLocationsTest() {
+        assertTrue(tourGuideService.getAllCurrentLocations().size() == 100);
+    }
+
+    @Test
     public void getUserTest() {
         User user1 = tourGuideService.getUser("internalUser0");
         assertTrue(user1.getUserName().contains("internalUser0"));
     }
 
-    @Test
-    public void getAllCurrentLocationsTest() {
-        assertTrue(tourGuideService.getAllCurrentLocations().size() == 100);
-    }
 
     @Test
     public void getLocationTest() {

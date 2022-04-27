@@ -10,7 +10,7 @@ import tourGuide.user.UserReward;
 import java.util.List;
 import java.util.UUID;
 
-@FeignClient(name = "rewardsCentral", url = "localhost:8082")
+@FeignClient(name = "rewardsCentral", url = "rewardscentral:8082")
 public interface RewardsCentralProxy {
 
     @PostMapping(value = "/getRewards")

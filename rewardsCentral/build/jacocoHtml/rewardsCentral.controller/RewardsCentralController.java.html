@@ -26,9 +26,9 @@ public class RewardsCentralController {
     private RewardsCentralService rewardsCentralService;
 
 
-<span class="nc" id="L29">    public RewardsCentralController(RewardsCentralService rewardsCentralService) {</span>
-<span class="nc" id="L30">        this.rewardsCentralService = rewardsCentralService;</span>
-<span class="nc" id="L31">    }</span>
+<span class="fc" id="L29">    public RewardsCentralController(RewardsCentralService rewardsCentralService) {</span>
+<span class="fc" id="L30">        this.rewardsCentralService = rewardsCentralService;</span>
+<span class="fc" id="L31">    }</span>
 
     /**
      * call the rewardsCentralService to get user's rewards
@@ -37,7 +37,7 @@ public class RewardsCentralController {
      */
     @PostMapping(value = &quot;/getRewards&quot;)
     public List&lt;UserReward&gt; getRewards(@RequestBody User user) {
-<span class="nc" id="L40">        return rewardsCentralService.getUserRewards(user);</span>
+<span class="fc" id="L40">        return rewardsCentralService.getUserRewards(user);</span>
     }
 
     /*@RequestMapping(&quot;/getUserRewardsPointsSum&quot;)

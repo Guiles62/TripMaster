@@ -24,9 +24,9 @@ public class TripPricerController {
     private TripPricerService tripPricerService;
 
 
-<span class="nc" id="L27">    public TripPricerController(TripPricerService tripPricerService) {</span>
-<span class="nc" id="L28">        this.tripPricerService = tripPricerService;</span>
-<span class="nc" id="L29">    }</span>
+<span class="fc" id="L27">    public TripPricerController(TripPricerService tripPricerService) {</span>
+<span class="fc" id="L28">        this.tripPricerService = tripPricerService;</span>
+<span class="fc" id="L29">    }</span>
 
     /**
      * call the tripPricerService to get the user's tripDeals
@@ -36,8 +36,8 @@ public class TripPricerController {
      */
     @PostMapping(value = &quot;/getPrice&quot;)
     public List&lt;Provider&gt; getPrice(@RequestBody User user, @RequestParam String url) {
-<span class="nc" id="L39">        List&lt;Provider&gt; providers = tripPricerService.getTripDeals(user, url);</span>
-<span class="nc" id="L40">        return providers;</span>
+<span class="fc" id="L39">        List&lt;Provider&gt; providers = tripPricerService.getTripDeals(user, url);</span>
+<span class="fc" id="L40">        return providers;</span>
     }
 
 }

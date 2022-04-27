@@ -25,10 +25,10 @@ import java.util.List;
 @Service
 public class TripPricerServiceImpl implements TripPricerService {
 
-<span class="nc" id="L28">    private TripPricer tripPricer = new TripPricer();</span>
+<span class="fc" id="L28">    private TripPricer tripPricer = new TripPricer();</span>
 
-<span class="nc" id="L30">    public TripPricerServiceImpl() {</span>
-<span class="nc" id="L31">    }</span>
+<span class="fc" id="L30">    public TripPricerServiceImpl() {</span>
+<span class="fc" id="L31">    }</span>
 
 
     /**
@@ -39,9 +39,9 @@ public class TripPricerServiceImpl implements TripPricerService {
      */
     @Override
     public List&lt;Provider&gt; getTripDeals(User user, String apiKey) {
-<span class="nc" id="L42">        List&lt;Provider&gt; providers = getPrice(user, apiKey);</span>
-<span class="nc" id="L43">        user.setTripDeals(providers);</span>
-<span class="nc" id="L44">        return providers;</span>
+<span class="fc" id="L42">        List&lt;Provider&gt; providers = getPrice(user, apiKey);</span>
+<span class="fc" id="L43">        user.setTripDeals(providers);</span>
+<span class="fc" id="L44">        return providers;</span>
     }
 
     /**
@@ -52,20 +52,20 @@ public class TripPricerServiceImpl implements TripPricerService {
      */
     @Override
     public List&lt;Provider&gt; getPrice(User user, String url) {
-<span class="nc" id="L55">        List&lt;Provider&gt; providerList = new ArrayList&lt;&gt;();</span>
-<span class="nc" id="L56">        List&lt;UserReward&gt; userRewards = user.getUserRewards();</span>
-<span class="nc" id="L57">        int rewardsPoints = 0;</span>
-<span class="nc bnc" id="L58" title="All 2 branches missed.">        for (UserReward userReward : userRewards) {</span>
+<span class="fc" id="L55">        List&lt;Provider&gt; providerList = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L56">        List&lt;UserReward&gt; userRewards = user.getUserRewards();</span>
+<span class="fc" id="L57">        int rewardsPoints = 0;</span>
+<span class="pc bpc" id="L58" title="1 of 2 branches missed.">        for (UserReward userReward : userRewards) {</span>
 <span class="nc" id="L59">            rewardsPoints += userReward.getRewardPoints();</span>
 <span class="nc" id="L60">        }</span>
-<span class="nc" id="L61">        int rewardsPointsForPrice = rewardsPoints/10;</span>
-<span class="nc" id="L62">        List&lt;tripPricer.Provider&gt; providers = tripPricer.getPrice(url,user.getUserId(),user.getUserPreferences().getNumberOfAdults(),</span>
-<span class="nc" id="L63">                user.getUserPreferences().getNumberOfChildren(), user.getUserPreferences().getTripDuration(),rewardsPointsForPrice);</span>
-<span class="nc bnc" id="L64" title="All 2 branches missed.">        for (tripPricer.Provider provider : providers) {</span>
-<span class="nc" id="L65">            Double price = (provider.price*100)/100;</span>
-<span class="nc" id="L66">            providerList.add(new Provider(provider.tripId, provider.name, price));</span>
-<span class="nc" id="L67">        }</span>
-<span class="nc" id="L68">        return providerList;</span>
+<span class="fc" id="L61">        int rewardsPointsForPrice = rewardsPoints/10;</span>
+<span class="fc" id="L62">        List&lt;tripPricer.Provider&gt; providers = tripPricer.getPrice(url,user.getUserId(),user.getUserPreferences().getNumberOfAdults(),</span>
+<span class="fc" id="L63">                user.getUserPreferences().getNumberOfChildren(), user.getUserPreferences().getTripDuration(),rewardsPointsForPrice);</span>
+<span class="fc bfc" id="L64" title="All 2 branches covered.">        for (tripPricer.Provider provider : providers) {</span>
+<span class="fc" id="L65">            Double price = (provider.price*100)/100;</span>
+<span class="fc" id="L66">            providerList.add(new Provider(provider.tripId, provider.name, price));</span>
+<span class="fc" id="L67">        }</span>
+<span class="fc" id="L68">        return providerList;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>
