@@ -2,7 +2,7 @@
 
 
 import java.util.List;
-
+import java.util.concurrent.ExecutionException;
 
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -57,9 +57,9 @@ public class TourGuideController {
      */
     @GetMapping(&quot;/getLocation&quot;)
     public Location getLocation(@RequestParam String userName) {
-<span class="fc" id="L60">        User user = tourGuideService.getUser(userName);</span>
-<span class="fc" id="L61">    	Location location = tourGuideService.getLocation(user);</span>
-<span class="fc" id="L62">		return location;</span>
+<span class="nc" id="L60">        User user = tourGuideService.getUser(userName);</span>
+<span class="nc" id="L61">    	Location location = tourGuideService.getLocation(user);</span>
+<span class="nc" id="L62">		return location;</span>
     }
 
     //  TODO: Change this method to no longer return a List of Attractions.
@@ -79,9 +79,9 @@ public class TourGuideController {
      */
     @GetMapping(&quot;/getNearByAttractions&quot;)
     public List&lt;NearByAttractions&gt; getNearByAttractions(@RequestParam String userName) {
-<span class="fc" id="L82">        User user = tourGuideService.getUser(userName);</span>
-<span class="fc" id="L83">    	List&lt;NearByAttractions&gt; nearAttractions = tourGuideService.getNearByAttractions(user);</span>
-<span class="fc" id="L84">    	return nearAttractions;</span>
+<span class="nc" id="L82">        User user = tourGuideService.getUser(userName);</span>
+<span class="nc" id="L83">    	List&lt;NearByAttractions&gt; nearAttractions = tourGuideService.getNearByAttractions(user);</span>
+<span class="nc" id="L84">    	return nearAttractions;</span>
     }
 
     /**
@@ -90,10 +90,10 @@ public class TourGuideController {
      * @return a JSON object that display user's visitedLocation, attractions and show rewardsPoints
      */
     @GetMapping(&quot;/getRewards&quot;)
-    public List&lt;UserReward&gt; getRewards(@RequestParam String userName) {
-<span class="fc" id="L94">        User user = tourGuideService.getUser(userName);</span>
-<span class="fc" id="L95">        List&lt;UserReward&gt; getUserRewardsList = tourGuideService.getRewards(user);</span>
-<span class="fc" id="L96">    	return getUserRewardsList;</span>
+    public List&lt;UserReward&gt; getRewards(@RequestParam String userName) throws ExecutionException, InterruptedException {
+<span class="nc" id="L94">        User user = tourGuideService.getUser(userName);</span>
+<span class="nc" id="L95">        List&lt;UserReward&gt; getUserRewardsList = tourGuideService.getRewards(user);</span>
+<span class="nc" id="L96">    	return getUserRewardsList;</span>
     }
 
 
@@ -112,8 +112,8 @@ public class TourGuideController {
     	//        &quot;019b04a9-067a-4c76-8817-ee75088c3822&quot;: {&quot;longitude&quot;:-48.188821,&quot;latitude&quot;:74.84371} 
     	//        ...
     	//     }
-<span class="fc" id="L115">        List&lt;VisitedLocation&gt;usersCurrentVisitedLocationList = tourGuideService.getAllCurrentLocations();</span>
-<span class="fc" id="L116">    	return usersCurrentVisitedLocationList;</span>
+<span class="nc" id="L115">        List&lt;VisitedLocation&gt;usersCurrentVisitedLocationList = tourGuideService.getAllCurrentLocations();</span>
+<span class="nc" id="L116">    	return usersCurrentVisitedLocationList;</span>
     }
 
     /**
@@ -123,9 +123,9 @@ public class TourGuideController {
      */
     @RequestMapping(&quot;/getTripDeals&quot;)
     public List&lt;Provider&gt; getTripDeals(@RequestParam String userName) {
-<span class="fc" id="L126">        User user = tourGuideService.getUser(userName);</span>
-<span class="fc" id="L127">    	List&lt;Provider&gt; providers = tourGuideService.getTripDeals(user);</span>
-<span class="fc" id="L128">    	return providers;</span>
+<span class="nc" id="L126">        User user = tourGuideService.getUser(userName);</span>
+<span class="nc" id="L127">    	List&lt;Provider&gt; providers = tourGuideService.getTripDeals(user);</span>
+<span class="nc" id="L128">    	return providers;</span>
     }
 
 }

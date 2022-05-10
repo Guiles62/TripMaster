@@ -19,6 +19,7 @@ import tourGuide.user.User;
 import tourGuide.user.UserReward;
 
 import java.util.*;
+import java.util.concurrent.ExecutionException;
 
 
 import static org.junit.Assert.assertEquals;
@@ -118,7 +119,7 @@ public class TourGuideServiceTest {
     }
 
     @Test
-    public void getRewardsTest() {
+    public void getRewardsTest() throws ExecutionException, InterruptedException {
         when(rewardsCentralProxy.getRewards(user)).thenReturn(user.getUserRewards());
         assertTrue(tourGuideService.getRewards(user) == user.getUserRewards());
     }

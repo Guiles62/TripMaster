@@ -2,7 +2,7 @@ package tourGuide.controller;
 
 
 import java.util.List;
-
+import java.util.concurrent.ExecutionException;
 
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -90,7 +90,7 @@ public class TourGuideController {
      * @return a JSON object that display user's visitedLocation, attractions and show rewardsPoints
      */
     @GetMapping("/getRewards")
-    public List<UserReward> getRewards(@RequestParam String userName) {
+    public List<UserReward> getRewards(@RequestParam String userName) throws ExecutionException, InterruptedException {
         User user = tourGuideService.getUser(userName);
         List<UserReward> getUserRewardsList = tourGuideService.getRewards(user);
     	return getUserRewardsList;

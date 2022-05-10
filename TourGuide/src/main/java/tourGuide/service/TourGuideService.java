@@ -2,6 +2,7 @@ package tourGuide.service;
 
 
 import java.util.*;
+import java.util.concurrent.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -43,7 +44,7 @@ import tourGuide.user.UserReward;
  * @author Guillaume C
  */
 @Service
-public class TourGuideService {
+public class TourGuideService extends Thread{
 
 	private GpsUtilProxy gpsUtilProxy;
 	private TripPricerProxy tripPricerProxy;
@@ -71,6 +72,9 @@ public class TourGuideService {
 		tracker = new Tracker(this);
 		addShutDownHook();
 
+	}
+
+	public TourGuideService() {
 	}
 
 	/**
@@ -115,9 +119,12 @@ public class TourGuideService {
 	 * @param user user we want to get his rewards
 	 * @return a list of UserRewards
 	 */
-	public List<UserReward> getRewards (User user) {
-		List<UserReward> userRewards = rewardsCentralProxy.getRewards(user);
-		return userRewards;
+	public List<UserReward> getRewards (User user) throws ExecutionException, InterruptedException {
+		ExecutorService executorService = Executors.newFixedThreadPool(100000);
+		CompletableFuture<List<UserReward>> completableFuture = CompletableFuture.supplyAsync(() -> rewardsCentralProxy.getRewards(user), executorService);
+		CompletableFuture<Void> future = completableFuture.thenAccept( s -> user.setUserRewards(s) );
+		future.join();
+		return user.getUserRewards();
 	}
 
 
@@ -225,7 +232,7 @@ public class TourGuideService {
 	/**
 	 * shutdown tracker
 	 */
-	private void addShutDownHook() {
+	public void addShutDownHook() {
 		Runtime.getRuntime().addShutdownHook(new Thread() { 
 		      public void run() {
 		        tracker.stopTracking();

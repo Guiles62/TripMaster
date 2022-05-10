@@ -23,7 +23,7 @@
 <tr>
 <td>
 <div class="infoBox" id="tests">
-<div class="counter">2</div>
+<div class="counter">1</div>
 <p>tests</p>
 </div>
 </td>
@@ -35,13 +35,13 @@
 </td>
 <td>
 <div class="infoBox" id="ignored">
-<div class="counter">2</div>
+<div class="counter">0</div>
 <p>ignored</p>
 </div>
 </td>
 <td>
 <div class="infoBox" id="duration">
-<div class="counter">0s</div>
+<div class="counter">51.606s</div>
 <p>duration</p>
 </div>
 </td>
@@ -50,8 +50,8 @@
 </div>
 </td>
 <td>
-<div class="infoBox skipped" id="successRate">
-<div class="percent">-</div>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
 <p>successful</p>
 </div>
 </td>
@@ -62,6 +62,9 @@
 <ul class="tabLinks">
 <li>
 <a href="#tab0">Tests</a>
+</li>
+<li>
+<a href="#tab1">Standard output</a>
 </li>
 </ul>
 <div id="tab0" class="tab">
@@ -75,16 +78,80 @@
 </tr>
 </thead>
 <tr>
-<td class="skipped">highVolumeGetRewards</td>
-<td class="skipped">-</td>
-<td class="skipped">ignored</td>
-</tr>
-<tr>
-<td class="skipped">highVolumeTrackLocation</td>
-<td class="skipped">-</td>
-<td class="skipped">ignored</td>
+<td class="success">rewardsTest</td>
+<td class="success">51.606s</td>
+<td class="success">passed</td>
 </tr>
 </table>
+</div>
+<div id="tab1" class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>14:13:59.047 [Test worker] DEBUG org.springframework.test.context.junit4.SpringJUnit4ClassRunner - SpringJUnit4ClassRunner constructor called with [class tourGuide.TestPerformance]
+14:13:59.055 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating CacheAwareContextLoaderDelegate from class [org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate]
+14:13:59.066 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating BootstrapContext using constructor [public org.springframework.test.context.support.DefaultBootstrapContext(java.lang.Class,org.springframework.test.context.CacheAwareContextLoaderDelegate)]
+14:13:59.088 [Test worker] DEBUG org.springframework.test.context.BootstrapUtils - Instantiating TestContextBootstrapper for test class [tourGuide.TestPerformance] from class [org.springframework.boot.test.context.SpringBootTestContextBootstrapper]
+14:13:59.101 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Neither @ContextConfiguration nor @ContextHierarchy found for test class [tourGuide.TestPerformance], using SpringBootContextLoader
+14:13:59.104 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [tourGuide.TestPerformance]: class path resource [tourGuide/TestPerformance-context.xml] does not exist
+14:13:59.105 [Test worker] DEBUG org.springframework.test.context.support.AbstractContextLoader - Did not detect default resource location for test class [tourGuide.TestPerformance]: class path resource [tourGuide/TestPerformanceContext.groovy] does not exist
+14:13:59.105 [Test worker] INFO org.springframework.test.context.support.AbstractContextLoader - Could not detect default resource locations for test class [tourGuide.TestPerformance]: no resource found for suffixes {-context.xml, Context.groovy}.
+14:13:59.105 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils - Could not detect default configuration classes for test class [tourGuide.TestPerformance]: TestPerformance does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+14:13:59.143 [Test worker] DEBUG org.springframework.test.context.support.ActiveProfilesUtils - Could not find an 'annotation declaring class' for annotation type [org.springframework.test.context.ActiveProfiles] and class [tourGuide.TestPerformance]
+14:13:59.221 [Test worker] DEBUG org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider - Identified candidate component class: file [C:\Users\guile\OneDrive\Bureau\Formation\P8\JavaPathENProject8\TourGuide\build\classes\java\main\tourGuide\Application.class]
+14:13:59.221 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Found @SpringBootConfiguration tourGuide.Application for test class tourGuide.TestPerformance
+14:13:59.314 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - @TestExecutionListeners is not present for class [tourGuide.TestPerformance]: using defaults.
+14:13:59.314 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener]
+14:13:59.326 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Skipping candidate TestExecutionListener [org.springframework.test.context.transaction.TransactionalTestExecutionListener] due to a missing dependency. Specify custom listener classes or make the default listener classes and their required dependencies available. Offending class: [org/springframework/transaction/interceptor/TransactionAttributeSource]
+14:13:59.327 [Test worker] DEBUG org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Skipping candidate TestExecutionListener [org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener] due to a missing dependency. Specify custom listener classes or make the default listener classes and their required dependencies available. Offending class: [org/springframework/transaction/interceptor/TransactionAttribute]
+14:13:59.327 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper - Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@49c83262, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@273aaab7, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@77bb916f, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@5a48d186, org.springframework.test.context.support.DirtiesContextTestExecutionListener@521ba38f, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@2086d469, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@b1d19ff, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@17c53dfb, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@184de357, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@efe49ab]
+14:13:59.330 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved @ProfileValueSourceConfiguration [null] for test class [tourGuide.TestPerformance]
+14:13:59.331 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved ProfileValueSource type [class org.springframework.test.annotation.SystemProfileValueSource] for class [tourGuide.TestPerformance]
+14:13:59.334 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved @ProfileValueSourceConfiguration [null] for test class [tourGuide.TestPerformance]
+14:13:59.334 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved ProfileValueSource type [class org.springframework.test.annotation.SystemProfileValueSource] for class [tourGuide.TestPerformance]
+14:13:59.334 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved @ProfileValueSourceConfiguration [null] for test class [tourGuide.TestPerformance]
+14:13:59.334 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved ProfileValueSource type [class org.springframework.test.annotation.SystemProfileValueSource] for class [tourGuide.TestPerformance]
+14:13:59.338 [Test worker] DEBUG org.springframework.test.context.support.AbstractDirtiesContextTestExecutionListener - Before test class: context [DefaultTestContext@c6a692e testClass = TestPerformance, testInstance = [null], testMethod = [null], testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@27502e5c testClass = TestPerformance, locations = '{}', classes = '{class tourGuide.Application}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@3ed34ef5, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@6c6017b9, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@63538bb4, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@708f018e], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -&gt; true]], class annotated with @DirtiesContext [false] with mode [null].
+14:13:59.338 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved @ProfileValueSourceConfiguration [null] for test class [tourGuide.TestPerformance]
+14:13:59.338 [Test worker] DEBUG org.springframework.test.annotation.ProfileValueUtils - Retrieved ProfileValueSource type [class org.springframework.test.annotation.SystemProfileValueSource] for class [tourGuide.TestPerformance]
+14:13:59.362 [Test worker] DEBUG org.springframework.test.context.support.TestPropertySourceUtils - Adding inlined properties to environment: {spring.jmx.enabled=false, org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true, server.port=-1}
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::        (v2.1.6.RELEASE)
+
+2022-05-10 14:14:00.163  INFO 38060 --- [    Test worker] tourGuide.TestPerformance                : No active profile set, falling back to default profiles: default
+2022-05-10 14:14:00.906  INFO 38060 --- [    Test worker] o.s.cloud.context.scope.GenericScope     : BeanFactory id=799bd1f0-11ea-3e55-828e-c2fc222d9970
+2022-05-10 14:14:00.955  INFO 38060 --- [    Test worker] trationDelegate$BeanPostProcessorChecker : Bean 'tourGuide.proxy.GpsUtilProxy' of type [org.springframework.cloud.openfeign.FeignClientFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-05-10 14:14:00.956  INFO 38060 --- [    Test worker] trationDelegate$BeanPostProcessorChecker : Bean 'tourGuide.proxy.RewardsCentralProxy' of type [org.springframework.cloud.openfeign.FeignClientFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-05-10 14:14:00.956  INFO 38060 --- [    Test worker] trationDelegate$BeanPostProcessorChecker : Bean 'tourGuide.proxy.TripPricerProxy' of type [org.springframework.cloud.openfeign.FeignClientFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2022-05-10 14:14:01.652  INFO 38060 --- [    Test worker] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
+2022-05-10 14:14:01.777  INFO 38060 --- [    Test worker] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [public org.springframework.http.ResponseEntity&lt;springfox.documentation.spring.web.json.Json&gt; springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String,javax.servlet.http.HttpServletRequest)]
+2022-05-10 14:14:01.915  WARN 38060 --- [    Test worker] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2022-05-10 14:14:01.915  INFO 38060 --- [    Test worker] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2022-05-10 14:14:01.921  WARN 38060 --- [    Test worker] c.n.c.sources.URLConfigurationSource     : No URLs will be polled as dynamic configuration sources.
+2022-05-10 14:14:01.921  INFO 38060 --- [    Test worker] c.n.c.sources.URLConfigurationSource     : To enable URLs as dynamic configuration sources, define System property archaius.configurationSource.additionalUrls or make config.properties available on classpath.
+2022-05-10 14:14:02.088  INFO 38060 --- [    Test worker] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2022-05-10 14:14:02.570  INFO 38060 --- [    Test worker] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2022-05-10 14:14:02.597  INFO 38060 --- [    Test worker] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2022-05-10 14:14:02.632  INFO 38060 --- [    Test worker] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2022-05-10 14:14:02.767  INFO 38060 --- [    Test worker] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_1
+2022-05-10 14:14:02.769  INFO 38060 --- [    Test worker] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_2
+2022-05-10 14:14:02.770  INFO 38060 --- [    Test worker] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: handleUsingGET_3
+2022-05-10 14:14:02.822  INFO 38060 --- [    Test worker] tourGuide.TestPerformance                : Started TestPerformance in 3.451 seconds (JVM running for 4.415)
+2022-05-10 14:14:03.058  INFO 38060 --- [    Test worker] tourGuide.service.TourGuideService       : TestMode enabled
+2022-05-10 14:14:03.058 DEBUG 38060 --- [    Test worker] tourGuide.service.TourGuideService       : Initializing users
+2022-05-10 14:14:03.060 DEBUG 38060 --- [    Test worker] tourGuide.service.TourGuideService       : Created 100 internal test users.
+2022-05-10 14:14:03.060 DEBUG 38060 --- [    Test worker] tourGuide.service.TourGuideService       : Finished initializing users
+2022-05-10 14:14:03.061 DEBUG 38060 --- [pool-1-thread-1] tourGuide.tracker.Tracker                : Begin Tracker. Tracking 100 users.
+2022-05-10 14:14:09.639 DEBUG 38060 --- [pool-1-thread-1] tourGuide.tracker.Tracker                : Tracker Time Elapsed: 6 seconds.
+2022-05-10 14:14:09.639 DEBUG 38060 --- [pool-1-thread-1] tourGuide.tracker.Tracker                : Tracker sleeping
+highVolumeGetRewards: Time Elapsed: 51 seconds.
+</pre>
+</span>
 </div>
 </div>
 <div id="footer">
@@ -94,7 +161,7 @@
 <input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
 </label>
 </div>Generated by 
-<a href="http://www.gradle.org">Gradle 7.4</a> at 26 avr. 2022 12:04:56</p>
+<a href="http://www.gradle.org">Gradle 7.4</a> at 10 mai 2022 14:14:54</p>
 </div>
 </div>
 </body>

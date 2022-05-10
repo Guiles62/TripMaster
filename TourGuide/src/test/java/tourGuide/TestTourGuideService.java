@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.ExecutionException;
 
 
 import org.junit.Ignore;
@@ -137,7 +138,7 @@ public class TestTourGuideService {
 	}
 
 	@Test
-	public void getRewards() {
+	public void getRewards() throws ExecutionException, InterruptedException {
 
 		InternalTestHelper.setInternalUserNumber(0);
 		TourGuideService tourGuideService = new TourGuideService(gpsUtilProxy,tripPricerProxy,rewardsCentralProxy);
