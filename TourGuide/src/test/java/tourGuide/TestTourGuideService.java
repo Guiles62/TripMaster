@@ -105,7 +105,7 @@ public class TestTourGuideService {
 	}
 
 	@Test
-	public void getNearbyAttractions() {
+	public void getNearbyAttractions() throws ExecutionException, InterruptedException {
 
 		InternalTestHelper.setInternalUserNumber(0);
 		TourGuideService tourGuideService = new TourGuideService(gpsUtilProxy,tripPricerProxy,rewardsCentralProxy);

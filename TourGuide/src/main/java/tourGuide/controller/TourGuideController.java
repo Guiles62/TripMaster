@@ -78,7 +78,7 @@ public class TourGuideController {
      * @return a JSON object that display the location, name, city, state and attractionId of the closest 5 attractions
      */
     @GetMapping("/getNearByAttractions")
-    public List<NearByAttractions> getNearByAttractions(@RequestParam String userName) {
+    public List<NearByAttractions> getNearByAttractions(@RequestParam String userName) throws ExecutionException, InterruptedException {
         User user = tourGuideService.getUser(userName);
     	List<NearByAttractions> nearAttractions = tourGuideService.getNearByAttractions(user);
     	return nearAttractions;
@@ -94,6 +94,12 @@ public class TourGuideController {
         User user = tourGuideService.getUser(userName);
         List<UserReward> getUserRewardsList = tourGuideService.getRewards(user);
     	return getUserRewardsList;
+    }
+
+    @GetMapping("/getAllUsersRewards")
+    public List<User> getAllUsersRewards() {
+        List<User> userRewardsList = tourGuideService.getAllRewards();
+        return userRewardsList;
     }
 
 

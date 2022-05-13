@@ -74,8 +74,6 @@ public class TourGuideService extends Thread{
 
 	}
 
-	public TourGuideService() {
-	}
 
 	/**
 	 * call gpsUtilProxy to get user's location from gpsUtil microservice
@@ -102,15 +100,23 @@ public class TourGuideService extends Thread{
 	 * @param user user we use to find the 5 attractions near him
 	 * @return a list of 5 attractions
 	 */
-	public List<NearByAttractions> getNearByAttractions (User user) {
+	public List<NearByAttractions> getNearByAttractions (User user) throws ExecutionException, InterruptedException {
+		ExecutorService executorService = Executors.newFixedThreadPool(5000);
 		List<Attraction> nearAttractions = gpsUtilProxy.getNearbyAttractions(user.getUserId());
-		List<NearByAttractions> nearByAttractions = new ArrayList<>();
+		user.setAttractions(nearAttractions);
+		CopyOnWriteArrayList<NearByAttractions> nearByAttractions = new CopyOnWriteArrayList<>();
 		for (Attraction attraction : nearAttractions) {
-			int rewardsPoints = rewardsCentralProxy.getAttractionRewardPoints(user.getUserId(),attraction.attractionId);
+			CompletableFuture<Integer> points = CompletableFuture.supplyAsync(() ->
+					rewardsCentralProxy.getAttractionRewardPoints(user.getUserId(),attraction.attractionId), executorService);
+			int rewardsPoints = points.get();
 			Location location = new Location(attraction.latitude,attraction.longitude);
-			double distance = getDistance(user.getLastVisitedLocation().location,location);
-			nearByAttractions.add(new NearByAttractions(attraction,distance,rewardsPoints));
+			Location userLocation = user.getLastVisitedLocation().location;
+			double distanceBetweenUserAndAttraction = gpsUtilProxy.getDistance(location.latitude,location.longitude,userLocation.latitude,userLocation.longitude);
+			CompletableFuture.supplyAsync(() ->
+					nearByAttractions.add(new NearByAttractions(attraction,distanceBetweenUserAndAttraction,rewardsPoints)),executorService);
+
 		}
+		executorService.shutdown();
 		return nearByAttractions;
 	}
 
@@ -120,11 +126,23 @@ public class TourGuideService extends Thread{
 	 * @return a list of UserRewards
 	 */
 	public List<UserReward> getRewards (User user) throws ExecutionException, InterruptedException {
+		List<Attraction> nearAttractions = gpsUtilProxy.getNearbyAttractions(user.getUserId());
+		user.setAttractions(nearAttractions);
+		List<UserReward> rewards = rewardsCentralProxy.getRewards(user);
+		user.setUserRewards(rewards);
+		return rewards;
+	}
+
+	public List<User> getAllRewards() {
 		ExecutorService executorService = Executors.newFixedThreadPool(100000);
-		CompletableFuture<List<UserReward>> completableFuture = CompletableFuture.supplyAsync(() -> rewardsCentralProxy.getRewards(user), executorService);
-		CompletableFuture<Void> future = completableFuture.thenAccept( s -> user.setUserRewards(s) );
-		future.join();
-		return user.getUserRewards();
+		List<User> users = getAllUsers();
+		for (User user : users) {
+			CompletableFuture<List<Attraction>> attractions = CompletableFuture.supplyAsync(() -> gpsUtilProxy.getNearbyAttractions(user.getUserId()), executorService);
+			user.setAttractions(attractions.join());
+		}
+		List<User> userListWithRewards = rewardsCentralProxy.getAllUsersRewards(users);
+		executorService.shutdown();
+		return userListWithRewards;
 	}
 
 
@@ -133,12 +151,13 @@ public class TourGuideService extends Thread{
 	 * @return a list of users visitedLocations
 	 */
 	public List<VisitedLocation>getAllCurrentLocations() {
-		List<VisitedLocation> usersCurrentVisitedLocationList = new ArrayList<>();
+		ExecutorService executorService = Executors.newFixedThreadPool(100000);
+		CopyOnWriteArrayList<VisitedLocation> usersCurrentVisitedLocationList = new CopyOnWriteArrayList<>();
 		List<User> userList = getAllUsers();
 		for(User user : userList){
-			VisitedLocation currentLocation = gpsUtilProxy.getCurrentLocation(user.getUserId());
-			usersCurrentVisitedLocationList.add(currentLocation);
+			CompletableFuture.supplyAsync( () -> usersCurrentVisitedLocationList.add(gpsUtilProxy.getCurrentLocation(user.getUserId())), executorService );
 		}
+		executorService.shutdown();
 		return usersCurrentVisitedLocationList;
 	}
 
@@ -171,15 +190,6 @@ public class TourGuideService extends Thread{
 		User user = internalUserMap.get(userName);
 		List<VisitedLocation> visitedLocations = gpsUtilProxy.getUserVisitedLocation(user.getUserId());
 		user.setVisitedLocations(visitedLocations);
-		List<NearByAttractions> attractions = getNearByAttractions(user);
-		List<Attraction> attractionList = new ArrayList<>();
-		for (NearByAttractions attractions1 : attractions){
-			attractionList.add(attractions1.getAttraction());
-			user.setAttractions(attractionList);
-		}
-
-		List<UserReward> userRewards = rewardsCentralProxy.getRewards(user);
-		user.setUserRewards(userRewards);
 		return user;
 	}
 
@@ -189,26 +199,19 @@ public class TourGuideService extends Thread{
 	 * @param loc2 is the second location
 	 * @return a distance in nautical miles
 	 */
-	public double getDistance(Location loc1, Location loc2) {
-		double lat1 = Math.toRadians(loc1.latitude);
-		double lon1 = Math.toRadians(loc1.longitude);
-		double lat2 = Math.toRadians(loc2.latitude);
-		double lon2 = Math.toRadians(loc2.longitude);
-
-		double angle = Math.acos(Math.sin(lat1) * Math.sin(lat2)
-				+ Math.cos(lat1) * Math.cos(lat2) * Math.cos(lon1 - lon2));
-
-		double nauticalMiles = 60 * Math.toDegrees(angle);
-		double statuteMiles = STATUTE_MILES_PER_NAUTICAL_MILE * nauticalMiles;
-		return statuteMiles;
-	}
 
 	/**
 	 * get all users
 	 * @return a list of users
 	 */
 	public List<User> getAllUsers() {
-		return internalUserMap.values().stream().collect(Collectors.toList());
+		ExecutorService executorService = Executors.newFixedThreadPool(100000);
+		List<User> users = internalUserMap.values().stream().collect(Collectors.toList());
+		for (User user : users) {
+			CompletableFuture<List<VisitedLocation>> visitedLocations = CompletableFuture.supplyAsync(() -> gpsUtilProxy.getUserVisitedLocation(user.getUserId()), executorService);
+			user.setVisitedLocations(visitedLocations.join());
+		}
+		return users;
 	}
 
 	/**

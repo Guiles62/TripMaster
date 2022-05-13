@@ -9,6 +9,7 @@ import rewardsCentral.service.RewardsCentralService;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.ExecutionException;
 
 /**
  * <b>RewardsCentralController RewardsCentralService to get data</b>
@@ -40,10 +41,10 @@ public class RewardsCentralController {
         return rewardsCentralService.getUserRewards(user);
     }
 
-    /*@RequestMapping("/getUserRewardsPointsSum")
-    public int getRewardsPointSum(@RequestBody User user) {
-        return rewardsCentralService.getRewardsPointsSum(user);
-    }*/
+    @PostMapping("/getAllUsersRewards")
+    public List<User> getAllUsersRewards(@RequestBody List<User> users) throws ExecutionException, InterruptedException {
+        return rewardsCentralService.getAllUsersRewards(users);
+    }
 
     @RequestMapping("/getAttractionRewardPoints")
     public int getAttractionRewardPoints(@RequestParam UUID userId, @RequestParam UUID attractionId) {

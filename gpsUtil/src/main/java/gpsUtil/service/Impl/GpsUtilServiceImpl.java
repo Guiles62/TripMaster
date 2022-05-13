@@ -12,6 +12,10 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.*;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.stream.IntStream;
 
 /**
@@ -130,14 +134,16 @@ public class GpsUtilServiceImpl implements GpsUtilService {
      */
     @Override
     public List<Attraction> getNearByAttractions(User user) {
+        ExecutorService executorService = Executors.newFixedThreadPool(2000);
         VisitedLocation visitedLocation = getUserLocation(user);
         List<Attraction> attractionList = getAllAttractions();
         List<Attraction> nearbyAttractions = new ArrayList<>();
-        List<NearAttractions> nearAttractionsList = new ArrayList<>();
+        CopyOnWriteArrayList<NearAttractions> nearAttractionsList = new CopyOnWriteArrayList<>();
         Location location = visitedLocation.location;
         for (Attraction attraction : attractionList) {
             Double distance = getDistance(attraction, location);
-            nearAttractionsList.add(new NearAttractions(attraction, distance));
+            CompletableFuture.supplyAsync(() ->
+            nearAttractionsList.add(new NearAttractions(attraction, distance)), executorService);
         }
         Collections.sort(nearAttractionsList, new Comparator<NearAttractions>() {
             @Override
@@ -158,11 +164,14 @@ public class GpsUtilServiceImpl implements GpsUtilService {
      */
     @Override
     public List<Attraction> getAllAttractions() {
+        ExecutorService executorService = Executors.newFixedThreadPool(2000);
         List<gpsUtil.location.Attraction> attractions = gpsUtil.getAttractions();
-        List<Attraction> attractionList = new ArrayList<>();
+        CopyOnWriteArrayList<Attraction> attractionList = new CopyOnWriteArrayList<>();
         for (gpsUtil.location.Attraction attraction : attractions) {
-            attractionList.add(new Attraction(attraction.attractionName,attraction.city,attraction.state,attraction.latitude,attraction.longitude));
+            CompletableFuture.supplyAsync(() ->
+            attractionList.add(new Attraction(attraction.attractionName,attraction.city,attraction.state,attraction.latitude,attraction.longitude)),executorService);
         }
+        executorService.shutdown();
         return attractionList;
     }
 

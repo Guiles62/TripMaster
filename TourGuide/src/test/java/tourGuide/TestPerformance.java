@@ -95,11 +95,9 @@ public class TestPerformance {
 			List<VisitedLocation> visitedLocations = new ArrayList<>();
 			visitedLocations.add(tourGuideService.trackUserLocation(users));
 			users.setVisitedLocations(visitedLocations);
-			List<NearByAttractions> nearByAttractions = tourGuideService.getNearByAttractions(users);
+			List<Attraction> nearByAttractions = tourGuideService.getAttractions();
 			List<Attraction> attractions = new ArrayList<>();
-			for (NearByAttractions nearAttractions : nearByAttractions){
-				attractions.add(nearAttractions.getAttraction());
-			}
+			attractions.add(nearByAttractions.get(0));
 			users.setAttractions(attractions);
 			List<UserReward> userRewards = tourGuideService.getRewards(users);
 			users.setUserRewards(userRewards);
@@ -115,24 +113,14 @@ public class TestPerformance {
 	}
 
 	@Test
-	public void rewardsTest() throws ExecutionException, InterruptedException {
+	public void rewardsTest() {
 		InternalTestHelper.setInternalUserNumber(100);
 		StopWatch stopWatch = new StopWatch();
 		stopWatch.start();
 		TourGuideService tourGuideService = new TourGuideService(gpsUtilProxy,tripPricerProxy,rewardsCentralProxy);
 		List<User> allUsers = tourGuideService.getAllUsers();
-		List<Attraction> attractions = tourGuideService.getAttractions();
-		List<Attraction> userAttraction = new ArrayList<>();
-		userAttraction.add(attractions.get(0));
-		List<VisitedLocation> visitedLocations = new ArrayList<>();
-		Location location = new Location(1.22, 20);
-		VisitedLocation visitedLocation = new VisitedLocation(UUID.randomUUID(), location, new Date());
-		visitedLocations.add(visitedLocation);
+		tourGuideService.getAllRewards();
 		for (User users : allUsers) {
-			users.setVisitedLocations(visitedLocations);
-			users.setAttractions(userAttraction);
-			List<UserReward> rewards = tourGuideService.getRewards(users);
-			users.setUserRewards(rewards);
 			assertTrue(users.getUserRewards().size() > 0);
 		}
 

@@ -101,7 +101,7 @@ public class TourGuideServiceTest {
     }
 
     @Test
-    public void getNearbyAttractionsTest() {
+    public void getNearbyAttractionsTest() throws ExecutionException, InterruptedException {
         when(tourGuideService.trackUserLocation(user)).thenReturn(visitedLocation);
         List<Attraction> attractions = new ArrayList<>();
         Attraction attraction = new Attraction("name","city","state",1.2,13);

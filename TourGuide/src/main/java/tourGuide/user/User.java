@@ -31,6 +31,11 @@ public class User {
 	public User() {
 	}
 
+	public User(String userName, List<UserReward> userRewards) {
+		this.userName = userName;
+		this.userRewards = userRewards;
+	}
+
 	public UUID getUserId() {
 		return userId;
 	}

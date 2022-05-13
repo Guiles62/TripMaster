@@ -8,6 +8,7 @@ import rewardsCentral.service.RewardsCentralService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.*;
 
 /**
  * <b>RewardsCentralServiceImpl is the class which implement RewardsCentralService and call RewardCentral jar</b>
@@ -50,6 +51,20 @@ public class RewardsCentralServiceImpl implements RewardsCentralService {
     public List<UserReward> getUserRewards(User user) {
         calculateRewards(user);
         return user.getUserRewards();
+    }
+
+    @Override
+    public List<User> getAllUsersRewards(List<User> users) {
+        ExecutorService executorService = Executors.newFixedThreadPool(100000);
+        List<User> userWithRewards = new CopyOnWriteArrayList<>();
+        for(User user : users) {
+            userWithRewards.add(user);
+            CompletableFuture<List<UserReward>> result = CompletableFuture.supplyAsync( () -> getUserRewards(user), executorService);
+            CompletableFuture<Void> result2 = result.thenAccept( s -> user.setUserRewards(s));
+            result2.join();
+        }
+        executorService.shutdown();
+        return userWithRewards;
     }
 
     /**

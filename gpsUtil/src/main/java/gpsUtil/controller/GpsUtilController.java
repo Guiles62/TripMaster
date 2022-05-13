@@ -1,10 +1,7 @@
 package gpsUtil.controller;
 
 
-import gpsUtil.model.Attraction;
-import gpsUtil.model.VisitedLocation;
-import gpsUtil.model.Location;
-import gpsUtil.model.User;
+import gpsUtil.model.*;
 import gpsUtil.service.GpsUtilService;
 import org.springframework.web.bind.annotation.*;
 
@@ -69,7 +66,8 @@ public class GpsUtilController {
     @PostMapping("/getNearbyAttractions")
     public List<Attraction> getNearbyAttractions(@RequestParam UUID userId) {
         User user = gpsUtilService.getUser(userId);
-        return gpsUtilService.getNearByAttractions(user);
+        List<Attraction> attractions = gpsUtilService.getNearByAttractions(user);
+        return attractions;
     }
 
     /**
@@ -104,6 +102,13 @@ public class GpsUtilController {
         User user = gpsUtilService.getUser(userId);
         VisitedLocation visitedLocation = gpsUtilService.trackUserLocation(user);
         return visitedLocation;
+    }
+
+    @PostMapping(value = "/getDistance")
+    public double getDistance (@RequestParam  double latitude1, @RequestParam double longitude1, @RequestParam double latitude2, @RequestParam double longitude2) {
+        Location loc1 = new Location(latitude1,longitude1);
+        Location loc2 = new Location(latitude2,longitude2);
+        return gpsUtilService.getDistance(loc1,loc2);
     }
 
 

@@ -22,4 +22,7 @@ public interface RewardsCentralProxy {
     @RequestMapping("/getAttractions")
     List<Attraction> getAttractions();
 
+    @PostMapping("/getAllUsersRewards")
+    List<User> getAllUsersRewards(@RequestBody List<User> users);
+
 }

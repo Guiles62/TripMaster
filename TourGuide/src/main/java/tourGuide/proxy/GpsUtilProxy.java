@@ -33,5 +33,8 @@ public interface GpsUtilProxy {
     @PostMapping(value = "/trackUserLocation")
     VisitedLocation trackUserLocation(@RequestParam UUID userId);
 
+    @PostMapping (value = "/getDistance")
+    double getDistance(@RequestParam  double latitude1, @RequestParam double longitude1, @RequestParam double latitude2, @RequestParam double longitude2);
+
 
 }
