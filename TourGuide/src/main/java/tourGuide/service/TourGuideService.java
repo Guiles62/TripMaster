@@ -94,8 +94,8 @@ public class TourGuideService extends Thread{
 		return gpsUtilProxy.trackUserLocation(user.getUserId());
 	}
 
-	public List<VisitedLocation> trackAllUsersLocation(List<User> users) {
-		List<VisitedLocation> allUsersLocation = gpsUtilProxy.trackAllUsersLocation(users);
+	public List<User> trackAllUsersLocation(List<User> users) {
+		List<User> allUsersLocation = gpsUtilProxy.trackAllUsersLocation(users);
 		return allUsersLocation;
 	}
 
@@ -130,7 +130,7 @@ public class TourGuideService extends Thread{
 	 * @param user user we want to get his rewards
 	 * @return a list of UserRewards
 	 */
-	public List<UserReward> getRewards (User user) throws ExecutionException, InterruptedException {
+	public List<UserReward> getRewards (User user) {
 		List<Attraction> nearAttractions = gpsUtilProxy.getNearbyAttractions(user.getUserId());
 		user.setAttractions(nearAttractions);
 		List<UserReward> rewards = rewardsCentralProxy.getRewards(user);
@@ -138,15 +138,8 @@ public class TourGuideService extends Thread{
 		return rewards;
 	}
 
-	public List<User> getAllRewards() throws ExecutionException, InterruptedException {
-		ExecutorService executorService = Executors.newFixedThreadPool(100000);
-		List<User> users = getAllUsers();
-		for (User user : users) {
-			CompletableFuture<List<Attraction>> attractions = CompletableFuture.supplyAsync(() -> gpsUtilProxy.getNearbyAttractions(user.getUserId()), executorService);
-			user.setAttractions(attractions.get());
-		}
+	public List<User> getAllRewards(List<User> users) {
 		List<User> userListWithRewards = rewardsCentralProxy.getAllUsersRewards(users);
-		executorService.shutdown();
 		return userListWithRewards;
 	}
 

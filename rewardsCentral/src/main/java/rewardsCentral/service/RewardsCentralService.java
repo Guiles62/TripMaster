@@ -23,7 +23,7 @@ import java.util.concurrent.ExecutionException;
 public interface RewardsCentralService {
 
 
-    List<UserReward> getUserRewards(User user);
+    List<UserReward> calculateRewards(User user);
     int getAttractionRewardPoints(UUID userId, UUID attractionID);
     List<User> getAllUsersRewards(List<User> users) throws ExecutionException, InterruptedException;
 

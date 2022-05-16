@@ -105,8 +105,8 @@ public class GpsUtilController {
     }
 
     @PostMapping(value="/trackAllUsersLocation")
-    public List<VisitedLocation> trackAllUsersLocation (@RequestBody List<User> users) {
-        List<VisitedLocation> allUsersTrackLocation = gpsUtilService.trackAllUserLocation(users);
+    public List<User> trackAllUsersLocation (@RequestBody List<User> users) {
+        List<User> allUsersTrackLocation = gpsUtilService.trackAllUserLocation(users);
         return allUsersTrackLocation;
     }
 

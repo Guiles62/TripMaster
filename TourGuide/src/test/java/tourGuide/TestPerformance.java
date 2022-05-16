@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
@@ -63,7 +64,7 @@ public class TestPerformance {
 	@Test
 	public void highVolumeTrackLocation() {
 		// Users should be incremented up to 100,000, and test finishes within 15 minutes
-		InternalTestHelper.setInternalUserNumber(100000);
+		InternalTestHelper.setInternalUserNumber(100);
 		TourGuideService tourGuideService = new TourGuideService(gpsUtilProxy,tripPricerProxy,rewardsCentralProxy);
 
 		List<User> allUsers = new ArrayList<>();
@@ -71,7 +72,7 @@ public class TestPerformance {
 		
 	    StopWatch stopWatch = new StopWatch();
 		stopWatch.start();
-		List<VisitedLocation> usersLocations = tourGuideService.trackAllUsersLocation(allUsers);
+		List<User> usersLocations = tourGuideService.trackAllUsersLocation(allUsers);
 		stopWatch.stop();
 		tourGuideService.tracker.stopTracking();
 
@@ -81,26 +82,23 @@ public class TestPerformance {
 	
 
 	@Test
-	public void highVolumeGetRewards() throws ExecutionException, InterruptedException {
+	public void highVolumeGetRewards() {
 		// Users should be incremented up to 100,000, and test finishes within 20 minutes
-		InternalTestHelper.setInternalUserNumber(100);
+		InternalTestHelper.setInternalUserNumber(100000);
 		StopWatch stopWatch = new StopWatch();
 		stopWatch.start();
 		TourGuideService tourGuideService = new TourGuideService(gpsUtilProxy,tripPricerProxy,rewardsCentralProxy);
 
 		List<User> allUsers = tourGuideService.getAllUsers();
-		for (User users : allUsers) {
-			List<VisitedLocation> visitedLocations = new ArrayList<>();
-			visitedLocations.add(tourGuideService.trackUserLocation(users));
-			users.setVisitedLocations(visitedLocations);
-			List<Attraction> nearByAttractions = tourGuideService.getAttractions();
-			List<Attraction> attractions = new ArrayList<>();
-			attractions.add(nearByAttractions.get(0));
+		List<User> userWithVisitedLocation = tourGuideService.trackAllUsersLocation(allUsers);
+		List<Attraction> nearByAttractions = tourGuideService.getAttractions();
+		List<Attraction> attractions = new ArrayList<>();
+		attractions.add(nearByAttractions.get(0));
+		for (User users : userWithVisitedLocation) {
 			users.setAttractions(attractions);
-			List<UserReward> userRewards = tourGuideService.getRewards(users);
-			users.setUserRewards(userRewards);
 		}
-		for(User user : allUsers) {
+		List<User> userRewards = tourGuideService.getAllRewards(userWithVisitedLocation);
+		for(User user : userRewards) {
 			assertTrue(user.getUserRewards().size() > 0);
 		}
 		stopWatch.stop();
@@ -109,24 +107,4 @@ public class TestPerformance {
 		System.out.println("highVolumeGetRewards: Time Elapsed: " + TimeUnit.MILLISECONDS.toSeconds(stopWatch.getTime()) + " seconds.");
 		assertTrue(TimeUnit.MINUTES.toSeconds(20) >= TimeUnit.MILLISECONDS.toSeconds(stopWatch.getTime()));
 	}
-
-	@Test
-	public void rewardsTest() throws ExecutionException, InterruptedException {
-		InternalTestHelper.setInternalUserNumber(100);
-		StopWatch stopWatch = new StopWatch();
-		stopWatch.start();
-		TourGuideService tourGuideService = new TourGuideService(gpsUtilProxy,tripPricerProxy,rewardsCentralProxy);
-		List<User> allUsers = tourGuideService.getAllUsers();
-		for (User users : allUsers) {
-			tourGuideService.getRewards(users);
-			assertTrue(users.getUserRewards().size() > 0);
-		}
-
-		stopWatch.stop();
-		tourGuideService.tracker.stopTracking();
-
-		System.out.println("highVolumeGetRewards: Time Elapsed: " + TimeUnit.MILLISECONDS.toSeconds(stopWatch.getTime()) + " seconds.");
-		assertTrue(TimeUnit.MINUTES.toSeconds(20) >= TimeUnit.MILLISECONDS.toSeconds(stopWatch.getTime()));
-	}
-	
 }

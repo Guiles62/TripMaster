@@ -64,7 +64,7 @@ public class RewardsCentralServiceTest {
 
     @Test
     public void getUserRewardsTest() {
-        assertEquals(rewardsCentralService.getUserRewards(user),user.getUserRewards());
+        assertEquals(rewardsCentralService.calculateRewards(user),user.getUserRewards());
     }
 
     @Test

@@ -127,11 +127,10 @@ public class GpsUtilServiceImpl implements GpsUtilService {
     }
 
     @Override
-    public List<VisitedLocation> trackAllUserLocation(List<User> userList) {
+    public List<User> trackAllUserLocation(List<User> userList) {
         executorService = Executors.newFixedThreadPool(1500);
-        CopyOnWriteArrayList<VisitedLocation> visitedLocations = new CopyOnWriteArrayList<>();
         for ( User user : userList) {
-            CompletableFuture.supplyAsync( () -> visitedLocations.add(trackUserLocation(user)), executorService);
+            CompletableFuture.supplyAsync( () -> (trackUserLocation(user)), executorService);
         }
         executorService.shutdown();
 
@@ -142,7 +141,7 @@ public class GpsUtilServiceImpl implements GpsUtilService {
             executorService.shutdown();
         }
 
-        return visitedLocations;
+        return userList;
     }
 
     /**
@@ -164,6 +163,13 @@ public class GpsUtilServiceImpl implements GpsUtilService {
             nearAttractionsList.add(new NearAttractions(attraction, distance)), executorService);
         }
         executorService.shutdown();
+
+        try {
+            executorService.shutdown();
+            executorService.awaitTermination(15, TimeUnit.MINUTES);
+        }catch(Exception e){
+            executorService.shutdown();
+        }
         Collections.sort(nearAttractionsList, new Comparator<NearAttractions>() {
             @Override
             public int compare(NearAttractions attraction1, NearAttractions attraction2) {
@@ -183,14 +189,11 @@ public class GpsUtilServiceImpl implements GpsUtilService {
      */
     @Override
     public List<Attraction> getAllAttractions() {
-        ExecutorService executorService = Executors.newFixedThreadPool(2000);
         List<gpsUtil.location.Attraction> attractions = gpsUtil.getAttractions();
         CopyOnWriteArrayList<Attraction> attractionList = new CopyOnWriteArrayList<>();
         for (gpsUtil.location.Attraction attraction : attractions) {
-            CompletableFuture.supplyAsync(() ->
-            attractionList.add(new Attraction(attraction.attractionName,attraction.city,attraction.state,attraction.latitude,attraction.longitude)),executorService);
+            attractionList.add(new Attraction(attraction.attractionName,attraction.city,attraction.state,attraction.latitude,attraction.longitude));
         }
-        executorService.shutdown();
         return attractionList;
     }
 

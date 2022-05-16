@@ -96,13 +96,6 @@ public class TourGuideController {
 <span class="nc" id="L96">    	return getUserRewardsList;</span>
     }
 
-    @GetMapping(&quot;/getAllUsersRewards&quot;)
-    public List&lt;User&gt; getAllUsersRewards() throws ExecutionException, InterruptedException {
-<span class="nc" id="L101">        List&lt;User&gt; userRewardsList = tourGuideService.getAllRewards();</span>
-<span class="nc" id="L102">        return userRewardsList;</span>
-    }
-
-
     /**
      * call service to display location of all users
      * @return a JSON object that display all users by userId and their locations
@@ -118,8 +111,8 @@ public class TourGuideController {
     	//        &quot;019b04a9-067a-4c76-8817-ee75088c3822&quot;: {&quot;longitude&quot;:-48.188821,&quot;latitude&quot;:74.84371} 
     	//        ...
     	//     }
-<span class="nc" id="L121">        List&lt;VisitedLocation&gt;usersCurrentVisitedLocationList = tourGuideService.getAllCurrentLocations();</span>
-<span class="nc" id="L122">    	return usersCurrentVisitedLocationList;</span>
+<span class="nc" id="L114">        List&lt;VisitedLocation&gt;usersCurrentVisitedLocationList = tourGuideService.getAllCurrentLocations();</span>
+<span class="nc" id="L115">    	return usersCurrentVisitedLocationList;</span>
     }
 
     /**
@@ -129,9 +122,9 @@ public class TourGuideController {
      */
     @RequestMapping(&quot;/getTripDeals&quot;)
     public List&lt;Provider&gt; getTripDeals(@RequestParam String userName) {
-<span class="nc" id="L132">        User user = tourGuideService.getUser(userName);</span>
-<span class="nc" id="L133">    	List&lt;Provider&gt; providers = tourGuideService.getTripDeals(user);</span>
-<span class="nc" id="L134">    	return providers;</span>
+<span class="nc" id="L125">        User user = tourGuideService.getUser(userName);</span>
+<span class="nc" id="L126">    	List&lt;Provider&gt; providers = tourGuideService.getTripDeals(user);</span>
+<span class="nc" id="L127">    	return providers;</span>
     }
 
 }

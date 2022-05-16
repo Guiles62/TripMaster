@@ -94,8 +94,8 @@ public class TourGuideService extends Thread{
 <span class="fc" id="L94">		return gpsUtilProxy.trackUserLocation(user.getUserId());</span>
 	}
 
-	public List&lt;VisitedLocation&gt; trackAllUsersLocation(List&lt;User&gt; users) {
-<span class="fc" id="L98">		List&lt;VisitedLocation&gt; allUsersLocation = gpsUtilProxy.trackAllUsersLocation(users);</span>
+	public List&lt;User&gt; trackAllUsersLocation(List&lt;User&gt; users) {
+<span class="fc" id="L98">		List&lt;User&gt; allUsersLocation = gpsUtilProxy.trackAllUsersLocation(users);</span>
 <span class="fc" id="L99">		return allUsersLocation;</span>
 	}
 
@@ -130,7 +130,7 @@ public class TourGuideService extends Thread{
 	 * @param user user we want to get his rewards
 	 * @return a list of UserRewards
 	 */
-	public List&lt;UserReward&gt; getRewards (User user) throws ExecutionException, InterruptedException {
+	public List&lt;UserReward&gt; getRewards (User user) {
 <span class="nc" id="L134">		List&lt;Attraction&gt; nearAttractions = gpsUtilProxy.getNearbyAttractions(user.getUserId());</span>
 <span class="nc" id="L135">		user.setAttractions(nearAttractions);</span>
 <span class="nc" id="L136">		List&lt;UserReward&gt; rewards = rewardsCentralProxy.getRewards(user);</span>
@@ -138,16 +138,9 @@ public class TourGuideService extends Thread{
 <span class="nc" id="L138">		return rewards;</span>
 	}
 
-	public List&lt;User&gt; getAllRewards() throws ExecutionException, InterruptedException {
-<span class="nc" id="L142">		ExecutorService executorService = Executors.newFixedThreadPool(100000);</span>
-<span class="nc" id="L143">		List&lt;User&gt; users = getAllUsers();</span>
-<span class="nc bnc" id="L144" title="All 2 branches missed.">		for (User user : users) {</span>
-<span class="nc" id="L145">			CompletableFuture&lt;List&lt;Attraction&gt;&gt; attractions = CompletableFuture.supplyAsync(() -&gt; gpsUtilProxy.getNearbyAttractions(user.getUserId()), executorService);</span>
-<span class="nc" id="L146">			user.setAttractions(attractions.get());</span>
-<span class="nc" id="L147">		}</span>
-<span class="nc" id="L148">		List&lt;User&gt; userListWithRewards = rewardsCentralProxy.getAllUsersRewards(users);</span>
-<span class="nc" id="L149">		executorService.shutdown();</span>
-<span class="nc" id="L150">		return userListWithRewards;</span>
+	public List&lt;User&gt; getAllRewards(List&lt;User&gt; users) {
+<span class="fc" id="L142">		List&lt;User&gt; userListWithRewards = rewardsCentralProxy.getAllUsersRewards(users);</span>
+<span class="fc" id="L143">		return userListWithRewards;</span>
 	}
 
 
@@ -156,14 +149,14 @@ public class TourGuideService extends Thread{
 	 * @return a list of users visitedLocations
 	 */
 	public List&lt;VisitedLocation&gt;getAllCurrentLocations() {
-<span class="nc" id="L159">		ExecutorService executorService = Executors.newFixedThreadPool(100000);</span>
-<span class="nc" id="L160">		CopyOnWriteArrayList&lt;VisitedLocation&gt; usersCurrentVisitedLocationList = new CopyOnWriteArrayList&lt;&gt;();</span>
-<span class="nc" id="L161">		List&lt;User&gt; userList = getAllUsers();</span>
-<span class="nc bnc" id="L162" title="All 2 branches missed.">		for(User user : userList){</span>
-<span class="nc" id="L163">			CompletableFuture.supplyAsync( () -&gt; usersCurrentVisitedLocationList.add(gpsUtilProxy.getCurrentLocation(user.getUserId())), executorService );</span>
-<span class="nc" id="L164">		}</span>
-<span class="nc" id="L165">		executorService.shutdown();</span>
-<span class="nc" id="L166">		return usersCurrentVisitedLocationList;</span>
+<span class="nc" id="L152">		ExecutorService executorService = Executors.newFixedThreadPool(100000);</span>
+<span class="nc" id="L153">		CopyOnWriteArrayList&lt;VisitedLocation&gt; usersCurrentVisitedLocationList = new CopyOnWriteArrayList&lt;&gt;();</span>
+<span class="nc" id="L154">		List&lt;User&gt; userList = getAllUsers();</span>
+<span class="nc bnc" id="L155" title="All 2 branches missed.">		for(User user : userList){</span>
+<span class="nc" id="L156">			CompletableFuture.supplyAsync( () -&gt; usersCurrentVisitedLocationList.add(gpsUtilProxy.getCurrentLocation(user.getUserId())), executorService );</span>
+<span class="nc" id="L157">		}</span>
+<span class="nc" id="L158">		executorService.shutdown();</span>
+<span class="nc" id="L159">		return usersCurrentVisitedLocationList;</span>
 	}
 
 	/**
@@ -172,9 +165,9 @@ public class TourGuideService extends Thread{
 	 * @return a list of provider with prices
 	 */
 	public List&lt;Provider&gt; getTripDeals(User user) {
-<span class="nc" id="L175">		String apiKey  = getApiKey();</span>
-<span class="nc" id="L176">		List&lt;Provider&gt; getPrice = tripPricerProxy.getPrice(user,apiKey);</span>
-<span class="nc" id="L177">		return getPrice;</span>
+<span class="nc" id="L168">		String apiKey  = getApiKey();</span>
+<span class="nc" id="L169">		List&lt;Provider&gt; getPrice = tripPricerProxy.getPrice(user,apiKey);</span>
+<span class="nc" id="L170">		return getPrice;</span>
 	}
 
 	/**
@@ -182,8 +175,8 @@ public class TourGuideService extends Thread{
 	 * @return a list of all Attractions
 	 */
 	public List&lt;Attraction&gt; getAttractions() {
-<span class="nc" id="L185">		List&lt;Attraction&gt; attractionList = gpsUtilProxy.getAllAttractions();</span>
-<span class="nc" id="L186">		return attractionList;</span>
+<span class="fc" id="L178">		List&lt;Attraction&gt; attractionList = gpsUtilProxy.getAllAttractions();</span>
+<span class="fc" id="L179">		return attractionList;</span>
 	}
 
 	/**
@@ -192,10 +185,10 @@ public class TourGuideService extends Thread{
 	 * @return the user
 	 */
 	public User getUser(String userName) {
-<span class="nc" id="L195">		User user = internalUserMap.get(userName);</span>
-<span class="nc" id="L196">		List&lt;VisitedLocation&gt; visitedLocations = gpsUtilProxy.getUserVisitedLocation(user.getUserId());</span>
-<span class="nc" id="L197">		user.setVisitedLocations(visitedLocations);</span>
-<span class="nc" id="L198">		return user;</span>
+<span class="nc" id="L188">		User user = internalUserMap.get(userName);</span>
+<span class="nc" id="L189">		List&lt;VisitedLocation&gt; visitedLocations = gpsUtilProxy.getUserVisitedLocation(user.getUserId());</span>
+<span class="nc" id="L190">		user.setVisitedLocations(visitedLocations);</span>
+<span class="nc" id="L191">		return user;</span>
 	}
 
 	/**
@@ -210,8 +203,8 @@ public class TourGuideService extends Thread{
 	 * @return a list of users
 	 */
 	public List&lt;User&gt; getAllUsers() {
-<span class="fc" id="L213">		List&lt;User&gt; users = internalUserMap.values().stream().collect(Collectors.toList());</span>
-<span class="fc" id="L214">		return users;</span>
+<span class="fc" id="L206">		List&lt;User&gt; users = internalUserMap.values().stream().collect(Collectors.toList());</span>
+<span class="fc" id="L207">		return users;</span>
 	}
 
 	/**
@@ -219,49 +212,49 @@ public class TourGuideService extends Thread{
 	 * @param user the user to add
 	 */
 	public void addUser(User user) {
-<span class="nc bnc" id="L222" title="All 2 branches missed.">		if(!internalUserMap.containsKey(user.getUserName())) {</span>
-<span class="nc" id="L223">			internalUserMap.put(user.getUserName(), user);</span>
+<span class="nc bnc" id="L215" title="All 2 branches missed.">		if(!internalUserMap.containsKey(user.getUserName())) {</span>
+<span class="nc" id="L216">			internalUserMap.put(user.getUserName(), user);</span>
 		}
-<span class="nc" id="L225">	}</span>
+<span class="nc" id="L218">	}</span>
 
 	/**
 	 * get the ApiKey
 	 * @return a string of the tripPricerApiKey
 	 */
 	public String getApiKey() {
-<span class="nc" id="L232">		return tripPricerApiKey;</span>
+<span class="nc" id="L225">		return tripPricerApiKey;</span>
 	}
 
 	/**
 	 * shutdown tracker
 	 */
 	public void addShutDownHook() {
-<span class="fc" id="L239">		Runtime.getRuntime().addShutdownHook(new Thread() { </span>
+<span class="fc" id="L232">		Runtime.getRuntime().addShutdownHook(new Thread() { </span>
 		      public void run() {
-<span class="fc" id="L241">		        tracker.stopTracking();</span>
-<span class="fc" id="L242">		      } </span>
+<span class="fc" id="L234">		        tracker.stopTracking();</span>
+<span class="fc" id="L235">		      } </span>
 		    }); 
-<span class="fc" id="L244">	}</span>
+<span class="fc" id="L237">	}</span>
 	
 	/**********************************************************************************
 	 * 
 	 * Methods Below: For Internal Testing
 	 * 
 	 **********************************************************************************/
-<span class="fc" id="L251">	private final String tripPricerApiKey = &quot;test-server-api-key&quot;;</span>
+<span class="fc" id="L244">	private final String tripPricerApiKey = &quot;test-server-api-key&quot;;</span>
 	// Database connection will be used for external users, but for testing purposes internal users are provided and stored in memory
-<span class="fc" id="L253">	private final Map&lt;String, User&gt; internalUserMap = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L246">	private final Map&lt;String, User&gt; internalUserMap = new HashMap&lt;&gt;();</span>
 	private void initializeInternalUsers() {
-<span class="fc" id="L255">		IntStream.range(0, InternalTestHelper.getInternalUserNumber()).forEach(i -&gt; {</span>
-<span class="fc" id="L256">			String userName = &quot;internalUser&quot; + i;</span>
-<span class="fc" id="L257">			String phone = &quot;000&quot;;</span>
-<span class="fc" id="L258">			String email = userName + &quot;@tourGuide.com&quot;;</span>
-<span class="fc" id="L259">			User user = new User(UUID.randomUUID(), userName, phone, email);</span>
+<span class="fc" id="L248">		IntStream.range(0, InternalTestHelper.getInternalUserNumber()).forEach(i -&gt; {</span>
+<span class="fc" id="L249">			String userName = &quot;internalUser&quot; + i;</span>
+<span class="fc" id="L250">			String phone = &quot;000&quot;;</span>
+<span class="fc" id="L251">			String email = userName + &quot;@tourGuide.com&quot;;</span>
+<span class="fc" id="L252">			User user = new User(UUID.randomUUID(), userName, phone, email);</span>
 			
-<span class="fc" id="L261">			internalUserMap.put(userName, user);</span>
-<span class="fc" id="L262">		});</span>
-<span class="fc" id="L263">		logger.debug(&quot;Created &quot; + InternalTestHelper.getInternalUserNumber() + &quot; internal test users.&quot;);</span>
-<span class="fc" id="L264">	}</span>
+<span class="fc" id="L254">			internalUserMap.put(userName, user);</span>
+<span class="fc" id="L255">		});</span>
+<span class="fc" id="L256">		logger.debug(&quot;Created &quot; + InternalTestHelper.getInternalUserNumber() + &quot; internal test users.&quot;);</span>
+<span class="fc" id="L257">	}</span>
 
 	
 }

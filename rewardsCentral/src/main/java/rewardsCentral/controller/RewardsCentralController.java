@@ -38,7 +38,7 @@ public class RewardsCentralController {
      */
     @PostMapping(value = "/getRewards")
     public List<UserReward> getRewards(@RequestBody User user) {
-        return rewardsCentralService.getUserRewards(user);
+        return rewardsCentralService.calculateRewards(user);
     }
 
     @PostMapping("/getAllUsersRewards")

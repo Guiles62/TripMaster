@@ -96,13 +96,6 @@ public class TourGuideController {
     	return getUserRewardsList;
     }
 
-    @GetMapping("/getAllUsersRewards")
-    public List<User> getAllUsersRewards() throws ExecutionException, InterruptedException {
-        List<User> userRewardsList = tourGuideService.getAllRewards();
-        return userRewardsList;
-    }
-
-
     /**
      * call service to display location of all users
      * @return a JSON object that display all users by userId and their locations

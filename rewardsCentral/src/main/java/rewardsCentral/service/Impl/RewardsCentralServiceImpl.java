@@ -41,27 +41,25 @@ public class RewardsCentralServiceImpl implements RewardsCentralService {
     public RewardsCentralServiceImpl() {
     }
 
-
     /**
-     * call the calculateRewards method to get the user's rewards
-     * @param user the user we use
-     * @return a list of userReward
+     * calculate the rewards for a list of users
+     * @param users the list of users
+     * @return the users list with their rewards
      */
     @Override
-    public List<UserReward> getUserRewards(User user) {
-        calculateRewards(user);
-        return user.getUserRewards();
-    }
-
-    @Override
-    public List<User> getAllUsersRewards(List<User> users) throws ExecutionException, InterruptedException {
+    public List<User> getAllUsersRewards(List<User> users) {
         ExecutorService executorService = Executors.newFixedThreadPool(100000);
         for(User user : users) {
-            CompletableFuture<List<UserReward>> result = CompletableFuture.supplyAsync( () -> getUserRewards(user), executorService);
-            CompletableFuture<Void> result2 = result.thenAccept( s -> user.setUserRewards(s));
-            result2.get();
+            CompletableFuture.supplyAsync( () -> calculateRewards(user), executorService);
         }
         executorService.shutdown();
+
+        try {
+            executorService.shutdown();
+            executorService.awaitTermination(15, TimeUnit.MINUTES);
+        }catch(Exception e){
+            executorService.shutdown();
+        }
         return users;
     }
 
@@ -81,8 +79,9 @@ public class RewardsCentralServiceImpl implements RewardsCentralService {
     /**
      * calculate the user's rewards
      * @param user the user we use
+     * @return a list of UserRewards
      */
-    public void calculateRewards(User user) {
+    public List<UserReward> calculateRewards(User user) {
         List<VisitedLocation> userLocations = user.getVisitedLocations();
         List<Attraction> attractions = user.getAttractions();
         List<UserReward> userRewards = new ArrayList<>();
@@ -94,6 +93,7 @@ public class RewardsCentralServiceImpl implements RewardsCentralService {
                 }
             }
         }
+        return userRewards;
     }
 
     /**
