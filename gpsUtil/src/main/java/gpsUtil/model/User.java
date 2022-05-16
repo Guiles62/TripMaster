@@ -21,6 +21,9 @@ public class User {
         this.userId = userId;
     }
 
+    public User() {
+    }
+
     public void setUserId(UUID userId) {
         this.userId = userId;
     }

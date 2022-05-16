@@ -97,7 +97,7 @@ public class TourGuideController {
     }
 
     @GetMapping("/getAllUsersRewards")
-    public List<User> getAllUsersRewards() {
+    public List<User> getAllUsersRewards() throws ExecutionException, InterruptedException {
         List<User> userRewardsList = tourGuideService.getAllRewards();
         return userRewardsList;
     }

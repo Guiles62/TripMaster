@@ -54,17 +54,15 @@ public class RewardsCentralServiceImpl implements RewardsCentralService {
     }
 
     @Override
-    public List<User> getAllUsersRewards(List<User> users) {
+    public List<User> getAllUsersRewards(List<User> users) throws ExecutionException, InterruptedException {
         ExecutorService executorService = Executors.newFixedThreadPool(100000);
-        List<User> userWithRewards = new CopyOnWriteArrayList<>();
         for(User user : users) {
-            userWithRewards.add(user);
             CompletableFuture<List<UserReward>> result = CompletableFuture.supplyAsync( () -> getUserRewards(user), executorService);
             CompletableFuture<Void> result2 = result.thenAccept( s -> user.setUserRewards(s));
-            result2.join();
+            result2.get();
         }
         executorService.shutdown();
-        return userWithRewards;
+        return users;
     }
 
     /**

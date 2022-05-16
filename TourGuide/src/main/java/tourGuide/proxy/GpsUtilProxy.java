@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import tourGuide.model.Attraction;
 import tourGuide.model.Location;
 import tourGuide.model.VisitedLocation;
+import tourGuide.user.User;
 
 
 import java.util.List;
@@ -35,6 +36,9 @@ public interface GpsUtilProxy {
 
     @PostMapping (value = "/getDistance")
     double getDistance(@RequestParam  double latitude1, @RequestParam double longitude1, @RequestParam double latitude2, @RequestParam double longitude2);
+
+    @PostMapping(value = "/trackAllUsersLocation")
+    List<VisitedLocation> trackAllUsersLocation (@RequestBody List<User> users);
 
 
 }

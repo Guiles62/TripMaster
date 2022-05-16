@@ -33,4 +33,5 @@ public interface GpsUtilService {
     VisitedLocation trackUserLocation(User user);
     List<Attraction> getNearByAttractions(User user);
     List<Attraction> getAllAttractions();
+    List<VisitedLocation> trackAllUserLocation(List<User> userList);
 }

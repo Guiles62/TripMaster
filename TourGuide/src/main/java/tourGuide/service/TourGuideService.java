@@ -94,6 +94,11 @@ public class TourGuideService extends Thread{
 		return gpsUtilProxy.trackUserLocation(user.getUserId());
 	}
 
+	public List<VisitedLocation> trackAllUsersLocation(List<User> users) {
+		List<VisitedLocation> allUsersLocation = gpsUtilProxy.trackAllUsersLocation(users);
+		return allUsersLocation;
+	}
+
 
 	/**
 	 * call the gpsProxy to get the closest 5 attractions to the user from gpsUtil microservice
@@ -133,12 +138,12 @@ public class TourGuideService extends Thread{
 		return rewards;
 	}
 
-	public List<User> getAllRewards() {
+	public List<User> getAllRewards() throws ExecutionException, InterruptedException {
 		ExecutorService executorService = Executors.newFixedThreadPool(100000);
 		List<User> users = getAllUsers();
 		for (User user : users) {
 			CompletableFuture<List<Attraction>> attractions = CompletableFuture.supplyAsync(() -> gpsUtilProxy.getNearbyAttractions(user.getUserId()), executorService);
-			user.setAttractions(attractions.join());
+			user.setAttractions(attractions.get());
 		}
 		List<User> userListWithRewards = rewardsCentralProxy.getAllUsersRewards(users);
 		executorService.shutdown();
@@ -205,12 +210,7 @@ public class TourGuideService extends Thread{
 	 * @return a list of users
 	 */
 	public List<User> getAllUsers() {
-		ExecutorService executorService = Executors.newFixedThreadPool(100000);
 		List<User> users = internalUserMap.values().stream().collect(Collectors.toList());
-		for (User user : users) {
-			CompletableFuture<List<VisitedLocation>> visitedLocations = CompletableFuture.supplyAsync(() -> gpsUtilProxy.getUserVisitedLocation(user.getUserId()), executorService);
-			user.setVisitedLocations(visitedLocations.join());
-		}
 		return users;
 	}
 

@@ -104,6 +104,12 @@ public class GpsUtilController {
         return visitedLocation;
     }
 
+    @PostMapping(value="/trackAllUsersLocation")
+    public List<VisitedLocation> trackAllUsersLocation (@RequestBody List<User> users) {
+        List<VisitedLocation> allUsersTrackLocation = gpsUtilService.trackAllUserLocation(users);
+        return allUsersTrackLocation;
+    }
+
     @PostMapping(value = "/getDistance")
     public double getDistance (@RequestParam  double latitude1, @RequestParam double longitude1, @RequestParam double latitude2, @RequestParam double longitude2) {
         Location loc1 = new Location(latitude1,longitude1);

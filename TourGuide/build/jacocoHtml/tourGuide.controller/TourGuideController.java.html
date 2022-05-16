@@ -97,7 +97,7 @@ public class TourGuideController {
     }
 
     @GetMapping(&quot;/getAllUsersRewards&quot;)
-    public List&lt;User&gt; getAllUsersRewards() {
+    public List&lt;User&gt; getAllUsersRewards() throws ExecutionException, InterruptedException {
 <span class="nc" id="L101">        List&lt;User&gt; userRewardsList = tourGuideService.getAllRewards();</span>
 <span class="nc" id="L102">        return userRewardsList;</span>
     }

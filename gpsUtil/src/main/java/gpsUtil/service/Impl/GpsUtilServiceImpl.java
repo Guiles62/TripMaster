@@ -12,10 +12,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.*;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
 import java.util.stream.IntStream;
 
 /**
@@ -66,6 +63,8 @@ public class GpsUtilServiceImpl implements GpsUtilService {
     public void setDefaultProximityBuffer() {
         proximityBuffer = defaultProximityBuffer;
     }
+
+    private ExecutorService executorService;
 
 
     /**
@@ -127,6 +126,25 @@ public class GpsUtilServiceImpl implements GpsUtilService {
         return visitedLocation;
     }
 
+    @Override
+    public List<VisitedLocation> trackAllUserLocation(List<User> userList) {
+        executorService = Executors.newFixedThreadPool(1500);
+        CopyOnWriteArrayList<VisitedLocation> visitedLocations = new CopyOnWriteArrayList<>();
+        for ( User user : userList) {
+            CompletableFuture.supplyAsync( () -> visitedLocations.add(trackUserLocation(user)), executorService);
+        }
+        executorService.shutdown();
+
+        try {
+            executorService.shutdown();
+            executorService.awaitTermination(15, TimeUnit.MINUTES);
+        }catch(Exception e){
+            executorService.shutdown();
+        }
+
+        return visitedLocations;
+    }
+
     /**
      * get closest 5 attractions to the user and sort them from closest to furthest
      * @param user the user we use
@@ -145,6 +163,7 @@ public class GpsUtilServiceImpl implements GpsUtilService {
             CompletableFuture.supplyAsync(() ->
             nearAttractionsList.add(new NearAttractions(attraction, distance)), executorService);
         }
+        executorService.shutdown();
         Collections.sort(nearAttractionsList, new Comparator<NearAttractions>() {
             @Override
             public int compare(NearAttractions attraction1, NearAttractions attraction2) {
