@@ -63,7 +63,15 @@ public class RewardsCentralServiceTest {
     }
 
     @Test
-    public void getUserRewardsTest() {
+    public void getAllUsersRewardsTest() {
+        List<User> users = new ArrayList<>();
+        users.add(user);
+        assertEquals(rewardsCentralService.getAllUsersRewards(users).get(0).getUserRewards(),  user.getUserRewards());
+    }
+
+
+    @Test
+    public void calculateRewardsTest() {
         assertEquals(rewardsCentralService.calculateRewards(user),user.getUserRewards());
     }
 

@@ -1,5 +1,6 @@
 package gpsUtil.controllerUT;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import gpsUtil.controller.GpsUtilController;
 import gpsUtil.model.Location;
 import gpsUtil.model.User;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -47,6 +49,14 @@ public class GpsUtilControllerTest {
 
     @MockBean
     private GpsUtilService gpsUtilService;
+
+    public static String asJsonString(final Object obj) {
+        try {
+            return new ObjectMapper().writeValueAsString(obj);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 
     @Before
@@ -88,7 +98,23 @@ public class GpsUtilControllerTest {
     }
 
     @Test
-    public void trackUserLocation() throws Exception {
+    public void trackUserLocationTest() throws Exception {
         mockMvc.perform(post("/trackUserLocation?userId=c01f2ef7-27fb-4990-b1b2-e5e7f3690973")).andExpect(status().isOk());
+    }
+
+    @Test
+    public void trackAllUsersLocationTest() throws Exception {
+        List<User> users = new ArrayList<>();
+        users.add(user);
+        mockMvc.perform(post("/trackAllUsersLocation")
+                .content(asJsonString(users))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void getDistanceTest() throws Exception {
+        mockMvc.perform(post("/getDistance?latitude1=1&latitude2=2&longitude1=3&longitude2=4")).andExpect(status().isOk());
     }
 }

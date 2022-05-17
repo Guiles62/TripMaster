@@ -126,6 +126,11 @@ public class GpsUtilServiceImpl implements GpsUtilService {
         return visitedLocation;
     }
 
+    /**
+     * call trackUserLocation method to get the location of a list users and add it in their visitedLocation
+     * @param userList a list of users
+     * @return a list of users with their visitedLocation
+     */
     @Override
     public List<User> trackAllUserLocation(List<User> userList) {
         executorService = Executors.newFixedThreadPool(1500);

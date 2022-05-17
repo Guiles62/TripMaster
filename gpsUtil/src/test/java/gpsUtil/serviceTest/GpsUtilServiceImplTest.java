@@ -78,6 +78,18 @@ public class GpsUtilServiceImplTest {
     }
 
     @Test
+    public void trackAllUserLocationTest() {
+        List<User> users = new ArrayList<>();
+        users.add(user);
+        gpsUtil.location.VisitedLocation userVisitedLocation = new gpsUtil.location.VisitedLocation(
+                user.getUserId(),
+                new gpsUtil.location.Location(1.20,1.10),
+                new Date());
+        Mockito.when(gpsUtil.getUserLocation(user.getUserId())).thenReturn(userVisitedLocation);
+        assertTrue(gpsUtilService.trackAllUserLocation(users).get(0).getVisitedLocations() == user.getVisitedLocations());
+    }
+
+    @Test
     public void getNearByAttractionsTest() {
         List<gpsUtil.location.Attraction> attractions = new ArrayList<gpsUtil.location.Attraction>();
         attractions.add(new Attraction("city","ccc","ccc",12.1,12.4));

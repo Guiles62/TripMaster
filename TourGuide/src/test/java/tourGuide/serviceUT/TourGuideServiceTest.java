@@ -24,8 +24,7 @@ import java.util.concurrent.ExecutionException;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -101,6 +100,15 @@ public class TourGuideServiceTest {
     }
 
     @Test
+    public void trackAllUsersLocation() {
+        List<User> users = new ArrayList<>();
+        users.add(user);
+        when(tourGuideService.trackUserLocation(user)).thenReturn(visitedLocation);
+        when(gpsUtilProxy.trackAllUsersLocation(users)).thenReturn(users);
+        assertTrue(tourGuideService.trackAllUsersLocation(users).get(0).getLastVisitedLocation() == user.getLastVisitedLocation());
+    }
+
+    @Test
     public void getNearbyAttractionsTest() throws ExecutionException, InterruptedException {
         when(tourGuideService.trackUserLocation(user)).thenReturn(visitedLocation);
         List<Attraction> attractions = new ArrayList<>();
@@ -119,12 +127,18 @@ public class TourGuideServiceTest {
     }
 
     @Test
-    public void getRewardsTest() throws ExecutionException, InterruptedException {
+    public void getRewardsTest() {
         when(rewardsCentralProxy.getRewards(user)).thenReturn(user.getUserRewards());
         assertTrue(tourGuideService.getRewards(user) == user.getUserRewards());
     }
 
-
+    @Test
+    public void getAllRewardsTest() {
+        List<User> users = new ArrayList<>();
+        users.add(user);
+        when(rewardsCentralProxy.getAllUsersRewards(users)).thenReturn(users);
+        assertTrue(tourGuideService.getAllRewards(users).get(0).getUserRewards() == user.getUserRewards());
+    }
 
     @Test
     public void getTripDealsTest() {

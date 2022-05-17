@@ -94,6 +94,12 @@ public class TourGuideService extends Thread{
 		return gpsUtilProxy.trackUserLocation(user.getUserId());
 	}
 
+
+	/**
+	 * call the gpsUtilProxy to get current location of a list of users from gpsUtil microservice
+	 * @param users the list of users for whom we want the last visitedLocation
+	 * @return the list of users with their last visitedLocation
+	 */
 	public List<User> trackAllUsersLocation(List<User> users) {
 		List<User> allUsersLocation = gpsUtilProxy.trackAllUsersLocation(users);
 		return allUsersLocation;
@@ -122,6 +128,13 @@ public class TourGuideService extends Thread{
 
 		}
 		executorService.shutdown();
+
+		try {
+			executorService.shutdown();
+			executorService.awaitTermination(15, TimeUnit.MINUTES);
+		}catch(Exception e){
+			executorService.shutdown();
+		}
 		return nearByAttractions;
 	}
 
@@ -138,6 +151,11 @@ public class TourGuideService extends Thread{
 		return rewards;
 	}
 
+	/**
+	 * call the rewardsCentralProxy to get a list of rewards for a list of users from rewardCentral microservice
+	 * @param users the list of users we want to get rewards
+	 * @return the list of users with their rewards
+	 */
 	public List<User> getAllRewards(List<User> users) {
 		List<User> userListWithRewards = rewardsCentralProxy.getAllUsersRewards(users);
 		return userListWithRewards;
@@ -156,6 +174,13 @@ public class TourGuideService extends Thread{
 			CompletableFuture.supplyAsync( () -> usersCurrentVisitedLocationList.add(gpsUtilProxy.getCurrentLocation(user.getUserId())), executorService );
 		}
 		executorService.shutdown();
+
+		try {
+			executorService.shutdown();
+			executorService.awaitTermination(15, TimeUnit.MINUTES);
+		}catch(Exception e){
+			executorService.shutdown();
+		}
 		return usersCurrentVisitedLocationList;
 	}
 

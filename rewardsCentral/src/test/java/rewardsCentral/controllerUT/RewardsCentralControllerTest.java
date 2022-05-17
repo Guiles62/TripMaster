@@ -70,6 +70,17 @@ public class RewardsCentralControllerTest {
                 .andExpect(status().isOk());
     }
 
+    @Test
+    public void getAllUsersRewardsTest() throws Exception {
+        List<User> users = new ArrayList<>();
+        users.add(user);
+        mockMvc.perform(post("/getAllUsersRewards")
+                        .content(asJsonString(users))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+
 
 
 
