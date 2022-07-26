@@ -48,7 +48,7 @@ public class RewardsCentralServiceImpl implements RewardsCentralService {
      */
     @Override
     public List<User> getAllUsersRewards(List<User> users) {
-        ExecutorService executorService = Executors.newFixedThreadPool(100000);
+        ExecutorService executorService = Executors.newFixedThreadPool(1500);
         for(User user : users) {
             CompletableFuture.supplyAsync( () -> calculateRewards(user), executorService);
         }

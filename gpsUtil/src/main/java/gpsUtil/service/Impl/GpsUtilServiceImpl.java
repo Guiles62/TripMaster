@@ -156,7 +156,7 @@ public class GpsUtilServiceImpl implements GpsUtilService {
      */
     @Override
     public List<Attraction> getNearByAttractions(User user) {
-        ExecutorService executorService = Executors.newFixedThreadPool(2000);
+        ExecutorService executorService = Executors.newFixedThreadPool(1500);
         VisitedLocation visitedLocation = getUserLocation(user);
         List<Attraction> attractionList = getAllAttractions();
         List<Attraction> nearbyAttractions = new ArrayList<>();

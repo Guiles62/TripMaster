@@ -30,31 +30,31 @@ public class User {
 	}
 	
 	public String getUserName() {
-<span class="nc" id="L33">		return userName;</span>
+<span class="fc" id="L33">		return userName;</span>
 	}
 	
 	public void setPhoneNumber(String phoneNumber) {
-<span class="nc" id="L37">		this.phoneNumber = phoneNumber;</span>
-<span class="nc" id="L38">	}</span>
+<span class="fc" id="L37">		this.phoneNumber = phoneNumber;</span>
+<span class="fc" id="L38">	}</span>
 	
 	public String getPhoneNumber() {
-<span class="nc" id="L41">		return phoneNumber;</span>
+<span class="fc" id="L41">		return phoneNumber;</span>
 	}
 
 	public void setEmailAddress(String emailAddress) {
-<span class="nc" id="L45">		this.emailAddress = emailAddress;</span>
-<span class="nc" id="L46">	}</span>
+<span class="fc" id="L45">		this.emailAddress = emailAddress;</span>
+<span class="fc" id="L46">	}</span>
 	
 	public String getEmailAddress() {
-<span class="nc" id="L49">		return emailAddress;</span>
+<span class="fc" id="L49">		return emailAddress;</span>
 	}
 	
 	public void setLatestLocationTimestamp(Date latestLocationTimestamp) {
-<span class="nc" id="L53">		this.latestLocationTimestamp = latestLocationTimestamp;</span>
-<span class="nc" id="L54">	}</span>
+<span class="fc" id="L53">		this.latestLocationTimestamp = latestLocationTimestamp;</span>
+<span class="fc" id="L54">	}</span>
 	
 	public Date getLatestLocationTimestamp() {
-<span class="nc" id="L57">		return latestLocationTimestamp;</span>
+<span class="fc" id="L57">		return latestLocationTimestamp;</span>
 	}
 
 	public List&lt;VisitedLocation&gt; getVisitedLocations() {
@@ -78,10 +78,10 @@ public class User {
 <span class="fc" id="L78">	}</span>
 
 	public VisitedLocation getLastVisitedLocation() {
-<span class="nc bnc" id="L81" title="All 2 branches missed.">		if (visitedLocations.size()!=0){</span>
+<span class="pc bpc" id="L81" title="1 of 2 branches missed.">		if (visitedLocations.size()!=0){</span>
 <span class="nc" id="L82">			return visitedLocations.get(visitedLocations.size() - 1);</span>
 		}
-<span class="nc" id="L84">		return null;</span>
+<span class="fc" id="L84">		return null;</span>
 	}
 
 	public List&lt;Attraction&gt; getAttractions() {

@@ -167,14 +167,13 @@ public class TourGuideService extends Thread{
 	 * @return a list of users visitedLocations
 	 */
 	public List<VisitedLocation>getAllCurrentLocations() {
-		ExecutorService executorService = Executors.newFixedThreadPool(100000);
+		ExecutorService executorService = Executors.newFixedThreadPool(1500);
 		CopyOnWriteArrayList<VisitedLocation> usersCurrentVisitedLocationList = new CopyOnWriteArrayList<>();
 		List<User> userList = getAllUsers();
 		for(User user : userList){
 			CompletableFuture.supplyAsync( () -> usersCurrentVisitedLocationList.add(gpsUtilProxy.getCurrentLocation(user.getUserId())), executorService );
 		}
 		executorService.shutdown();
-
 		try {
 			executorService.shutdown();
 			executorService.awaitTermination(15, TimeUnit.MINUTES);

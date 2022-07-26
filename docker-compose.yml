@@ -18,12 +18,12 @@ services:
     ports:
       - "8083:8083"
 
-  TourGuide:
-    depends_on:
-      - gpsutil
-      - trippricer
-      - rewardscentral
-    image: tourguide
-    container_name: tourguideappcontainer
-    ports:
-      - "8080:8080"
+  #TourGuide:
+   # depends_on:
+    #  - gpsUtil
+     # - tripPricer
+      #- rewardsCentral
+    #image: tourguide
+    #container_name: tourguideappcontainer
+    #ports:
+    #  - "8080:8080"

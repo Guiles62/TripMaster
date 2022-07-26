@@ -38,12 +38,12 @@ public class RewardsCentralController {
      */
     @PostMapping(value = &quot;/getRewards&quot;)
     public List&lt;UserReward&gt; getRewards(@RequestBody User user) {
-<span class="nc" id="L41">        return rewardsCentralService.calculateRewards(user);</span>
+<span class="fc" id="L41">        return rewardsCentralService.calculateRewards(user);</span>
     }
 
     @PostMapping(&quot;/getAllUsersRewards&quot;)
     public List&lt;User&gt; getAllUsersRewards(@RequestBody List&lt;User&gt; users) throws ExecutionException, InterruptedException {
-<span class="nc" id="L46">        return rewardsCentralService.getAllUsersRewards(users);</span>
+<span class="fc" id="L46">        return rewardsCentralService.getAllUsersRewards(users);</span>
     }
 
     @RequestMapping(&quot;/getAttractionRewardPoints&quot;)
